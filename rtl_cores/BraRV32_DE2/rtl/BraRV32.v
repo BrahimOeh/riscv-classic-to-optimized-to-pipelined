@@ -49,7 +49,9 @@ module BraRV32(
    /*===================== Exposed_for_FPGA_implementation ====================================*/
    
    output [15:0] RF10 // holds Fib(15)= 610 = 0b1001100010 → 10-bits
-   
+  
+   input wire [4:0] view_index,         // Switch input
+   output wire [31:0] view_data_out     // Output register value
    
    
    
