@@ -1,0 +1,49 @@
+module MemoryRV32_synthesis #(
+    parameter MEM_WORDS = 150
+)(
+    input wire        clk,
+    input wire [31:0] mem_addr,
+    input wire [31:0] mem_wdata,
+    input wire  [3:0] mem_wmask,
+    output reg [31:0] mem_rdata,
+    input wire        mem_rstrb,
+    output wire       mem_rbusy,
+    input wire        reset
+);
+	
+    // Using memory initialization directive with an init file for FPGA synthesis (! Quartus 13.0sp1 !)
+    //(* ramstyle = "M9K", ram_init_file = "memory_init.mif" *)reg [31:0] memory [0:MEM_WORDS-1];
+	// ! ../memory_init.mif paths only works with simulation functions like $readmemh !
+	wire wren = |mem_wmask;
+	wire [31:0] mem_out;
+
+	ram ram_inst (
+		.address ( mem_addr ),
+		.clock ( clk ),
+		.data ( mem_wdata ),
+		.wren ( wren ),
+		.q ( mem_out )
+	);
+	assign read_data = mem_out;
+    assign mem_rbusy = 0; // always ready
+/*
+    // Read on rising clock edge if read strobe
+    always @(posedge clk) begin
+        if (mem_rstrb) begin
+            mem_rdata <= q ;
+        end
+    end
+
+    // Write on rising clock edge if write mask active
+    integer i;
+    always @(posedge clk) begin
+        if (|mem_wmask) begin
+            for (i = 0; i < 4; i = i + 1) begin
+                if (mem_wmask[i]) begin
+                    memory[mem_addr[31:2]][8*i +: 8] <= mem_wdata[8*i +: 8];
+                end
+            end
+        end
+    end
+*/
+endmodule

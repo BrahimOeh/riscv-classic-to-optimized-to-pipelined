@@ -1,0 +1,38 @@
+ localparam NB_STATES = 4;
+	  reg [NB_STATES-1:0] state;
+	  
+   localparam FETCH_INSTR_bit     = 0;
+   localparam WAIT_INSTR_bit      = 1;
+   localparam EXECUTE_bit         = 2;
+   localparam WAIT_ALU_OR_MEM_bit = 3;
+
+
+   localparam FETCH_INSTR     = 1 << FETCH_INSTR_bit;
+   localparam WAIT_INSTR      = 1 << WAIT_INSTR_bit;
+   localparam EXECUTE         = 1 << EXECUTE_bit;
+   localparam WAIT_ALU_OR_MEM = 1 << WAIT_ALU_OR_MEM_bit;
+
+1010101 00111 000 00001 11011-11-
+
+jal r1,r7,0x55	
+
+0101 0101 0011 1000 0000 1110 1111
+5538                    │\_ PC + 4
+11011 11                ↓
+1 00001 1101111 -> jal rd(=r1),0x0000 0001
+0000 0000 0000 0000 0001 0000 1110 1111
+000010EF
+
+000000000000000000 00101 00100_11_        addi r5,rs1(=r0),0
+0000 0000 0000 0000 0000 0010 1001 0011
+00000293	
+
+0000 0000 0001 0000 0000 0011 0001 0011
+0000 0000 0001 00000 000 00110 00100-11-    addi r5,rs1(=r0),1 ;r5<-0+1
+00100313
+rs2<=regfile[00001];
+
+0001 0000 0000 0011 0001 00
+[31:2] instr <= mem_rdata [31:2]
+		<= 0001 0000 0000 0011 0001 00
+intr[30:20] → 000000000000000000001

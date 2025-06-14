@@ -1,0 +1,147 @@
+module top_BraRV32 (
+    input wire clk,          // ← CLOCK_50  [← : towards input]
+    input wire reset_n,      // ← KEY[0]
+    output wire [7:0]leds,   // → LED[7:0]  [→ : towards output]
+	output wire [6:0]HEX0,
+	output wire [6:0]HEX1,
+	output wire [6:0]HEX2,
+	output wire [6:0]HEX3,
+	output wire [6:0]HEX4,
+	output wire [6:0]HEX5,
+	output wire [6:0]HEX6,
+	output wire [6:0]HEX7
+);
+
+    wire [31:0] mem_addr, mem_wdata, mem_rdata;
+    wire [3:0]  mem_wmask;
+    wire        mem_rstrb, mem_rbusy, mem_wbusy;
+
+    wire [31:0] reg10_out; // For debugging x10
+	wire [31:0] digits_flat; // all digits flatout in a single register (10 HEX displays → 10 digits (4-bits each {0...9})→ 40bits
+	wire [4:0] num_digits; // max 10 digits
+	
+
+	
+    BraRV32 cpu (
+        .clk(clk),
+        .reset(~reset_n),
+        .mem_addr(mem_addr),
+        .mem_wdata(mem_wdata),
+        .mem_wmask(mem_wmask),
+        .mem_rdata(mem_rdata),
+        .mem_rstrb(mem_rstrb),
+        .mem_rbusy(mem_rbusy),
+        .mem_wbusy(mem_wbusy),
+        .RF10(reg10_out)
+    );
+
+    MemoryRV32 mem (
+        .clk(clk),
+        .mem_addr(mem_addr),
+        .mem_wdata(mem_wdata),
+        .mem_wmask(mem_wmask),
+        .mem_rdata(mem_rdata),
+        .mem_rstrb(mem_rstrb),
+        .mem_rbusy(mem_rbusy),
+        .reset(~reset_n)
+    );
+	
+	PrintDigits pd (
+    .number(reg10_out),
+    .digits_flat(digits_flat),  // Flattened output cause we can't declared a tabeled port in verilog
+    .num_digits(num_digits)
+	);
+	
+	hex_7seg_decoder digit0(                             
+	  .in(digits_flat[0:3]),             
+	  .o_a(HEX0[0]),                
+	  .o_b(HEX0[1]),
+	  .o_c(HEX0[2]),
+	  .o_d(HEX0[3]),
+	  .o_e(HEX0[4]),
+	  .o_f(HEX0[5]),
+	  .o_g(HEX0[6]) 
+	);
+	
+	hex_7seg_decoder digit1(                             
+	  .in(digits_flat[4:7]),             
+	  .o_a(HEX1[0]),                
+	  .o_b(HEX1[1]),
+	  .o_c(HEX1[2]),
+	  .o_d(HEX1[3]),
+	  .o_e(HEX1[4]),
+	  .o_f(HEX1[5]),
+	  .o_g(HEX1[6]) 
+	);
+	
+	hex_7seg_decoder digit2(                             
+	  .in(digits_flat[8:11]),             
+	  .o_a(HEX2[0]),                
+	  .o_b(HEX2[1]),
+	  .o_c(HEX2[2]),
+	  .o_d(HEX2[3]),
+	  .o_e(HEX2[4]),
+	  .o_f(HEX2[5]),
+	  .o_g(HEX2[6]) 
+	);
+	
+	hex_7seg_decoder digit3(                             
+	  .in(digits_flat[12:15]),             
+	  .o_a(HEX3[0]),                
+	  .o_b(HEX3[1]),
+	  .o_c(HEX3[2]),
+	  .o_d(HEX3[3]),
+	  .o_e(HEX3[4]),
+	  .o_f(HEX3[5]),
+	  .o_g(HEX3[6]) 
+	);
+	
+	hex_7seg_decoder digit4(                             
+	  .in(digits_flat[16:19]),             
+	  .o_a(HEX4[0]),                
+	  .o_b(HEX4[1]),
+	  .o_c(HEX4[2]),
+	  .o_d(HEX4[3]),
+	  .o_e(HEX4[4]),
+	  .o_f(HEX4[5]),
+	  .o_g(HEX4[6]) 
+	);
+	
+	hex_7seg_decoder digit5(                             
+	  .in(digits_flat[20:23]),             
+	  .o_a(HEX5[0]),                
+	  .o_b(HEX5[1]),
+	  .o_c(HEX5[2]),
+	  .o_d(HEX5[3]),
+	  .o_e(HEX5[4]),
+	  .o_f(HEX5[5]),
+	  .o_g(HEX5[6]) 
+	);
+	
+	hex_7seg_decoder digit6(                             
+	  .in(digits_flat[24:27]),             
+	  .o_a(HEX6[0]),                
+	  .o_b(HEX6[1]),
+	  .o_c(HEX6[2]),
+	  .o_d(HEX6[3]),
+	  .o_e(HEX6[4]),
+	  .o_f(HEX6[5]),
+	  .o_g(HEX6[6]) 
+	);
+	
+	hex_7seg_decoder digit7(                             
+	  .in(digits_flat[28:31]),             
+	  .o_a(HEX7[0]),                
+	  .o_b(HEX7[1]),
+	  .o_c(HEX7[2]),
+	  .o_d(HEX7[3]),
+	  .o_e(HEX7[4]),
+	  .o_f(HEX7[5]),
+	  .o_g(HEX7[6]) 
+	);
+		
+
+    // Debug output
+    assign leds = reg10_out[7:0];
+
+endmodule

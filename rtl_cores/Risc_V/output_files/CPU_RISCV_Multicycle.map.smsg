@@ -1,0 +1,4 @@
+Warning (10268): Verilog HDL information at Risc_V.v(21): always construct contains both blocking and non-blocking assignments File: C:/Users/brahim/Desktop/Risc_V/Risc_V.v Line: 21
+Warning (10268): Verilog HDL information at d_flip_flop.v(7): always construct contains both blocking and non-blocking assignments File: C:/Users/brahim/Desktop/Risc_V/d_flip_flop.v Line: 7
+Warning (10273): Verilog HDL warning at datapath.v(74): extended using "x" or "z" File: C:/Users/brahim/Desktop/Risc_V/datapath.v Line: 74
+Warning (10273): Verilog HDL warning at datapath.v(75): extended using "x" or "z" File: C:/Users/brahim/Desktop/Risc_V/datapath.v Line: 75

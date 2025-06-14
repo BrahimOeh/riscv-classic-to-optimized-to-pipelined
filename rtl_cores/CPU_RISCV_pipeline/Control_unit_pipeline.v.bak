@@ -1,0 +1,55 @@
+module Control_unit(
+    input clk, reset,funct7,
+    input [2:0] funct3,
+    input [6:0] op, 
+    
+	 output  JumpD,BranchD,done,beqD,bneD,bltD,bgeD,bltuD,bgeuD,JumpD,
+    output  Mem_WriteD,RegWriteD,
+    output  [1:0] ALUSrcD, ResultSrcD,
+	 output  [3:0] ALUControlD ,
+    output [2:0] ImmSrcD , sizeD
+	 
+	 
+);
+
+
+
+wire    [1:0] ALUOp ;
+wire  PCUpdate,Branch,sel_size;
+
+//
+
+
+
+
+//Module du choix d'operation				  
+ALU_decoder alu_dec(.funct7_5(funct7) ,.ALUop(ALUOp) , .funct3(funct3) , .ALU_Control(ALUControlD));	
+
+//Module du choix de extend immediate
+Inst_decoder Imm_choice(.op(op), .ImmSrc(ImmSrcD));	
+
+
+
+//Branch and jump decoder
+
+assign	beqD  = Branch & (funct3 == 3'b000); 
+assign	bneD  = Branch & (funct3 == 3'b001); 
+assign	bltD  = Branch & (funct3 == 3'b100); 
+assign	bgeD  = Branch & (funct3 == 3'b101); 
+assign	bltuD = Branch & (funct3 == 3'b110); 
+assign	bgeuD = Branch & (funct3 == 3'b111);  
+assign   JumpD	= (op[6] & op[2])? 1:0;		  
+
+		  
+//sizeD of data (lb,sb,lh,sh,lw,sw,lbu,lhu)
+
+size_decoder size_data(.sel_size(sel_size) , .op(op) , .funct3(funct3) , .size(sizeD) );
+
+				 
+endmodule
+
+
+
+
+
+

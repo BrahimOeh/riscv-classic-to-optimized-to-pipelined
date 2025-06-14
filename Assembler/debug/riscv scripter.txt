@@ -1,0 +1,119 @@
+import re
+
+# Opcodes and function mappings (subset)
+INSTR_ENCODING = {
+    'addi': {'opcode': '0010011', 'funct3': '000', 'type': 'I'},
+    'lw':   {'opcode': '0000011', 'funct3': '010', 'type': 'I'},
+    'sw':   {'opcode': '0100011', 'funct3': '010', 'type': 'S'},
+    'beq':  {'opcode': '1100011', 'funct3': '000', 'type': 'B'},
+    'blt':  {'opcode': '1100011', 'funct3': '100', 'type': 'B'},
+    'jal':  {'opcode': '1101111', 'type': 'J'},
+    'jalr': {'opcode': '1100111', 'funct3': '000', 'type': 'I'},
+    'lui':  {'opcode': '0110111', 'type': 'U'},
+}
+
+# Register name to index
+REGISTERS = {f'x{i}': i for i in range(32)}
+REGISTERS.update({'zero': 0, 'ra': 1, 'sp': 2, 'gp': 3, 'tp': 4,
+                  't0': 5, 't1': 6, 't2': 7, 's0': 8, 'fp': 8, 's1': 9,
+                  'a0': 10, 'a1': 11, 'a2': 12, 'a3': 13, 'a4': 14,
+                  'a5': 15, 'a6': 16, 'a7': 17, 's2': 18, 's3': 19,
+                  's4': 20, 's5': 21, 's6': 22, 's7': 23, 's8': 24,
+                  's9': 25, 's10': 26, 's11': 27, 't3': 28, 't4': 29,
+                  't5': 30, 't6': 31})
+
+def imm_to_bin(val, bits):
+    """Convert integer to binary string of 'bits' bits."""
+    return format((val + (1 << bits)) % (1 << bits), f'0{bits}b')
+
+def parse_line(line):
+    """Strip comments and extract label, mnemonic, operands."""
+    line = line.split('#')[0].strip()
+    if not line:
+        return None
+    label = None
+    if ':' in line:
+        label, line = line.split(':', 1)
+        label = label.strip()
+        line = line.strip()
+    if not line:
+        return {'label': label}
+    parts = [p.strip() for p in line.split()]
+    mnemonic = parts[0]
+    operands = [x.strip() for x in ' '.join(parts[1:]).split(',')]
+    return {'label': label, 'mnemonic': mnemonic, 'operands': operands}
+
+def encode_instr(parsed, pc, labels):
+    instr = parsed['mnemonic']
+    ops = parsed['operands']
+    meta = INSTR_ENCODING[instr]
+    typ = meta['type']
+    opcode = meta['opcode']
+    funct3 = meta.get('funct3', '')
+    funct7 = '0000000'
+    
+    if typ == 'I':
+        rd, rs1, imm = ops[0], ops[1], int(ops[2], 0)
+        return imm_to_bin(imm, 12) + format(REGISTERS[rs1], '05b') + funct3 + format(REGISTERS[rd], '05b') + opcode
+    elif typ == 'S':
+        rs2, offset_base = ops[0], ops[1]
+        offset, rs1 = re.match(r'(-?\d+)\((\w+)\)', offset_base).groups()
+        offset = int(offset)
+        imm = imm_to_bin(offset, 12)
+        return imm[:7] + format(REGISTERS[rs2], '05b') + format(REGISTERS[rs1], '05b') + funct3 + imm[7:] + opcode
+    elif typ == 'B':
+        rs1, rs2, label = ops
+        target_pc = labels[label]
+        offset = (target_pc - pc)
+        imm = imm_to_bin(offset, 13)  # 13 for sign bit
+        return imm[0] + imm[2:8] + format(REGISTERS[rs2], '05b') + format(REGISTERS[rs1], '05b') + funct3 + imm[8:12] + imm[1] + opcode
+    elif typ == 'J':
+        rd, label = ops
+        target_pc = labels[label]
+        offset = (target_pc - pc)
+        imm = imm_to_bin(offset, 21)
+        return (imm[0] + imm[10:20] + imm[9] + imm[1:9] +
+                format(REGISTERS[rd], '05b') + opcode)
+    elif typ == 'U':
+        rd, imm = ops[0], int(ops[1], 0)
+        return imm_to_bin(imm, 20) + format(REGISTERS[rd], '05b') + opcode
+    else:
+        raise NotImplementedError(f"Type {typ} not implemented")
+
+def assemble(code_lines):
+    parsed_lines = []
+    labels = {}
+    pc = 0
+    for line in code_lines:
+        parsed = parse_line(line)
+        if parsed:
+            if parsed.get('label'):
+                labels[parsed['label']] = pc
+            if parsed.get('mnemonic'):
+                parsed_lines.append((pc, parsed))
+                pc += 4  # RISC-V is word-aligned
+
+    binary_lines = []
+    for pc, instr in parsed_lines:
+        bin_instr = encode_instr(instr, pc, labels)
+        hex_instr = f"{int(bin_instr, 2):08x}"
+        binary_lines.append(hex_instr)
+
+    return binary_lines
+
+# Example usage
+if __name__ == '__main__':
+    input_code = """
+    addi sp, sp, -32
+    sw ra, 28(sp)
+    loop:
+    addi a0, a0, -1
+    blt zero, a0, loop
+    jal ra, end
+    end:
+    addi sp, sp, 32
+    """
+    lines = input_code.strip().split('\n')
+    result = assemble(lines)
+    for r in result:
+        print(r)

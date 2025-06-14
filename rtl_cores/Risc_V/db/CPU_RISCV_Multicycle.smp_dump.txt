@@ -1,0 +1,19 @@
+
+State Machine - |Risc_V|Control_unit:ctrl|Main_FSM:Fsm|state
+Name state.Fetch state.ExecuteIC state.ExecuteRC state.Auipc state.LUI_s state.ExecuteI state.JAL_s state.BEQ_s state.ALUWB_s state.ExecuteR state.MemWrite state.MemWB state.MemRead state.MemAdr state.Decode state.idle 
+state.idle 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+state.Decode 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+state.MemAdr 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+state.MemRead 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+state.MemWB 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+state.MemWrite 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+state.ExecuteR 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+state.ALUWB_s 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+state.BEQ_s 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+state.JAL_s 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+state.ExecuteI 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+state.LUI_s 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+state.Auipc 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+state.ExecuteRC 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.ExecuteIC 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.Fetch 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 

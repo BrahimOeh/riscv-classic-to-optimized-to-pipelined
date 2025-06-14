@@ -1,0 +1,23 @@
+module Inst_decoder(
+	 input [6:0] op,
+	 
+   
+    output reg [2:0] ImmSrc 
+);
+
+always @(*) begin
+	case (op)
+		7'b0000011 : ImmSrc <= 3'b000;
+		7'b0100011 : ImmSrc <= 3'b001;
+		7'b1100011 : ImmSrc <= 3'b010;
+		7'b1101111 : ImmSrc <= 3'b011;
+	
+	endcase 
+	
+	
+end
+
+
+
+
+endmodule

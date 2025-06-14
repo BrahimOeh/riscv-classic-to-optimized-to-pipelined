@@ -1,0 +1,15 @@
+C:/Users/brahim/Desktop/BraRV32_DE2/rtl/PrintDigits.v {1 {vlog -work work -stats=none C:/Users/brahim/Desktop/BraRV32_DE2/rtl/PrintDigits.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module PrintDigits
+
+Top level modules:
+	PrintDigits
+
+} {} {}} C:/Users/brahim/Desktop/BraRV32_DE2/rtl/Top.v {1 {vlog -work work -stats=none C:/Users/brahim/Desktop/BraRV32_DE2/rtl/Top.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module Top
+
+Top level modules:
+	Top
+
+} {} {}}

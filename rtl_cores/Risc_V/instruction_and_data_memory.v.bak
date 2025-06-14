@@ -1,0 +1,77 @@
+module instruction_and_data_memory
+    #(parameter MEMORY_SIZE = 256) // Now in bytes!
+    (
+        output reg [63:0] ReadData, // 64-bit to support doubleword reads
+        input             RESET, CLK, WriteEnable, ReadEnable,
+        input      [31:0] Address, WriteData,
+        input      [2:0]  size
+    );
+
+    // Byte-addressed memory (1 byte per address)
+    reg [7:0] MEMORY[MEMORY_SIZE-1:0];
+    integer i;
+
+    // Size encoding
+    localparam BYTE       = 3'b000;
+    localparam HALFWORD   = 3'b001;
+    localparam WORD       = 3'b010;
+    localparam DOUBLEWORD = 3'b011;
+
+    always @(posedge RESET or posedge CLK) begin
+        if (RESET) begin
+            for (i = 0; i < MEMORY_SIZE; i = i + 1)
+                MEMORY[i] <= 8'b0;
+        end else begin
+            if (WriteEnable) begin
+                case (size)
+                    BYTE: begin
+                        MEMORY[Address] <= WriteData[7:0];
+                    end
+                    HALFWORD: begin
+                        MEMORY[Address]     <= WriteData[7:0];
+                        MEMORY[Address + 1] <= WriteData[15:8];
+                    end
+                    WORD: begin
+                        MEMORY[Address]     <= WriteData[7:0];
+                        MEMORY[Address + 1] <= WriteData[15:8];
+                        MEMORY[Address + 2] <= WriteData[23:16];
+                        MEMORY[Address + 3] <= WriteData[31:24];
+                    end
+                    DOUBLEWORD: begin
+                        MEMORY[Address]     <= WriteData[7:0];
+                        MEMORY[Address + 1] <= WriteData[15:8];
+                        MEMORY[Address + 2] <= WriteData[23:16];
+                        MEMORY[Address + 3] <= WriteData[31:24];
+                        // WriteData is only 32 bits — fill upper half with same data or use another input
+                        MEMORY[Address + 4] <= WriteData[7:0];
+                        MEMORY[Address + 5] <= WriteData[15:8];
+                        MEMORY[Address + 6] <= WriteData[23:16];
+                        MEMORY[Address + 7] <= WriteData[31:24];
+                    end
+                endcase
+            end
+            else if (ReadEnable) begin
+                case (size)
+                    BYTE: begin
+                        ReadData <= {56'b0, MEMORY[Address]};
+                    end
+                    HALFWORD: begin
+                        ReadData <= {48'b0, MEMORY[Address + 1], MEMORY[Address]};
+                    end
+                    WORD: begin
+                        ReadData <= {32'b0,
+                                     MEMORY[Address + 3], MEMORY[Address + 2],
+                                     MEMORY[Address + 1], MEMORY[Address]};
+                    end
+                    DOUBLEWORD: begin
+                        ReadData <= {MEMORY[Address + 7], MEMORY[Address + 6],
+                                     MEMORY[Address + 5], MEMORY[Address + 4],
+                                     MEMORY[Address + 3], MEMORY[Address + 2],
+                                     MEMORY[Address + 1], MEMORY[Address]};
+                    end
+                endcase
+            end
+        end
+    end
+
+endmodule

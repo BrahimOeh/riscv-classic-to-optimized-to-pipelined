@@ -1,0 +1,1400 @@
+TimeQuest Timing Analyzer report for top_BraRV32
+Tue Jun 03 09:55:59 2025
+Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. TimeQuest Timing Analyzer Summary
+  3. Parallel Compilation
+  4. SDC File List
+  5. Clocks
+  6. Slow Model Fmax Summary
+  7. Slow Model Setup Summary
+  8. Slow Model Hold Summary
+  9. Slow Model Recovery Summary
+ 10. Slow Model Removal Summary
+ 11. Slow Model Minimum Pulse Width Summary
+ 12. Slow Model Setup: 'clk'
+ 13. Slow Model Hold: 'clk'
+ 14. Slow Model Minimum Pulse Width: 'clk'
+ 15. Setup Times
+ 16. Hold Times
+ 17. Clock to Output Times
+ 18. Minimum Clock to Output Times
+ 19. Fast Model Setup Summary
+ 20. Fast Model Hold Summary
+ 21. Fast Model Recovery Summary
+ 22. Fast Model Removal Summary
+ 23. Fast Model Minimum Pulse Width Summary
+ 24. Fast Model Setup: 'clk'
+ 25. Fast Model Hold: 'clk'
+ 26. Fast Model Minimum Pulse Width: 'clk'
+ 27. Setup Times
+ 28. Hold Times
+ 29. Clock to Output Times
+ 30. Minimum Clock to Output Times
+ 31. Multicorner Timing Analysis Summary
+ 32. Setup Times
+ 33. Hold Times
+ 34. Clock to Output Times
+ 35. Minimum Clock to Output Times
+ 36. Setup Transfers
+ 37. Hold Transfers
+ 38. Report TCCS
+ 39. Report RSKM
+ 40. Unconstrained Paths
+ 41. TimeQuest Timing Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++----------------------------------------------------------------------------------------+
+; TimeQuest Timing Analyzer Summary                                                      ;
++--------------------+-------------------------------------------------------------------+
+; Quartus II Version ; Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition ;
+; Revision Name      ; top_BraRV32                                                       ;
+; Device Family      ; Cyclone II                                                        ;
+; Device Name        ; EP2C35F672C6                                                      ;
+; Timing Models      ; Final                                                             ;
+; Delay Model        ; Combined                                                          ;
+; Rise/Fall Delays   ; Unavailable                                                       ;
++--------------------+-------------------------------------------------------------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 8      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++-----------------------------------------------------+
+; SDC File List                                       ;
++-----------------+--------+--------------------------+
+; SDC File Path   ; Status ; Read at                  ;
++-----------------+--------+--------------------------+
+; top_BraRV32.sdc ; OK     ; Tue Jun 03 09:55:50 2025 ;
++-----------------+--------+--------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clocks                                                                                                                                                                          ;
++------------+------+--------+-----------+-------+--------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------+
+; Clock Name ; Type ; Period ; Frequency ; Rise  ; Fall   ; Duty Cycle ; Divide by ; Multiply by ; Phase ; Offset ; Edge List ; Edge Shift ; Inverted ; Master ; Source ; Targets ;
++------------+------+--------+-----------+-------+--------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------+
+; clk        ; Base ; 20.000 ; 50.0 MHz  ; 0.000 ; 10.000 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { clk } ;
++------------+------+--------+-----------+-------+--------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------+
+
+
++-------------------------------------------------+
+; Slow Model Fmax Summary                         ;
++-----------+-----------------+------------+------+
+; Fmax      ; Restricted Fmax ; Clock Name ; Note ;
++-----------+-----------------+------------+------+
+; 63.76 MHz ; 63.76 MHz       ; clk        ;      ;
++-----------+-----------------+------------+------+
+This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
+
+
++-------------------------------+
+; Slow Model Setup Summary      ;
++-------+-------+---------------+
+; Clock ; Slack ; End Point TNS ;
++-------+-------+---------------+
+; clk   ; 4.316 ; 0.000         ;
++-------+-------+---------------+
+
+
++-------------------------------+
+; Slow Model Hold Summary       ;
++-------+-------+---------------+
+; Clock ; Slack ; End Point TNS ;
++-------+-------+---------------+
+; clk   ; 0.391 ; 0.000         ;
++-------+-------+---------------+
+
+
+-------------------------------
+; Slow Model Recovery Summary ;
+-------------------------------
+No paths to report.
+
+
+------------------------------
+; Slow Model Removal Summary ;
+------------------------------
+No paths to report.
+
+
++----------------------------------------+
+; Slow Model Minimum Pulse Width Summary ;
++-------+-------+------------------------+
+; Clock ; Slack ; End Point TNS          ;
++-------+-------+------------------------+
+; clk   ; 9.000 ; 0.000                  ;
++-------+-------+------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------+
+; Slow Model Setup: 'clk'                                                                                                                        ;
++-------+-----------------------+------------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node             ; To Node                                  ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+-----------------------+------------------------------------------+--------------+-------------+--------------+------------+------------+
+; 4.316 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.008      ; 15.728     ;
+; 4.372 ; BraRV32:cpu|instr[10] ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.029      ; 15.693     ;
+; 4.410 ; BraRV32:cpu|instr[20] ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.013      ; 15.639     ;
+; 4.436 ; BraRV32:cpu|instr[21] ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.013      ; 15.613     ;
+; 4.496 ; BraRV32:cpu|instr[5]  ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.013      ; 15.553     ;
+; 4.612 ; BraRV32:cpu|instr[9]  ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.013      ; 15.437     ;
+; 4.690 ; BraRV32:cpu|instr[22] ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.013      ; 15.359     ;
+; 4.708 ; BraRV32:cpu|instr[7]  ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.013      ; 15.341     ;
+; 4.728 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|mem_rdata[22]   ; clk          ; clk         ; 20.000       ; 0.019      ; 15.327     ;
+; 4.751 ; BraRV32:cpu|instr[8]  ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.013      ; 15.298     ;
+; 4.771 ; BraRV32:cpu|instr[24] ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.014      ; 15.279     ;
+; 4.784 ; BraRV32:cpu|instr[10] ; MemoryRV32_synthesis:mem|mem_rdata[22]   ; clk          ; clk         ; 20.000       ; 0.040      ; 15.292     ;
+; 4.822 ; BraRV32:cpu|instr[20] ; MemoryRV32_synthesis:mem|mem_rdata[22]   ; clk          ; clk         ; 20.000       ; 0.024      ; 15.238     ;
+; 4.848 ; BraRV32:cpu|instr[21] ; MemoryRV32_synthesis:mem|mem_rdata[22]   ; clk          ; clk         ; 20.000       ; 0.024      ; 15.212     ;
+; 4.851 ; BraRV32:cpu|rs1[0]    ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.016      ; 15.201     ;
+; 4.908 ; BraRV32:cpu|instr[5]  ; MemoryRV32_synthesis:mem|mem_rdata[22]   ; clk          ; clk         ; 20.000       ; 0.024      ; 15.152     ;
+; 4.915 ; BraRV32:cpu|rs1[1]    ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.038      ; 15.159     ;
+; 4.980 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|mem_rdata[18]   ; clk          ; clk         ; 20.000       ; 0.010      ; 15.066     ;
+; 5.009 ; BraRV32:cpu|rs1[3]    ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.038      ; 15.065     ;
+; 5.024 ; BraRV32:cpu|instr[9]  ; MemoryRV32_synthesis:mem|mem_rdata[22]   ; clk          ; clk         ; 20.000       ; 0.024      ; 15.036     ;
+; 5.036 ; BraRV32:cpu|instr[10] ; MemoryRV32_synthesis:mem|mem_rdata[18]   ; clk          ; clk         ; 20.000       ; 0.031      ; 15.031     ;
+; 5.074 ; BraRV32:cpu|instr[20] ; MemoryRV32_synthesis:mem|mem_rdata[18]   ; clk          ; clk         ; 20.000       ; 0.015      ; 14.977     ;
+; 5.083 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|mem_rdata[3]    ; clk          ; clk         ; 20.000       ; 0.010      ; 14.963     ;
+; 5.100 ; BraRV32:cpu|instr[21] ; MemoryRV32_synthesis:mem|mem_rdata[18]   ; clk          ; clk         ; 20.000       ; 0.015      ; 14.951     ;
+; 5.102 ; BraRV32:cpu|instr[22] ; MemoryRV32_synthesis:mem|mem_rdata[22]   ; clk          ; clk         ; 20.000       ; 0.024      ; 14.958     ;
+; 5.120 ; BraRV32:cpu|instr[7]  ; MemoryRV32_synthesis:mem|mem_rdata[22]   ; clk          ; clk         ; 20.000       ; 0.024      ; 14.940     ;
+; 5.139 ; BraRV32:cpu|instr[10] ; MemoryRV32_synthesis:mem|mem_rdata[3]    ; clk          ; clk         ; 20.000       ; 0.031      ; 14.928     ;
+; 5.160 ; BraRV32:cpu|instr[5]  ; MemoryRV32_synthesis:mem|mem_rdata[18]   ; clk          ; clk         ; 20.000       ; 0.015      ; 14.891     ;
+; 5.163 ; BraRV32:cpu|instr[8]  ; MemoryRV32_synthesis:mem|mem_rdata[22]   ; clk          ; clk         ; 20.000       ; 0.024      ; 14.897     ;
+; 5.177 ; BraRV32:cpu|instr[20] ; MemoryRV32_synthesis:mem|mem_rdata[3]    ; clk          ; clk         ; 20.000       ; 0.015      ; 14.874     ;
+; 5.178 ; BraRV32:cpu|instr[20] ; MemoryRV32_synthesis:mem|mem_rdata[0]    ; clk          ; clk         ; 20.000       ; 0.028      ; 14.886     ;
+; 5.183 ; BraRV32:cpu|instr[24] ; MemoryRV32_synthesis:mem|mem_rdata[22]   ; clk          ; clk         ; 20.000       ; 0.025      ; 14.878     ;
+; 5.203 ; BraRV32:cpu|instr[21] ; MemoryRV32_synthesis:mem|mem_rdata[3]    ; clk          ; clk         ; 20.000       ; 0.015      ; 14.848     ;
+; 5.204 ; BraRV32:cpu|instr[21] ; MemoryRV32_synthesis:mem|mem_rdata[0]    ; clk          ; clk         ; 20.000       ; 0.028      ; 14.860     ;
+; 5.214 ; BraRV32:cpu|rs1[4]    ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.016      ; 14.838     ;
+; 5.221 ; BraRV32:cpu|instr[20] ; MemoryRV32_synthesis:mem|mem_rdata[8]    ; clk          ; clk         ; 20.000       ; 0.023      ; 14.838     ;
+; 5.247 ; BraRV32:cpu|instr[21] ; MemoryRV32_synthesis:mem|mem_rdata[8]    ; clk          ; clk         ; 20.000       ; 0.023      ; 14.812     ;
+; 5.251 ; BraRV32:cpu|rs1[5]    ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.038      ; 14.823     ;
+; 5.258 ; BraRV32:cpu|rs1[2]    ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.016      ; 14.794     ;
+; 5.261 ; BraRV32:cpu|instr[23] ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.014      ; 14.789     ;
+; 5.263 ; BraRV32:cpu|rs1[0]    ; MemoryRV32_synthesis:mem|mem_rdata[22]   ; clk          ; clk         ; 20.000       ; 0.027      ; 14.800     ;
+; 5.263 ; BraRV32:cpu|instr[5]  ; MemoryRV32_synthesis:mem|mem_rdata[3]    ; clk          ; clk         ; 20.000       ; 0.015      ; 14.788     ;
+; 5.264 ; BraRV32:cpu|instr[5]  ; MemoryRV32_synthesis:mem|mem_rdata[0]    ; clk          ; clk         ; 20.000       ; 0.028      ; 14.800     ;
+; 5.271 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|mem_rdata[0]    ; clk          ; clk         ; 20.000       ; 0.023      ; 14.788     ;
+; 5.276 ; BraRV32:cpu|instr[9]  ; MemoryRV32_synthesis:mem|mem_rdata[18]   ; clk          ; clk         ; 20.000       ; 0.015      ; 14.775     ;
+; 5.280 ; BraRV32:cpu|instr[20] ; MemoryRV32_synthesis:mem|mem_rdata[20]   ; clk          ; clk         ; 20.000       ; 0.015      ; 14.771     ;
+; 5.306 ; BraRV32:cpu|instr[21] ; MemoryRV32_synthesis:mem|mem_rdata[20]   ; clk          ; clk         ; 20.000       ; 0.015      ; 14.745     ;
+; 5.307 ; BraRV32:cpu|instr[5]  ; MemoryRV32_synthesis:mem|mem_rdata[8]    ; clk          ; clk         ; 20.000       ; 0.023      ; 14.752     ;
+; 5.327 ; BraRV32:cpu|rs1[1]    ; MemoryRV32_synthesis:mem|mem_rdata[22]   ; clk          ; clk         ; 20.000       ; 0.049      ; 14.758     ;
+; 5.327 ; BraRV32:cpu|instr[10] ; MemoryRV32_synthesis:mem|mem_rdata[0]    ; clk          ; clk         ; 20.000       ; 0.044      ; 14.753     ;
+; 5.335 ; BraRV32:cpu|rs1[6]    ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.025      ; 14.726     ;
+; 5.354 ; BraRV32:cpu|instr[22] ; MemoryRV32_synthesis:mem|mem_rdata[18]   ; clk          ; clk         ; 20.000       ; 0.015      ; 14.697     ;
+; 5.366 ; BraRV32:cpu|instr[5]  ; MemoryRV32_synthesis:mem|mem_rdata[20]   ; clk          ; clk         ; 20.000       ; 0.015      ; 14.685     ;
+; 5.372 ; BraRV32:cpu|instr[7]  ; MemoryRV32_synthesis:mem|mem_rdata[18]   ; clk          ; clk         ; 20.000       ; 0.015      ; 14.679     ;
+; 5.374 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|mem_rdata[15]   ; clk          ; clk         ; 20.000       ; 0.026      ; 14.688     ;
+; 5.378 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|mem_rdata[20]   ; clk          ; clk         ; 20.000       ; 0.010      ; 14.668     ;
+; 5.379 ; BraRV32:cpu|instr[9]  ; MemoryRV32_synthesis:mem|mem_rdata[3]    ; clk          ; clk         ; 20.000       ; 0.015      ; 14.672     ;
+; 5.396 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|mem_rdata[30]   ; clk          ; clk         ; 20.000       ; -0.023     ; 14.617     ;
+; 5.415 ; BraRV32:cpu|instr[8]  ; MemoryRV32_synthesis:mem|mem_rdata[18]   ; clk          ; clk         ; 20.000       ; 0.015      ; 14.636     ;
+; 5.421 ; BraRV32:cpu|rs1[3]    ; MemoryRV32_synthesis:mem|mem_rdata[22]   ; clk          ; clk         ; 20.000       ; 0.049      ; 14.664     ;
+; 5.430 ; BraRV32:cpu|instr[10] ; MemoryRV32_synthesis:mem|mem_rdata[15]   ; clk          ; clk         ; 20.000       ; 0.047      ; 14.653     ;
+; 5.434 ; BraRV32:cpu|instr[10] ; MemoryRV32_synthesis:mem|mem_rdata[20]   ; clk          ; clk         ; 20.000       ; 0.031      ; 14.633     ;
+; 5.435 ; BraRV32:cpu|instr[24] ; MemoryRV32_synthesis:mem|mem_rdata[18]   ; clk          ; clk         ; 20.000       ; 0.016      ; 14.617     ;
+; 5.446 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|mem_rdata[12]   ; clk          ; clk         ; 20.000       ; 0.016      ; 14.606     ;
+; 5.449 ; BraRV32:cpu|instr[20] ; MemoryRV32_synthesis:mem|mem_rdata[14]   ; clk          ; clk         ; 20.000       ; 0.013      ; 14.600     ;
+; 5.450 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|mem_rdata[11]   ; clk          ; clk         ; 20.000       ; -0.023     ; 14.563     ;
+; 5.452 ; BraRV32:cpu|instr[10] ; MemoryRV32_synthesis:mem|mem_rdata[30]   ; clk          ; clk         ; 20.000       ; -0.002     ; 14.582     ;
+; 5.457 ; BraRV32:cpu|instr[22] ; MemoryRV32_synthesis:mem|mem_rdata[3]    ; clk          ; clk         ; 20.000       ; 0.015      ; 14.594     ;
+; 5.468 ; BraRV32:cpu|instr[20] ; MemoryRV32_synthesis:mem|mem_rdata[15]   ; clk          ; clk         ; 20.000       ; 0.031      ; 14.599     ;
+; 5.475 ; BraRV32:cpu|instr[7]  ; MemoryRV32_synthesis:mem|mem_rdata[3]    ; clk          ; clk         ; 20.000       ; 0.015      ; 14.576     ;
+; 5.475 ; BraRV32:cpu|instr[21] ; MemoryRV32_synthesis:mem|mem_rdata[14]   ; clk          ; clk         ; 20.000       ; 0.013      ; 14.574     ;
+; 5.476 ; BraRV32:cpu|instr[7]  ; MemoryRV32_synthesis:mem|mem_rdata[0]    ; clk          ; clk         ; 20.000       ; 0.028      ; 14.588     ;
+; 5.490 ; BraRV32:cpu|instr[20] ; MemoryRV32_synthesis:mem|mem_rdata[30]   ; clk          ; clk         ; 20.000       ; -0.018     ; 14.528     ;
+; 5.493 ; BraRV32:cpu|instr[10] ; MemoryRV32_synthesis:mem|mem_rdata[8]    ; clk          ; clk         ; 20.000       ; 0.039      ; 14.582     ;
+; 5.494 ; BraRV32:cpu|instr[21] ; MemoryRV32_synthesis:mem|mem_rdata[15]   ; clk          ; clk         ; 20.000       ; 0.031      ; 14.573     ;
+; 5.502 ; BraRV32:cpu|instr[10] ; MemoryRV32_synthesis:mem|mem_rdata[12]   ; clk          ; clk         ; 20.000       ; 0.037      ; 14.571     ;
+; 5.506 ; BraRV32:cpu|instr[10] ; MemoryRV32_synthesis:mem|mem_rdata[11]   ; clk          ; clk         ; 20.000       ; -0.002     ; 14.528     ;
+; 5.515 ; BraRV32:cpu|rs1[0]    ; MemoryRV32_synthesis:mem|mem_rdata[18]   ; clk          ; clk         ; 20.000       ; 0.018      ; 14.539     ;
+; 5.516 ; BraRV32:cpu|instr[21] ; MemoryRV32_synthesis:mem|mem_rdata[30]   ; clk          ; clk         ; 20.000       ; -0.018     ; 14.502     ;
+; 5.518 ; BraRV32:cpu|instr[8]  ; MemoryRV32_synthesis:mem|mem_rdata[3]    ; clk          ; clk         ; 20.000       ; 0.015      ; 14.533     ;
+; 5.519 ; BraRV32:cpu|instr[8]  ; MemoryRV32_synthesis:mem|mem_rdata[0]    ; clk          ; clk         ; 20.000       ; 0.028      ; 14.545     ;
+; 5.519 ; BraRV32:cpu|instr[7]  ; MemoryRV32_synthesis:mem|mem_rdata[8]    ; clk          ; clk         ; 20.000       ; 0.023      ; 14.540     ;
+; 5.535 ; BraRV32:cpu|instr[5]  ; MemoryRV32_synthesis:mem|mem_rdata[14]   ; clk          ; clk         ; 20.000       ; 0.013      ; 14.514     ;
+; 5.538 ; BraRV32:cpu|instr[24] ; MemoryRV32_synthesis:mem|mem_rdata[3]    ; clk          ; clk         ; 20.000       ; 0.016      ; 14.514     ;
+; 5.540 ; BraRV32:cpu|instr[20] ; MemoryRV32_synthesis:mem|mem_rdata[12]   ; clk          ; clk         ; 20.000       ; 0.021      ; 14.517     ;
+; 5.544 ; BraRV32:cpu|instr[20] ; MemoryRV32_synthesis:mem|mem_rdata[11]   ; clk          ; clk         ; 20.000       ; -0.018     ; 14.474     ;
+; 5.553 ; BraRV32:cpu|instr[10] ; MemoryRV32_synthesis:mem|mem_rdata[21]   ; clk          ; clk         ; 20.000       ; 0.041      ; 14.524     ;
+; 5.554 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|mem_rdata[23]   ; clk          ; clk         ; 20.000       ; 0.017      ; 14.499     ;
+; 5.554 ; BraRV32:cpu|instr[5]  ; MemoryRV32_synthesis:mem|mem_rdata[15]   ; clk          ; clk         ; 20.000       ; 0.031      ; 14.513     ;
+; 5.562 ; BraRV32:cpu|instr[8]  ; MemoryRV32_synthesis:mem|mem_rdata[8]    ; clk          ; clk         ; 20.000       ; 0.023      ; 14.497     ;
+; 5.566 ; BraRV32:cpu|instr[21] ; MemoryRV32_synthesis:mem|mem_rdata[12]   ; clk          ; clk         ; 20.000       ; 0.021      ; 14.491     ;
+; 5.567 ; BraRV32:cpu|instr[9]  ; MemoryRV32_synthesis:mem|mem_rdata[0]    ; clk          ; clk         ; 20.000       ; 0.028      ; 14.497     ;
+; 5.570 ; BraRV32:cpu|instr[21] ; MemoryRV32_synthesis:mem|mem_rdata[11]   ; clk          ; clk         ; 20.000       ; -0.018     ; 14.448     ;
+; 5.576 ; BraRV32:cpu|instr[5]  ; MemoryRV32_synthesis:mem|mem_rdata[30]   ; clk          ; clk         ; 20.000       ; -0.018     ; 14.442     ;
+; 5.578 ; BraRV32:cpu|instr[7]  ; MemoryRV32_synthesis:mem|mem_rdata[20]   ; clk          ; clk         ; 20.000       ; 0.015      ; 14.473     ;
+; 5.579 ; BraRV32:cpu|rs1[1]    ; MemoryRV32_synthesis:mem|mem_rdata[18]   ; clk          ; clk         ; 20.000       ; 0.040      ; 14.497     ;
+; 5.581 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|memory[473][28] ; clk          ; clk         ; 20.000       ; 0.030      ; 14.485     ;
+; 5.581 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|memory[473][31] ; clk          ; clk         ; 20.000       ; 0.030      ; 14.485     ;
+; 5.581 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|memory[473][24] ; clk          ; clk         ; 20.000       ; 0.030      ; 14.485     ;
+; 5.591 ; BraRV32:cpu|instr[20] ; MemoryRV32_synthesis:mem|mem_rdata[21]   ; clk          ; clk         ; 20.000       ; 0.025      ; 14.470     ;
++-------+-----------------------+------------------------------------------+--------------+-------------+--------------+------------+------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Slow Model Hold: 'clk'                                                                                                                                          ;
++-------+----------------------------------------+------------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node                              ; To Node                                  ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+----------------------------------------+------------------------------------------+--------------+-------------+--------------+------------+------------+
+; 0.391 ; BraRV32:cpu|cycles[0]                  ; BraRV32:cpu|cycles[0]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; BraRV32:cpu|aluReg[0]                  ; BraRV32:cpu|aluReg[0]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; BraRV32:cpu|PC[1]                      ; BraRV32:cpu|PC[1]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; BraRV32:cpu|state[1]                   ; BraRV32:cpu|state[1]                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.530 ; BraRV32:cpu|aluReg[22]                 ; BraRV32:cpu|aluReg[23]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.796      ;
+; 0.530 ; BraRV32:cpu|aluReg[23]                 ; BraRV32:cpu|aluReg[22]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.796      ;
+; 0.531 ; BraRV32:cpu|aluReg[12]                 ; BraRV32:cpu|aluReg[11]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.797      ;
+; 0.531 ; BraRV32:cpu|cycles[31]                 ; BraRV32:cpu|cycles[31]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.797      ;
+; 0.532 ; BraRV32:cpu|aluReg[3]                  ; BraRV32:cpu|aluReg[2]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.798      ;
+; 0.532 ; BraRV32:cpu|aluReg[26]                 ; BraRV32:cpu|aluReg[25]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.798      ;
+; 0.534 ; BraRV32:cpu|aluReg[20]                 ; BraRV32:cpu|aluReg[21]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.800      ;
+; 0.534 ; BraRV32:cpu|aluReg[3]                  ; BraRV32:cpu|aluReg[4]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.800      ;
+; 0.537 ; BraRV32:cpu|aluReg[31]                 ; BraRV32:cpu|aluReg[30]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.803      ;
+; 0.537 ; BraRV32:cpu|aluReg[13]                 ; BraRV32:cpu|aluReg[14]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.803      ;
+; 0.538 ; BraRV32:cpu|aluReg[13]                 ; BraRV32:cpu|aluReg[12]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.804      ;
+; 0.540 ; BraRV32:cpu|aluReg[29]                 ; BraRV32:cpu|aluReg[28]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.806      ;
+; 0.541 ; BraRV32:cpu|aluReg[8]                  ; BraRV32:cpu|aluReg[9]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.807      ;
+; 0.542 ; BraRV32:cpu|aluReg[4]                  ; BraRV32:cpu|aluReg[3]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.808      ;
+; 0.545 ; BraRV32:cpu|aluReg[16]                 ; BraRV32:cpu|aluReg[17]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.811      ;
+; 0.549 ; BraRV32:cpu|aluReg[16]                 ; BraRV32:cpu|aluReg[15]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.815      ;
+; 0.675 ; BraRV32:cpu|rs2[19]                    ; MemoryRV32_synthesis:mem|memory[434][19] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.941      ;
+; 0.709 ; BraRV32:cpu|aluReg[5]                  ; BraRV32:cpu|aluReg[6]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.975      ;
+; 0.740 ; BraRV32:cpu|cycles[0]                  ; BraRV32:cpu|registerFile[18][0]          ; clk          ; clk         ; 0.000        ; 0.000      ; 1.006      ;
+; 0.795 ; BraRV32:cpu|cycles[16]                 ; BraRV32:cpu|cycles[16]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.061      ;
+; 0.798 ; BraRV32:cpu|aluReg[1]                  ; BraRV32:cpu|aluReg[2]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.064      ;
+; 0.803 ; BraRV32:cpu|aluReg[22]                 ; BraRV32:cpu|aluReg[21]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.069      ;
+; 0.805 ; BraRV32:cpu|cycles[1]                  ; BraRV32:cpu|cycles[1]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.071      ;
+; 0.805 ; BraRV32:cpu|cycles[17]                 ; BraRV32:cpu|cycles[17]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.071      ;
+; 0.805 ; BraRV32:cpu|aluReg[12]                 ; BraRV32:cpu|aluReg[13]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.071      ;
+; 0.806 ; BraRV32:cpu|cycles[4]                  ; BraRV32:cpu|cycles[4]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.072      ;
+; 0.806 ; BraRV32:cpu|cycles[9]                  ; BraRV32:cpu|cycles[9]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.072      ;
+; 0.806 ; BraRV32:cpu|cycles[11]                 ; BraRV32:cpu|cycles[11]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.072      ;
+; 0.806 ; BraRV32:cpu|cycles[13]                 ; BraRV32:cpu|cycles[13]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.072      ;
+; 0.806 ; BraRV32:cpu|cycles[14]                 ; BraRV32:cpu|cycles[14]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.072      ;
+; 0.806 ; BraRV32:cpu|cycles[15]                 ; BraRV32:cpu|cycles[15]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.072      ;
+; 0.806 ; BraRV32:cpu|cycles[18]                 ; BraRV32:cpu|cycles[18]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.072      ;
+; 0.806 ; BraRV32:cpu|cycles[20]                 ; BraRV32:cpu|cycles[20]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.072      ;
+; 0.806 ; BraRV32:cpu|cycles[23]                 ; BraRV32:cpu|cycles[23]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.072      ;
+; 0.806 ; BraRV32:cpu|cycles[25]                 ; BraRV32:cpu|cycles[25]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.072      ;
+; 0.806 ; BraRV32:cpu|cycles[27]                 ; BraRV32:cpu|cycles[27]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.072      ;
+; 0.806 ; BraRV32:cpu|cycles[29]                 ; BraRV32:cpu|cycles[29]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.072      ;
+; 0.806 ; BraRV32:cpu|aluReg[9]                  ; BraRV32:cpu|aluReg[10]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.072      ;
+; 0.806 ; BraRV32:cpu|cycles[30]                 ; BraRV32:cpu|cycles[30]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.072      ;
+; 0.807 ; BraRV32:cpu|aluReg[2]                  ; BraRV32:cpu|aluReg[1]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.073      ;
+; 0.808 ; BraRV32:cpu|aluReg[9]                  ; BraRV32:cpu|aluReg[8]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.074      ;
+; 0.809 ; BraRV32:cpu|aluReg[17]                 ; BraRV32:cpu|aluReg[16]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.075      ;
+; 0.809 ; BraRV32:cpu|rs2[22]                    ; MemoryRV32_synthesis:mem|memory[211][22] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.075      ;
+; 0.810 ; BraRV32:cpu|cycles[2]                  ; BraRV32:cpu|cycles[2]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.076      ;
+; 0.810 ; BraRV32:cpu|cycles[7]                  ; BraRV32:cpu|cycles[7]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.076      ;
+; 0.811 ; BraRV32:cpu|aluReg[17]                 ; BraRV32:cpu|aluReg[18]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.077      ;
+; 0.812 ; BraRV32:cpu|aluReg[25]                 ; BraRV32:cpu|aluReg[26]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.078      ;
+; 0.812 ; BraRV32:cpu|aluReg[2]                  ; BraRV32:cpu|aluReg[3]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.078      ;
+; 0.814 ; BraRV32:cpu|aluReg[21]                 ; BraRV32:cpu|aluReg[20]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.080      ;
+; 0.814 ; BraRV32:cpu|aluReg[30]                 ; BraRV32:cpu|aluReg[31]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.080      ;
+; 0.816 ; BraRV32:cpu|aluReg[30]                 ; BraRV32:cpu|aluReg[29]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.082      ;
+; 0.816 ; BraRV32:cpu|aluReg[8]                  ; BraRV32:cpu|aluReg[7]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.082      ;
+; 0.816 ; BraRV32:cpu|aluReg[21]                 ; BraRV32:cpu|aluReg[22]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.082      ;
+; 0.817 ; BraRV32:cpu|aluReg[25]                 ; BraRV32:cpu|aluReg[24]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.083      ;
+; 0.832 ; BraRV32:cpu|rs2[0]                     ; MemoryRV32_synthesis:mem|memory[255][24] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.098      ;
+; 0.838 ; BraRV32:cpu|cycles[3]                  ; BraRV32:cpu|cycles[3]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.104      ;
+; 0.838 ; BraRV32:cpu|cycles[8]                  ; BraRV32:cpu|cycles[8]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.104      ;
+; 0.838 ; BraRV32:cpu|cycles[10]                 ; BraRV32:cpu|cycles[10]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.104      ;
+; 0.838 ; BraRV32:cpu|cycles[12]                 ; BraRV32:cpu|cycles[12]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.104      ;
+; 0.838 ; BraRV32:cpu|cycles[19]                 ; BraRV32:cpu|cycles[19]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.104      ;
+; 0.838 ; BraRV32:cpu|cycles[24]                 ; BraRV32:cpu|cycles[24]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.104      ;
+; 0.838 ; BraRV32:cpu|cycles[26]                 ; BraRV32:cpu|cycles[26]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.104      ;
+; 0.838 ; BraRV32:cpu|cycles[28]                 ; BraRV32:cpu|cycles[28]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.104      ;
+; 0.839 ; BraRV32:cpu|cycles[5]                  ; BraRV32:cpu|cycles[5]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.105      ;
+; 0.839 ; BraRV32:cpu|cycles[6]                  ; BraRV32:cpu|cycles[6]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.105      ;
+; 0.839 ; BraRV32:cpu|cycles[21]                 ; BraRV32:cpu|cycles[21]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.105      ;
+; 0.839 ; BraRV32:cpu|cycles[22]                 ; BraRV32:cpu|cycles[22]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.105      ;
+; 0.841 ; BraRV32:cpu|aluReg[19]                 ; BraRV32:cpu|aluReg[18]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.107      ;
+; 0.842 ; BraRV32:cpu|aluReg[14]                 ; BraRV32:cpu|aluReg[15]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.108      ;
+; 0.842 ; BraRV32:cpu|aluReg[14]                 ; BraRV32:cpu|aluReg[13]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.108      ;
+; 0.844 ; BraRV32:cpu|aluReg[26]                 ; BraRV32:cpu|aluReg[27]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.110      ;
+; 0.846 ; BraRV32:cpu|aluReg[27]                 ; BraRV32:cpu|aluReg[26]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.112      ;
+; 0.846 ; BraRV32:cpu|aluReg[28]                 ; BraRV32:cpu|aluReg[29]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.112      ;
+; 0.847 ; BraRV32:cpu|aluReg[29]                 ; BraRV32:cpu|aluReg[30]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.113      ;
+; 0.850 ; BraRV32:cpu|rs2[10]                    ; MemoryRV32_synthesis:mem|memory[254][10] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.116      ;
+; 0.853 ; BraRV32:cpu|aluReg[10]                 ; BraRV32:cpu|aluReg[11]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.119      ;
+; 0.854 ; BraRV32:cpu|aluReg[11]                 ; BraRV32:cpu|aluReg[10]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.120      ;
+; 0.855 ; BraRV32:cpu|aluReg[11]                 ; BraRV32:cpu|aluReg[12]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.121      ;
+; 0.855 ; BraRV32:cpu|aluReg[10]                 ; BraRV32:cpu|aluReg[9]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.121      ;
+; 0.920 ; BraRV32:cpu|rs2[25]                    ; MemoryRV32_synthesis:mem|memory[255][25] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.186      ;
+; 0.988 ; BraRV32:cpu|state[1]                   ; BraRV32:cpu|state[0]                     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.254      ;
+; 0.995 ; BraRV32:cpu|aluReg[18]                 ; BraRV32:cpu|aluReg[17]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.261      ;
+; 0.996 ; BraRV32:cpu|aluReg[18]                 ; BraRV32:cpu|aluReg[19]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.262      ;
+; 1.004 ; BraRV32:cpu|aluReg[6]                  ; BraRV32:cpu|aluReg[7]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.270      ;
+; 1.005 ; BraRV32:cpu|aluReg[6]                  ; BraRV32:cpu|aluReg[5]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.271      ;
+; 1.024 ; BraRV32:cpu|aluReg[7]                  ; BraRV32:cpu|aluReg[6]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.290      ;
+; 1.026 ; BraRV32:cpu|aluReg[7]                  ; BraRV32:cpu|aluReg[8]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 1.292      ;
+; 1.034 ; BraRV32:cpu|aluReg[15]                 ; BraRV32:cpu|aluReg[14]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.300      ;
+; 1.036 ; BraRV32:cpu|aluReg[15]                 ; BraRV32:cpu|aluReg[16]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.302      ;
+; 1.037 ; BraRV32:cpu|aluReg[27]                 ; BraRV32:cpu|aluReg[28]                   ; clk          ; clk         ; 0.000        ; 0.001      ; 1.304      ;
+; 1.078 ; BraRV32:cpu|rs2[6]                     ; MemoryRV32_synthesis:mem|memory[211][22] ; clk          ; clk         ; 0.000        ; 0.009      ; 1.353      ;
+; 1.094 ; BraRV32:cpu|rs2[0]                     ; MemoryRV32_synthesis:mem|memory[481][0]  ; clk          ; clk         ; 0.000        ; 0.001      ; 1.361      ;
+; 1.125 ; MemoryRV32_synthesis:mem|mem_rdata[18] ; BraRV32:cpu|instr[18]                    ; clk          ; clk         ; 0.000        ; -0.010     ; 1.381      ;
+; 1.178 ; BraRV32:cpu|cycles[16]                 ; BraRV32:cpu|cycles[17]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.444      ;
+; 1.183 ; BraRV32:cpu|state[0]                   ; BraRV32:cpu|state[0]                     ; clk          ; clk         ; 0.000        ; 0.000      ; 1.449      ;
+; 1.185 ; BraRV32:cpu|aluShamt[3]                ; BraRV32:cpu|aluShamt[3]                  ; clk          ; clk         ; 0.000        ; 0.000      ; 1.451      ;
++-------+----------------------------------------+------------------------------------------+--------------+-------------+--------------+------------+------------+
+
+
++--------------------------------------------------------------------------------------------------------+
+; Slow Model Minimum Pulse Width: 'clk'                                                                  ;
++-------+--------------+----------------+------------------+-------+------------+------------------------+
+; Slack ; Actual Width ; Required Width ; Type             ; Clock ; Clock Edge ; Target                 ;
++-------+--------------+----------------+------------------+-------+------------+------------------------+
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[10]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[10]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[11]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[11]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[12]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[12]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[13]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[13]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[14]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[14]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[15]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[15]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[16]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[16]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[17]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[17]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[18]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[18]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[19]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[19]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[1]      ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[1]      ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[20]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[20]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[21]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[21]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[22]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[22]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[23]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[23]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[2]      ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[2]      ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[3]      ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[3]      ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[4]      ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[4]      ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[5]      ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[5]      ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[6]      ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[6]      ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[7]      ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[7]      ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[8]      ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[8]      ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[9]      ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[9]      ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[0]  ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[0]  ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[10] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[10] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[11] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[11] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[12] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[12] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[13] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[13] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[14] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[14] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[15] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[15] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[16] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[16] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[17] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[17] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[18] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[18] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[19] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[19] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[1]  ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[1]  ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[20] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[20] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[21] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[21] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[22] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[22] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[23] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[23] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[24] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[24] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[25] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[25] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[26] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[26] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[27] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[27] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[28] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[28] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[29] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[29] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[2]  ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[2]  ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[30] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[30] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[31] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[31] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[3]  ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[3]  ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[4]  ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[4]  ;
++-------+--------------+----------------+------------------+-------+------------+------------------------+
+
+
++-----------------------------------------------------------------------+
+; Setup Times                                                           ;
++-----------+------------+-------+-------+------------+-----------------+
+; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++-----------+------------+-------+-------+------------+-----------------+
+; reset     ; clk        ; 8.750 ; 8.750 ; Rise       ; clk             ;
++-----------+------------+-------+-------+------------+-----------------+
+
+
++-------------------------------------------------------------------------+
+; Hold Times                                                              ;
++-----------+------------+--------+--------+------------+-----------------+
+; Data Port ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++-----------+------------+--------+--------+------------+-----------------+
+; reset     ; clk        ; -4.233 ; -4.233 ; Rise       ; clk             ;
++-----------+------------+--------+--------+------------+-----------------+
+
+
++-------------------------------------------------------------------------+
+; Clock to Output Times                                                   ;
++-----------+------------+--------+--------+------------+-----------------+
+; Data Port ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++-----------+------------+--------+--------+------------+-----------------+
+; HEX0[*]   ; clk        ; 40.209 ; 40.209 ; Rise       ; clk             ;
+;  HEX0[0]  ; clk        ; 40.209 ; 40.209 ; Rise       ; clk             ;
+;  HEX0[1]  ; clk        ; 39.278 ; 39.278 ; Rise       ; clk             ;
+;  HEX0[2]  ; clk        ; 40.150 ; 40.150 ; Rise       ; clk             ;
+;  HEX0[3]  ; clk        ; 39.474 ; 39.474 ; Rise       ; clk             ;
+;  HEX0[4]  ; clk        ; 39.262 ; 39.262 ; Rise       ; clk             ;
+;  HEX0[5]  ; clk        ; 39.065 ; 39.065 ; Rise       ; clk             ;
+;  HEX0[6]  ; clk        ; 39.928 ; 39.928 ; Rise       ; clk             ;
+; HEX1[*]   ; clk        ; 43.366 ; 43.366 ; Rise       ; clk             ;
+;  HEX1[0]  ; clk        ; 43.170 ; 43.170 ; Rise       ; clk             ;
+;  HEX1[1]  ; clk        ; 43.161 ; 43.161 ; Rise       ; clk             ;
+;  HEX1[2]  ; clk        ; 43.173 ; 43.173 ; Rise       ; clk             ;
+;  HEX1[3]  ; clk        ; 43.272 ; 43.272 ; Rise       ; clk             ;
+;  HEX1[4]  ; clk        ; 43.312 ; 43.312 ; Rise       ; clk             ;
+;  HEX1[5]  ; clk        ; 43.345 ; 43.345 ; Rise       ; clk             ;
+;  HEX1[6]  ; clk        ; 43.366 ; 43.366 ; Rise       ; clk             ;
+; HEX2[*]   ; clk        ; 59.336 ; 59.336 ; Rise       ; clk             ;
+;  HEX2[0]  ; clk        ; 59.306 ; 59.306 ; Rise       ; clk             ;
+;  HEX2[1]  ; clk        ; 58.983 ; 58.983 ; Rise       ; clk             ;
+;  HEX2[2]  ; clk        ; 59.060 ; 59.060 ; Rise       ; clk             ;
+;  HEX2[3]  ; clk        ; 59.073 ; 59.073 ; Rise       ; clk             ;
+;  HEX2[4]  ; clk        ; 59.288 ; 59.288 ; Rise       ; clk             ;
+;  HEX2[5]  ; clk        ; 59.336 ; 59.336 ; Rise       ; clk             ;
+;  HEX2[6]  ; clk        ; 59.333 ; 59.333 ; Rise       ; clk             ;
+; HEX3[*]   ; clk        ; 63.152 ; 63.152 ; Rise       ; clk             ;
+;  HEX3[0]  ; clk        ; 63.152 ; 63.152 ; Rise       ; clk             ;
+;  HEX3[1]  ; clk        ; 62.844 ; 62.844 ; Rise       ; clk             ;
+;  HEX3[2]  ; clk        ; 62.878 ; 62.878 ; Rise       ; clk             ;
+;  HEX3[3]  ; clk        ; 62.820 ; 62.820 ; Rise       ; clk             ;
+;  HEX3[4]  ; clk        ; 62.891 ; 62.891 ; Rise       ; clk             ;
+;  HEX3[5]  ; clk        ; 63.096 ; 63.096 ; Rise       ; clk             ;
+;  HEX3[6]  ; clk        ; 63.149 ; 63.149 ; Rise       ; clk             ;
+; HEX4[*]   ; clk        ; 68.433 ; 68.433 ; Rise       ; clk             ;
+;  HEX4[0]  ; clk        ; 68.093 ; 68.093 ; Rise       ; clk             ;
+;  HEX4[1]  ; clk        ; 68.140 ; 68.140 ; Rise       ; clk             ;
+;  HEX4[2]  ; clk        ; 68.127 ; 68.127 ; Rise       ; clk             ;
+;  HEX4[3]  ; clk        ; 68.399 ; 68.399 ; Rise       ; clk             ;
+;  HEX4[4]  ; clk        ; 68.275 ; 68.275 ; Rise       ; clk             ;
+;  HEX4[5]  ; clk        ; 68.425 ; 68.425 ; Rise       ; clk             ;
+;  HEX4[6]  ; clk        ; 68.433 ; 68.433 ; Rise       ; clk             ;
+; HEX5[*]   ; clk        ; 67.496 ; 67.496 ; Rise       ; clk             ;
+;  HEX5[0]  ; clk        ; 67.491 ; 67.491 ; Rise       ; clk             ;
+;  HEX5[3]  ; clk        ; 67.496 ; 67.496 ; Rise       ; clk             ;
+;  HEX5[4]  ; clk        ; 67.476 ; 67.476 ; Rise       ; clk             ;
+;  HEX5[5]  ; clk        ; 67.476 ; 67.476 ; Rise       ; clk             ;
+; leds[*]   ; clk        ; 7.399  ; 7.399  ; Rise       ; clk             ;
+;  leds[0]  ; clk        ; 7.399  ; 7.399  ; Rise       ; clk             ;
+;  leds[1]  ; clk        ; 7.253  ; 7.253  ; Rise       ; clk             ;
+;  leds[2]  ; clk        ; 7.317  ; 7.317  ; Rise       ; clk             ;
+;  leds[3]  ; clk        ; 7.368  ; 7.368  ; Rise       ; clk             ;
+;  leds[4]  ; clk        ; 7.344  ; 7.344  ; Rise       ; clk             ;
+;  leds[5]  ; clk        ; 7.376  ; 7.376  ; Rise       ; clk             ;
+;  leds[6]  ; clk        ; 7.129  ; 7.129  ; Rise       ; clk             ;
+;  leds[7]  ; clk        ; 7.120  ; 7.120  ; Rise       ; clk             ;
+;  leds[8]  ; clk        ; 7.370  ; 7.370  ; Rise       ; clk             ;
+;  leds[9]  ; clk        ; 7.104  ; 7.104  ; Rise       ; clk             ;
++-----------+------------+--------+--------+------------+-----------------+
+
+
++-------------------------------------------------------------------------+
+; Minimum Clock to Output Times                                           ;
++-----------+------------+--------+--------+------------+-----------------+
+; Data Port ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++-----------+------------+--------+--------+------------+-----------------+
+; HEX0[*]   ; clk        ; 9.213  ; 9.213  ; Rise       ; clk             ;
+;  HEX0[0]  ; clk        ; 10.356 ; 10.356 ; Rise       ; clk             ;
+;  HEX0[1]  ; clk        ; 9.424  ; 9.424  ; Rise       ; clk             ;
+;  HEX0[2]  ; clk        ; 10.289 ; 10.289 ; Rise       ; clk             ;
+;  HEX0[3]  ; clk        ; 9.628  ; 9.628  ; Rise       ; clk             ;
+;  HEX0[4]  ; clk        ; 9.412  ; 9.412  ; Rise       ; clk             ;
+;  HEX0[5]  ; clk        ; 9.213  ; 9.213  ; Rise       ; clk             ;
+;  HEX0[6]  ; clk        ; 10.074 ; 10.074 ; Rise       ; clk             ;
+; HEX1[*]   ; clk        ; 9.397  ; 9.397  ; Rise       ; clk             ;
+;  HEX1[0]  ; clk        ; 9.446  ; 9.446  ; Rise       ; clk             ;
+;  HEX1[1]  ; clk        ; 9.397  ; 9.397  ; Rise       ; clk             ;
+;  HEX1[2]  ; clk        ; 9.411  ; 9.411  ; Rise       ; clk             ;
+;  HEX1[3]  ; clk        ; 9.510  ; 9.510  ; Rise       ; clk             ;
+;  HEX1[4]  ; clk        ; 9.588  ; 9.588  ; Rise       ; clk             ;
+;  HEX1[5]  ; clk        ; 9.593  ; 9.593  ; Rise       ; clk             ;
+;  HEX1[6]  ; clk        ; 9.611  ; 9.611  ; Rise       ; clk             ;
+; HEX2[*]   ; clk        ; 10.644 ; 10.644 ; Rise       ; clk             ;
+;  HEX2[0]  ; clk        ; 10.971 ; 10.971 ; Rise       ; clk             ;
+;  HEX2[1]  ; clk        ; 10.644 ; 10.644 ; Rise       ; clk             ;
+;  HEX2[2]  ; clk        ; 10.721 ; 10.721 ; Rise       ; clk             ;
+;  HEX2[3]  ; clk        ; 10.735 ; 10.735 ; Rise       ; clk             ;
+;  HEX2[4]  ; clk        ; 10.949 ; 10.949 ; Rise       ; clk             ;
+;  HEX2[5]  ; clk        ; 10.999 ; 10.999 ; Rise       ; clk             ;
+;  HEX2[6]  ; clk        ; 10.990 ; 10.990 ; Rise       ; clk             ;
+; HEX3[*]   ; clk        ; 11.875 ; 11.875 ; Rise       ; clk             ;
+;  HEX3[0]  ; clk        ; 12.190 ; 12.190 ; Rise       ; clk             ;
+;  HEX3[1]  ; clk        ; 11.875 ; 11.875 ; Rise       ; clk             ;
+;  HEX3[2]  ; clk        ; 11.920 ; 11.920 ; Rise       ; clk             ;
+;  HEX3[3]  ; clk        ; 11.877 ; 11.877 ; Rise       ; clk             ;
+;  HEX3[4]  ; clk        ; 11.914 ; 11.914 ; Rise       ; clk             ;
+;  HEX3[5]  ; clk        ; 12.120 ; 12.120 ; Rise       ; clk             ;
+;  HEX3[6]  ; clk        ; 12.182 ; 12.182 ; Rise       ; clk             ;
+; HEX4[*]   ; clk        ; 15.573 ; 15.573 ; Rise       ; clk             ;
+;  HEX4[0]  ; clk        ; 15.573 ; 15.573 ; Rise       ; clk             ;
+;  HEX4[1]  ; clk        ; 15.598 ; 15.598 ; Rise       ; clk             ;
+;  HEX4[2]  ; clk        ; 15.584 ; 15.584 ; Rise       ; clk             ;
+;  HEX4[3]  ; clk        ; 15.851 ; 15.851 ; Rise       ; clk             ;
+;  HEX4[4]  ; clk        ; 15.757 ; 15.757 ; Rise       ; clk             ;
+;  HEX4[5]  ; clk        ; 15.852 ; 15.852 ; Rise       ; clk             ;
+;  HEX4[6]  ; clk        ; 15.889 ; 15.889 ; Rise       ; clk             ;
+; HEX5[*]   ; clk        ; 16.520 ; 16.520 ; Rise       ; clk             ;
+;  HEX5[0]  ; clk        ; 16.535 ; 16.535 ; Rise       ; clk             ;
+;  HEX5[3]  ; clk        ; 16.540 ; 16.540 ; Rise       ; clk             ;
+;  HEX5[4]  ; clk        ; 16.520 ; 16.520 ; Rise       ; clk             ;
+;  HEX5[5]  ; clk        ; 16.520 ; 16.520 ; Rise       ; clk             ;
+; leds[*]   ; clk        ; 7.104  ; 7.104  ; Rise       ; clk             ;
+;  leds[0]  ; clk        ; 7.399  ; 7.399  ; Rise       ; clk             ;
+;  leds[1]  ; clk        ; 7.253  ; 7.253  ; Rise       ; clk             ;
+;  leds[2]  ; clk        ; 7.317  ; 7.317  ; Rise       ; clk             ;
+;  leds[3]  ; clk        ; 7.368  ; 7.368  ; Rise       ; clk             ;
+;  leds[4]  ; clk        ; 7.344  ; 7.344  ; Rise       ; clk             ;
+;  leds[5]  ; clk        ; 7.376  ; 7.376  ; Rise       ; clk             ;
+;  leds[6]  ; clk        ; 7.129  ; 7.129  ; Rise       ; clk             ;
+;  leds[7]  ; clk        ; 7.120  ; 7.120  ; Rise       ; clk             ;
+;  leds[8]  ; clk        ; 7.370  ; 7.370  ; Rise       ; clk             ;
+;  leds[9]  ; clk        ; 7.104  ; 7.104  ; Rise       ; clk             ;
++-----------+------------+--------+--------+------------+-----------------+
+
+
++--------------------------------+
+; Fast Model Setup Summary       ;
++-------+--------+---------------+
+; Clock ; Slack  ; End Point TNS ;
++-------+--------+---------------+
+; clk   ; 12.727 ; 0.000         ;
++-------+--------+---------------+
+
+
++-------------------------------+
+; Fast Model Hold Summary       ;
++-------+-------+---------------+
+; Clock ; Slack ; End Point TNS ;
++-------+-------+---------------+
+; clk   ; 0.215 ; 0.000         ;
++-------+-------+---------------+
+
+
+-------------------------------
+; Fast Model Recovery Summary ;
+-------------------------------
+No paths to report.
+
+
+------------------------------
+; Fast Model Removal Summary ;
+------------------------------
+No paths to report.
+
+
++----------------------------------------+
+; Fast Model Minimum Pulse Width Summary ;
++-------+-------+------------------------+
+; Clock ; Slack ; End Point TNS          ;
++-------+-------+------------------------+
+; clk   ; 9.000 ; 0.000                  ;
++-------+-------+------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------+
+; Fast Model Setup: 'clk'                                                                                                                         ;
++--------+-----------------------+------------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack  ; From Node             ; To Node                                  ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+-----------------------+------------------------------------------+--------------+-------------+--------------+------------+------------+
+; 12.727 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.004      ; 7.309      ;
+; 12.740 ; BraRV32:cpu|instr[10] ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.024      ; 7.316      ;
+; 12.742 ; BraRV32:cpu|instr[20] ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.009      ; 7.299      ;
+; 12.765 ; BraRV32:cpu|instr[21] ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.009      ; 7.276      ;
+; 12.773 ; BraRV32:cpu|instr[5]  ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.009      ; 7.268      ;
+; 12.834 ; BraRV32:cpu|instr[9]  ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.009      ; 7.207      ;
+; 12.861 ; BraRV32:cpu|instr[22] ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.009      ; 7.180      ;
+; 12.871 ; BraRV32:cpu|instr[7]  ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.009      ; 7.170      ;
+; 12.898 ; BraRV32:cpu|instr[8]  ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.009      ; 7.143      ;
+; 12.925 ; BraRV32:cpu|rs1[0]    ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.012      ; 7.119      ;
+; 12.941 ; BraRV32:cpu|instr[24] ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.010      ; 7.101      ;
+; 12.958 ; BraRV32:cpu|rs1[1]    ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.033      ; 7.107      ;
+; 13.014 ; BraRV32:cpu|rs1[3]    ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.033      ; 7.051      ;
+; 13.055 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|mem_rdata[18]   ; clk          ; clk         ; 20.000       ; 0.007      ; 6.984      ;
+; 13.068 ; BraRV32:cpu|instr[10] ; MemoryRV32_synthesis:mem|mem_rdata[18]   ; clk          ; clk         ; 20.000       ; 0.027      ; 6.991      ;
+; 13.070 ; BraRV32:cpu|instr[20] ; MemoryRV32_synthesis:mem|mem_rdata[18]   ; clk          ; clk         ; 20.000       ; 0.012      ; 6.974      ;
+; 13.083 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|mem_rdata[22]   ; clk          ; clk         ; 20.000       ; 0.013      ; 6.962      ;
+; 13.090 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|memory[473][28] ; clk          ; clk         ; 20.000       ; 0.025      ; 6.967      ;
+; 13.090 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|memory[473][31] ; clk          ; clk         ; 20.000       ; 0.025      ; 6.967      ;
+; 13.090 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|memory[473][24] ; clk          ; clk         ; 20.000       ; 0.025      ; 6.967      ;
+; 13.093 ; BraRV32:cpu|instr[21] ; MemoryRV32_synthesis:mem|mem_rdata[18]   ; clk          ; clk         ; 20.000       ; 0.012      ; 6.951      ;
+; 13.096 ; BraRV32:cpu|instr[10] ; MemoryRV32_synthesis:mem|mem_rdata[22]   ; clk          ; clk         ; 20.000       ; 0.033      ; 6.969      ;
+; 13.098 ; BraRV32:cpu|instr[20] ; MemoryRV32_synthesis:mem|mem_rdata[22]   ; clk          ; clk         ; 20.000       ; 0.018      ; 6.952      ;
+; 13.101 ; BraRV32:cpu|instr[5]  ; MemoryRV32_synthesis:mem|mem_rdata[18]   ; clk          ; clk         ; 20.000       ; 0.012      ; 6.943      ;
+; 13.102 ; BraRV32:cpu|instr[23] ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.010      ; 6.940      ;
+; 13.103 ; BraRV32:cpu|instr[10] ; MemoryRV32_synthesis:mem|memory[473][28] ; clk          ; clk         ; 20.000       ; 0.045      ; 6.974      ;
+; 13.103 ; BraRV32:cpu|instr[10] ; MemoryRV32_synthesis:mem|memory[473][31] ; clk          ; clk         ; 20.000       ; 0.045      ; 6.974      ;
+; 13.103 ; BraRV32:cpu|instr[10] ; MemoryRV32_synthesis:mem|memory[473][24] ; clk          ; clk         ; 20.000       ; 0.045      ; 6.974      ;
+; 13.105 ; BraRV32:cpu|instr[20] ; MemoryRV32_synthesis:mem|memory[473][28] ; clk          ; clk         ; 20.000       ; 0.030      ; 6.957      ;
+; 13.105 ; BraRV32:cpu|instr[20] ; MemoryRV32_synthesis:mem|memory[473][31] ; clk          ; clk         ; 20.000       ; 0.030      ; 6.957      ;
+; 13.105 ; BraRV32:cpu|instr[20] ; MemoryRV32_synthesis:mem|memory[473][24] ; clk          ; clk         ; 20.000       ; 0.030      ; 6.957      ;
+; 13.107 ; BraRV32:cpu|rs1[2]    ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.012      ; 6.937      ;
+; 13.121 ; BraRV32:cpu|instr[21] ; MemoryRV32_synthesis:mem|mem_rdata[22]   ; clk          ; clk         ; 20.000       ; 0.018      ; 6.929      ;
+; 13.122 ; BraRV32:cpu|rs1[4]    ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.012      ; 6.922      ;
+; 13.128 ; BraRV32:cpu|instr[21] ; MemoryRV32_synthesis:mem|memory[473][28] ; clk          ; clk         ; 20.000       ; 0.030      ; 6.934      ;
+; 13.128 ; BraRV32:cpu|instr[21] ; MemoryRV32_synthesis:mem|memory[473][31] ; clk          ; clk         ; 20.000       ; 0.030      ; 6.934      ;
+; 13.128 ; BraRV32:cpu|instr[21] ; MemoryRV32_synthesis:mem|memory[473][24] ; clk          ; clk         ; 20.000       ; 0.030      ; 6.934      ;
+; 13.129 ; BraRV32:cpu|instr[5]  ; MemoryRV32_synthesis:mem|mem_rdata[22]   ; clk          ; clk         ; 20.000       ; 0.018      ; 6.921      ;
+; 13.136 ; BraRV32:cpu|instr[5]  ; MemoryRV32_synthesis:mem|memory[473][28] ; clk          ; clk         ; 20.000       ; 0.030      ; 6.926      ;
+; 13.136 ; BraRV32:cpu|instr[5]  ; MemoryRV32_synthesis:mem|memory[473][31] ; clk          ; clk         ; 20.000       ; 0.030      ; 6.926      ;
+; 13.136 ; BraRV32:cpu|instr[5]  ; MemoryRV32_synthesis:mem|memory[473][24] ; clk          ; clk         ; 20.000       ; 0.030      ; 6.926      ;
+; 13.144 ; BraRV32:cpu|rs1[5]    ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.033      ; 6.921      ;
+; 13.162 ; BraRV32:cpu|instr[9]  ; MemoryRV32_synthesis:mem|mem_rdata[18]   ; clk          ; clk         ; 20.000       ; 0.012      ; 6.882      ;
+; 13.175 ; BraRV32:cpu|rs1[6]    ; MemoryRV32_synthesis:mem|mem_rdata[16]   ; clk          ; clk         ; 20.000       ; 0.021      ; 6.878      ;
+; 13.187 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|memory[181][6]  ; clk          ; clk         ; 20.000       ; 0.017      ; 6.862      ;
+; 13.187 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|memory[181][7]  ; clk          ; clk         ; 20.000       ; 0.017      ; 6.862      ;
+; 13.189 ; BraRV32:cpu|instr[22] ; MemoryRV32_synthesis:mem|mem_rdata[18]   ; clk          ; clk         ; 20.000       ; 0.012      ; 6.855      ;
+; 13.190 ; BraRV32:cpu|instr[9]  ; MemoryRV32_synthesis:mem|mem_rdata[22]   ; clk          ; clk         ; 20.000       ; 0.018      ; 6.860      ;
+; 13.197 ; BraRV32:cpu|instr[9]  ; MemoryRV32_synthesis:mem|memory[473][28] ; clk          ; clk         ; 20.000       ; 0.030      ; 6.865      ;
+; 13.197 ; BraRV32:cpu|instr[9]  ; MemoryRV32_synthesis:mem|memory[473][31] ; clk          ; clk         ; 20.000       ; 0.030      ; 6.865      ;
+; 13.197 ; BraRV32:cpu|instr[9]  ; MemoryRV32_synthesis:mem|memory[473][24] ; clk          ; clk         ; 20.000       ; 0.030      ; 6.865      ;
+; 13.198 ; BraRV32:cpu|instr[20] ; MemoryRV32_synthesis:mem|mem_rdata[8]    ; clk          ; clk         ; 20.000       ; 0.018      ; 6.852      ;
+; 13.199 ; BraRV32:cpu|instr[7]  ; MemoryRV32_synthesis:mem|mem_rdata[18]   ; clk          ; clk         ; 20.000       ; 0.012      ; 6.845      ;
+; 13.200 ; BraRV32:cpu|instr[10] ; MemoryRV32_synthesis:mem|memory[181][6]  ; clk          ; clk         ; 20.000       ; 0.037      ; 6.869      ;
+; 13.200 ; BraRV32:cpu|instr[10] ; MemoryRV32_synthesis:mem|memory[181][7]  ; clk          ; clk         ; 20.000       ; 0.037      ; 6.869      ;
+; 13.202 ; BraRV32:cpu|instr[20] ; MemoryRV32_synthesis:mem|memory[181][6]  ; clk          ; clk         ; 20.000       ; 0.022      ; 6.852      ;
+; 13.202 ; BraRV32:cpu|instr[20] ; MemoryRV32_synthesis:mem|memory[181][7]  ; clk          ; clk         ; 20.000       ; 0.022      ; 6.852      ;
+; 13.217 ; BraRV32:cpu|instr[22] ; MemoryRV32_synthesis:mem|mem_rdata[22]   ; clk          ; clk         ; 20.000       ; 0.018      ; 6.833      ;
+; 13.221 ; BraRV32:cpu|instr[21] ; MemoryRV32_synthesis:mem|mem_rdata[8]    ; clk          ; clk         ; 20.000       ; 0.018      ; 6.829      ;
+; 13.224 ; BraRV32:cpu|instr[22] ; MemoryRV32_synthesis:mem|memory[473][28] ; clk          ; clk         ; 20.000       ; 0.030      ; 6.838      ;
+; 13.224 ; BraRV32:cpu|instr[22] ; MemoryRV32_synthesis:mem|memory[473][31] ; clk          ; clk         ; 20.000       ; 0.030      ; 6.838      ;
+; 13.224 ; BraRV32:cpu|instr[22] ; MemoryRV32_synthesis:mem|memory[473][24] ; clk          ; clk         ; 20.000       ; 0.030      ; 6.838      ;
+; 13.225 ; BraRV32:cpu|instr[21] ; MemoryRV32_synthesis:mem|memory[181][6]  ; clk          ; clk         ; 20.000       ; 0.022      ; 6.829      ;
+; 13.225 ; BraRV32:cpu|instr[21] ; MemoryRV32_synthesis:mem|memory[181][7]  ; clk          ; clk         ; 20.000       ; 0.022      ; 6.829      ;
+; 13.226 ; BraRV32:cpu|instr[8]  ; MemoryRV32_synthesis:mem|mem_rdata[18]   ; clk          ; clk         ; 20.000       ; 0.012      ; 6.818      ;
+; 13.227 ; BraRV32:cpu|instr[7]  ; MemoryRV32_synthesis:mem|mem_rdata[22]   ; clk          ; clk         ; 20.000       ; 0.018      ; 6.823      ;
+; 13.229 ; BraRV32:cpu|instr[5]  ; MemoryRV32_synthesis:mem|mem_rdata[8]    ; clk          ; clk         ; 20.000       ; 0.018      ; 6.821      ;
+; 13.233 ; BraRV32:cpu|instr[5]  ; MemoryRV32_synthesis:mem|memory[181][6]  ; clk          ; clk         ; 20.000       ; 0.022      ; 6.821      ;
+; 13.233 ; BraRV32:cpu|instr[5]  ; MemoryRV32_synthesis:mem|memory[181][7]  ; clk          ; clk         ; 20.000       ; 0.022      ; 6.821      ;
+; 13.234 ; BraRV32:cpu|instr[7]  ; MemoryRV32_synthesis:mem|memory[473][28] ; clk          ; clk         ; 20.000       ; 0.030      ; 6.828      ;
+; 13.234 ; BraRV32:cpu|instr[7]  ; MemoryRV32_synthesis:mem|memory[473][31] ; clk          ; clk         ; 20.000       ; 0.030      ; 6.828      ;
+; 13.234 ; BraRV32:cpu|instr[7]  ; MemoryRV32_synthesis:mem|memory[473][24] ; clk          ; clk         ; 20.000       ; 0.030      ; 6.828      ;
+; 13.253 ; BraRV32:cpu|rs1[0]    ; MemoryRV32_synthesis:mem|mem_rdata[18]   ; clk          ; clk         ; 20.000       ; 0.015      ; 6.794      ;
+; 13.254 ; BraRV32:cpu|instr[8]  ; MemoryRV32_synthesis:mem|mem_rdata[22]   ; clk          ; clk         ; 20.000       ; 0.018      ; 6.796      ;
+; 13.259 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|mem_rdata[3]    ; clk          ; clk         ; 20.000       ; 0.007      ; 6.780      ;
+; 13.261 ; BraRV32:cpu|instr[8]  ; MemoryRV32_synthesis:mem|memory[473][28] ; clk          ; clk         ; 20.000       ; 0.030      ; 6.801      ;
+; 13.261 ; BraRV32:cpu|instr[8]  ; MemoryRV32_synthesis:mem|memory[473][31] ; clk          ; clk         ; 20.000       ; 0.030      ; 6.801      ;
+; 13.261 ; BraRV32:cpu|instr[8]  ; MemoryRV32_synthesis:mem|memory[473][24] ; clk          ; clk         ; 20.000       ; 0.030      ; 6.801      ;
+; 13.269 ; BraRV32:cpu|instr[24] ; MemoryRV32_synthesis:mem|mem_rdata[18]   ; clk          ; clk         ; 20.000       ; 0.013      ; 6.776      ;
+; 13.272 ; BraRV32:cpu|instr[10] ; MemoryRV32_synthesis:mem|mem_rdata[3]    ; clk          ; clk         ; 20.000       ; 0.027      ; 6.787      ;
+; 13.274 ; BraRV32:cpu|instr[20] ; MemoryRV32_synthesis:mem|mem_rdata[3]    ; clk          ; clk         ; 20.000       ; 0.012      ; 6.770      ;
+; 13.281 ; BraRV32:cpu|rs1[0]    ; MemoryRV32_synthesis:mem|mem_rdata[22]   ; clk          ; clk         ; 20.000       ; 0.021      ; 6.772      ;
+; 13.286 ; BraRV32:cpu|rs1[1]    ; MemoryRV32_synthesis:mem|mem_rdata[18]   ; clk          ; clk         ; 20.000       ; 0.036      ; 6.782      ;
+; 13.288 ; BraRV32:cpu|rs1[0]    ; MemoryRV32_synthesis:mem|memory[473][28] ; clk          ; clk         ; 20.000       ; 0.033      ; 6.777      ;
+; 13.288 ; BraRV32:cpu|rs1[0]    ; MemoryRV32_synthesis:mem|memory[473][31] ; clk          ; clk         ; 20.000       ; 0.033      ; 6.777      ;
+; 13.288 ; BraRV32:cpu|rs1[0]    ; MemoryRV32_synthesis:mem|memory[473][24] ; clk          ; clk         ; 20.000       ; 0.033      ; 6.777      ;
+; 13.294 ; BraRV32:cpu|instr[9]  ; MemoryRV32_synthesis:mem|memory[181][6]  ; clk          ; clk         ; 20.000       ; 0.022      ; 6.760      ;
+; 13.294 ; BraRV32:cpu|instr[9]  ; MemoryRV32_synthesis:mem|memory[181][7]  ; clk          ; clk         ; 20.000       ; 0.022      ; 6.760      ;
+; 13.295 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|memory[144][4]  ; clk          ; clk         ; 20.000       ; 0.016      ; 6.753      ;
+; 13.295 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|memory[144][0]  ; clk          ; clk         ; 20.000       ; 0.016      ; 6.753      ;
+; 13.295 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|memory[144][2]  ; clk          ; clk         ; 20.000       ; 0.016      ; 6.753      ;
+; 13.295 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|memory[144][1]  ; clk          ; clk         ; 20.000       ; 0.016      ; 6.753      ;
+; 13.295 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|memory[144][6]  ; clk          ; clk         ; 20.000       ; 0.016      ; 6.753      ;
+; 13.295 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|memory[144][7]  ; clk          ; clk         ; 20.000       ; 0.016      ; 6.753      ;
+; 13.295 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|memory[144][3]  ; clk          ; clk         ; 20.000       ; 0.016      ; 6.753      ;
+; 13.295 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|memory[144][5]  ; clk          ; clk         ; 20.000       ; 0.016      ; 6.753      ;
+; 13.297 ; BraRV32:cpu|instr[24] ; MemoryRV32_synthesis:mem|mem_rdata[22]   ; clk          ; clk         ; 20.000       ; 0.019      ; 6.754      ;
+; 13.297 ; BraRV32:cpu|instr[21] ; MemoryRV32_synthesis:mem|mem_rdata[3]    ; clk          ; clk         ; 20.000       ; 0.012      ; 6.747      ;
+; 13.302 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|memory[361][20] ; clk          ; clk         ; 20.000       ; 0.018      ; 6.748      ;
+; 13.302 ; BraRV32:cpu|instr[11] ; MemoryRV32_synthesis:mem|memory[361][19] ; clk          ; clk         ; 20.000       ; 0.018      ; 6.748      ;
++--------+-----------------------+------------------------------------------+--------------+-------------+--------------+------------+------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------+
+; Fast Model Hold: 'clk'                                                                                                                          ;
++-------+------------------------+------------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node              ; To Node                                  ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+------------------------+------------------------------------------+--------------+-------------+--------------+------------+------------+
+; 0.215 ; BraRV32:cpu|cycles[0]  ; BraRV32:cpu|cycles[0]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; BraRV32:cpu|aluReg[0]  ; BraRV32:cpu|aluReg[0]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; BraRV32:cpu|PC[1]      ; BraRV32:cpu|PC[1]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; BraRV32:cpu|state[1]   ; BraRV32:cpu|state[1]                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.243 ; BraRV32:cpu|aluReg[26] ; BraRV32:cpu|aluReg[25]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.395      ;
+; 0.243 ; BraRV32:cpu|aluReg[22] ; BraRV32:cpu|aluReg[23]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.395      ;
+; 0.243 ; BraRV32:cpu|aluReg[23] ; BraRV32:cpu|aluReg[22]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.395      ;
+; 0.243 ; BraRV32:cpu|cycles[31] ; BraRV32:cpu|cycles[31]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.395      ;
+; 0.244 ; BraRV32:cpu|aluReg[12] ; BraRV32:cpu|aluReg[11]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.396      ;
+; 0.246 ; BraRV32:cpu|aluReg[20] ; BraRV32:cpu|aluReg[21]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.398      ;
+; 0.247 ; BraRV32:cpu|aluReg[3]  ; BraRV32:cpu|aluReg[2]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.399      ;
+; 0.247 ; BraRV32:cpu|aluReg[13] ; BraRV32:cpu|aluReg[14]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.399      ;
+; 0.248 ; BraRV32:cpu|aluReg[13] ; BraRV32:cpu|aluReg[12]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.400      ;
+; 0.249 ; BraRV32:cpu|aluReg[31] ; BraRV32:cpu|aluReg[30]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.401      ;
+; 0.249 ; BraRV32:cpu|aluReg[3]  ; BraRV32:cpu|aluReg[4]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.401      ;
+; 0.251 ; BraRV32:cpu|aluReg[16] ; BraRV32:cpu|aluReg[17]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.403      ;
+; 0.251 ; BraRV32:cpu|aluReg[8]  ; BraRV32:cpu|aluReg[9]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.403      ;
+; 0.251 ; BraRV32:cpu|aluReg[29] ; BraRV32:cpu|aluReg[28]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.403      ;
+; 0.252 ; BraRV32:cpu|aluReg[4]  ; BraRV32:cpu|aluReg[3]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.404      ;
+; 0.255 ; BraRV32:cpu|aluReg[16] ; BraRV32:cpu|aluReg[15]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.407      ;
+; 0.305 ; BraRV32:cpu|rs2[19]    ; MemoryRV32_synthesis:mem|memory[434][19] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.457      ;
+; 0.324 ; BraRV32:cpu|aluReg[5]  ; BraRV32:cpu|aluReg[6]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.476      ;
+; 0.341 ; BraRV32:cpu|cycles[0]  ; BraRV32:cpu|registerFile[18][0]          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.493      ;
+; 0.355 ; BraRV32:cpu|cycles[16] ; BraRV32:cpu|cycles[16]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.507      ;
+; 0.357 ; BraRV32:cpu|aluReg[1]  ; BraRV32:cpu|aluReg[2]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.509      ;
+; 0.359 ; BraRV32:cpu|cycles[17] ; BraRV32:cpu|cycles[17]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.511      ;
+; 0.360 ; BraRV32:cpu|cycles[9]  ; BraRV32:cpu|cycles[9]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.512      ;
+; 0.360 ; BraRV32:cpu|cycles[11] ; BraRV32:cpu|cycles[11]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.512      ;
+; 0.360 ; BraRV32:cpu|cycles[18] ; BraRV32:cpu|cycles[18]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.512      ;
+; 0.360 ; BraRV32:cpu|cycles[25] ; BraRV32:cpu|cycles[25]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.512      ;
+; 0.360 ; BraRV32:cpu|cycles[27] ; BraRV32:cpu|cycles[27]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.512      ;
+; 0.361 ; BraRV32:cpu|cycles[13] ; BraRV32:cpu|cycles[13]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.513      ;
+; 0.361 ; BraRV32:cpu|cycles[14] ; BraRV32:cpu|cycles[14]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.513      ;
+; 0.361 ; BraRV32:cpu|cycles[15] ; BraRV32:cpu|cycles[15]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.513      ;
+; 0.361 ; BraRV32:cpu|cycles[20] ; BraRV32:cpu|cycles[20]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.513      ;
+; 0.361 ; BraRV32:cpu|cycles[23] ; BraRV32:cpu|cycles[23]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.513      ;
+; 0.361 ; BraRV32:cpu|cycles[29] ; BraRV32:cpu|cycles[29]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.513      ;
+; 0.361 ; BraRV32:cpu|cycles[30] ; BraRV32:cpu|cycles[30]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.513      ;
+; 0.362 ; BraRV32:cpu|cycles[1]  ; BraRV32:cpu|cycles[1]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.514      ;
+; 0.363 ; BraRV32:cpu|cycles[2]  ; BraRV32:cpu|cycles[2]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.515      ;
+; 0.363 ; BraRV32:cpu|cycles[7]  ; BraRV32:cpu|cycles[7]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.515      ;
+; 0.364 ; BraRV32:cpu|cycles[4]  ; BraRV32:cpu|cycles[4]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.516      ;
+; 0.365 ; BraRV32:cpu|aluReg[17] ; BraRV32:cpu|aluReg[16]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.517      ;
+; 0.365 ; BraRV32:cpu|aluReg[12] ; BraRV32:cpu|aluReg[13]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.517      ;
+; 0.365 ; BraRV32:cpu|aluReg[22] ; BraRV32:cpu|aluReg[21]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.517      ;
+; 0.365 ; BraRV32:cpu|aluReg[2]  ; BraRV32:cpu|aluReg[3]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.517      ;
+; 0.366 ; BraRV32:cpu|aluReg[9]  ; BraRV32:cpu|aluReg[8]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.518      ;
+; 0.366 ; BraRV32:cpu|aluReg[9]  ; BraRV32:cpu|aluReg[10]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.518      ;
+; 0.367 ; BraRV32:cpu|aluReg[2]  ; BraRV32:cpu|aluReg[1]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.519      ;
+; 0.368 ; BraRV32:cpu|rs2[0]     ; MemoryRV32_synthesis:mem|memory[255][24] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.520      ;
+; 0.369 ; BraRV32:cpu|aluReg[17] ; BraRV32:cpu|aluReg[18]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.521      ;
+; 0.370 ; BraRV32:cpu|rs2[22]    ; MemoryRV32_synthesis:mem|memory[211][22] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.522      ;
+; 0.370 ; BraRV32:cpu|aluReg[21] ; BraRV32:cpu|aluReg[22]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.522      ;
+; 0.371 ; BraRV32:cpu|cycles[3]  ; BraRV32:cpu|cycles[3]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.523      ;
+; 0.371 ; BraRV32:cpu|cycles[8]  ; BraRV32:cpu|cycles[8]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.523      ;
+; 0.371 ; BraRV32:cpu|cycles[10] ; BraRV32:cpu|cycles[10]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.523      ;
+; 0.371 ; BraRV32:cpu|cycles[19] ; BraRV32:cpu|cycles[19]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.523      ;
+; 0.371 ; BraRV32:cpu|cycles[24] ; BraRV32:cpu|cycles[24]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.523      ;
+; 0.371 ; BraRV32:cpu|cycles[26] ; BraRV32:cpu|cycles[26]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.523      ;
+; 0.372 ; BraRV32:cpu|cycles[5]  ; BraRV32:cpu|cycles[5]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.524      ;
+; 0.372 ; BraRV32:cpu|cycles[6]  ; BraRV32:cpu|cycles[6]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.524      ;
+; 0.372 ; BraRV32:cpu|cycles[12] ; BraRV32:cpu|cycles[12]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.524      ;
+; 0.372 ; BraRV32:cpu|cycles[21] ; BraRV32:cpu|cycles[21]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.524      ;
+; 0.372 ; BraRV32:cpu|cycles[22] ; BraRV32:cpu|cycles[22]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.524      ;
+; 0.372 ; BraRV32:cpu|aluReg[21] ; BraRV32:cpu|aluReg[20]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.524      ;
+; 0.372 ; BraRV32:cpu|cycles[28] ; BraRV32:cpu|cycles[28]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.524      ;
+; 0.372 ; BraRV32:cpu|aluReg[30] ; BraRV32:cpu|aluReg[29]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.524      ;
+; 0.372 ; BraRV32:cpu|aluReg[8]  ; BraRV32:cpu|aluReg[7]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.524      ;
+; 0.372 ; BraRV32:cpu|aluReg[25] ; BraRV32:cpu|aluReg[26]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.524      ;
+; 0.373 ; BraRV32:cpu|aluReg[30] ; BraRV32:cpu|aluReg[31]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.525      ;
+; 0.373 ; BraRV32:cpu|aluReg[14] ; BraRV32:cpu|aluReg[13]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.525      ;
+; 0.374 ; BraRV32:cpu|aluReg[14] ; BraRV32:cpu|aluReg[15]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.526      ;
+; 0.374 ; BraRV32:cpu|aluReg[19] ; BraRV32:cpu|aluReg[18]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.526      ;
+; 0.375 ; BraRV32:cpu|aluReg[25] ; BraRV32:cpu|aluReg[24]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.527      ;
+; 0.379 ; BraRV32:cpu|aluReg[27] ; BraRV32:cpu|aluReg[26]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.531      ;
+; 0.380 ; BraRV32:cpu|aluReg[29] ; BraRV32:cpu|aluReg[30]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.532      ;
+; 0.381 ; BraRV32:cpu|rs2[10]    ; MemoryRV32_synthesis:mem|memory[254][10] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.533      ;
+; 0.381 ; BraRV32:cpu|aluReg[10] ; BraRV32:cpu|aluReg[11]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.533      ;
+; 0.381 ; BraRV32:cpu|aluReg[11] ; BraRV32:cpu|aluReg[10]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.533      ;
+; 0.382 ; BraRV32:cpu|aluReg[10] ; BraRV32:cpu|aluReg[9]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.534      ;
+; 0.383 ; BraRV32:cpu|aluReg[11] ; BraRV32:cpu|aluReg[12]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.535      ;
+; 0.384 ; BraRV32:cpu|aluReg[26] ; BraRV32:cpu|aluReg[27]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.536      ;
+; 0.385 ; BraRV32:cpu|aluReg[28] ; BraRV32:cpu|aluReg[29]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.537      ;
+; 0.407 ; BraRV32:cpu|rs2[25]    ; MemoryRV32_synthesis:mem|memory[255][25] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.559      ;
+; 0.452 ; BraRV32:cpu|aluReg[18] ; BraRV32:cpu|aluReg[17]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.604      ;
+; 0.453 ; BraRV32:cpu|aluReg[18] ; BraRV32:cpu|aluReg[19]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.605      ;
+; 0.458 ; BraRV32:cpu|aluReg[7]  ; BraRV32:cpu|aluReg[6]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.610      ;
+; 0.459 ; BraRV32:cpu|aluReg[6]  ; BraRV32:cpu|aluReg[5]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.611      ;
+; 0.464 ; BraRV32:cpu|aluReg[27] ; BraRV32:cpu|aluReg[28]                   ; clk          ; clk         ; 0.000        ; 0.001      ; 0.617      ;
+; 0.465 ; BraRV32:cpu|aluReg[15] ; BraRV32:cpu|aluReg[14]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.617      ;
+; 0.466 ; BraRV32:cpu|aluReg[7]  ; BraRV32:cpu|aluReg[8]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.618      ;
+; 0.466 ; BraRV32:cpu|aluReg[6]  ; BraRV32:cpu|aluReg[7]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.618      ;
+; 0.467 ; BraRV32:cpu|state[1]   ; BraRV32:cpu|state[0]                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.619      ;
+; 0.473 ; BraRV32:cpu|aluReg[15] ; BraRV32:cpu|aluReg[16]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.625      ;
+; 0.478 ; BraRV32:cpu|rs2[6]     ; MemoryRV32_synthesis:mem|memory[211][22] ; clk          ; clk         ; 0.000        ; 0.007      ; 0.637      ;
+; 0.493 ; BraRV32:cpu|cycles[16] ; BraRV32:cpu|cycles[17]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.645      ;
+; 0.497 ; BraRV32:cpu|cycles[17] ; BraRV32:cpu|cycles[18]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.649      ;
+; 0.497 ; BraRV32:cpu|cycles[1]  ; BraRV32:cpu|cycles[2]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.649      ;
+; 0.498 ; BraRV32:cpu|cycles[9]  ; BraRV32:cpu|cycles[10]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.650      ;
+; 0.498 ; BraRV32:cpu|cycles[18] ; BraRV32:cpu|cycles[19]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.650      ;
++-------+------------------------+------------------------------------------+--------------+-------------+--------------+------------+------------+
+
+
++--------------------------------------------------------------------------------------------------------+
+; Fast Model Minimum Pulse Width: 'clk'                                                                  ;
++-------+--------------+----------------+------------------+-------+------------+------------------------+
+; Slack ; Actual Width ; Required Width ; Type             ; Clock ; Clock Edge ; Target                 ;
++-------+--------------+----------------+------------------+-------+------------+------------------------+
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[10]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[10]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[11]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[11]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[12]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[12]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[13]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[13]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[14]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[14]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[15]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[15]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[16]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[16]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[17]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[17]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[18]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[18]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[19]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[19]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[1]      ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[1]      ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[20]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[20]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[21]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[21]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[22]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[22]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[23]     ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[23]     ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[2]      ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[2]      ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[3]      ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[3]      ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[4]      ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[4]      ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[5]      ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[5]      ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[6]      ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[6]      ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[7]      ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[7]      ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[8]      ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[8]      ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|PC[9]      ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|PC[9]      ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[0]  ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[0]  ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[10] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[10] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[11] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[11] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[12] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[12] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[13] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[13] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[14] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[14] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[15] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[15] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[16] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[16] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[17] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[17] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[18] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[18] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[19] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[19] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[1]  ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[1]  ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[20] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[20] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[21] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[21] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[22] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[22] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[23] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[23] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[24] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[24] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[25] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[25] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[26] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[26] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[27] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[27] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[28] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[28] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[29] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[29] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[2]  ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[2]  ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[30] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[30] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[31] ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[31] ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[3]  ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[3]  ;
+; 9.000 ; 10.000       ; 1.000          ; High Pulse Width ; clk   ; Rise       ; BraRV32:cpu|aluReg[4]  ;
+; 9.000 ; 10.000       ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; BraRV32:cpu|aluReg[4]  ;
++-------+--------------+----------------+------------------+-------+------------+------------------------+
+
+
++-----------------------------------------------------------------------+
+; Setup Times                                                           ;
++-----------+------------+-------+-------+------------+-----------------+
+; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++-----------+------------+-------+-------+------------+-----------------+
+; reset     ; clk        ; 4.508 ; 4.508 ; Rise       ; clk             ;
++-----------+------------+-------+-------+------------+-----------------+
+
+
++-------------------------------------------------------------------------+
+; Hold Times                                                              ;
++-----------+------------+--------+--------+------------+-----------------+
+; Data Port ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++-----------+------------+--------+--------+------------+-----------------+
+; reset     ; clk        ; -2.364 ; -2.364 ; Rise       ; clk             ;
++-----------+------------+--------+--------+------------+-----------------+
+
+
++-------------------------------------------------------------------------+
+; Clock to Output Times                                                   ;
++-----------+------------+--------+--------+------------+-----------------+
+; Data Port ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++-----------+------------+--------+--------+------------+-----------------+
+; HEX0[*]   ; clk        ; 18.302 ; 18.302 ; Rise       ; clk             ;
+;  HEX0[0]  ; clk        ; 18.302 ; 18.302 ; Rise       ; clk             ;
+;  HEX0[1]  ; clk        ; 17.915 ; 17.915 ; Rise       ; clk             ;
+;  HEX0[2]  ; clk        ; 18.291 ; 18.291 ; Rise       ; clk             ;
+;  HEX0[3]  ; clk        ; 18.001 ; 18.001 ; Rise       ; clk             ;
+;  HEX0[4]  ; clk        ; 17.908 ; 17.908 ; Rise       ; clk             ;
+;  HEX0[5]  ; clk        ; 17.820 ; 17.820 ; Rise       ; clk             ;
+;  HEX0[6]  ; clk        ; 18.159 ; 18.159 ; Rise       ; clk             ;
+; HEX1[*]   ; clk        ; 19.576 ; 19.576 ; Rise       ; clk             ;
+;  HEX1[0]  ; clk        ; 19.538 ; 19.538 ; Rise       ; clk             ;
+;  HEX1[1]  ; clk        ; 19.515 ; 19.515 ; Rise       ; clk             ;
+;  HEX1[2]  ; clk        ; 19.465 ; 19.465 ; Rise       ; clk             ;
+;  HEX1[3]  ; clk        ; 19.510 ; 19.510 ; Rise       ; clk             ;
+;  HEX1[4]  ; clk        ; 19.555 ; 19.555 ; Rise       ; clk             ;
+;  HEX1[5]  ; clk        ; 19.556 ; 19.556 ; Rise       ; clk             ;
+;  HEX1[6]  ; clk        ; 19.576 ; 19.576 ; Rise       ; clk             ;
+; HEX2[*]   ; clk        ; 26.460 ; 26.460 ; Rise       ; clk             ;
+;  HEX2[0]  ; clk        ; 26.441 ; 26.441 ; Rise       ; clk             ;
+;  HEX2[1]  ; clk        ; 26.276 ; 26.276 ; Rise       ; clk             ;
+;  HEX2[2]  ; clk        ; 26.335 ; 26.335 ; Rise       ; clk             ;
+;  HEX2[3]  ; clk        ; 26.348 ; 26.348 ; Rise       ; clk             ;
+;  HEX2[4]  ; clk        ; 26.420 ; 26.420 ; Rise       ; clk             ;
+;  HEX2[5]  ; clk        ; 26.460 ; 26.460 ; Rise       ; clk             ;
+;  HEX2[6]  ; clk        ; 26.446 ; 26.446 ; Rise       ; clk             ;
+; HEX3[*]   ; clk        ; 28.191 ; 28.191 ; Rise       ; clk             ;
+;  HEX3[0]  ; clk        ; 28.191 ; 28.191 ; Rise       ; clk             ;
+;  HEX3[1]  ; clk        ; 28.060 ; 28.060 ; Rise       ; clk             ;
+;  HEX3[2]  ; clk        ; 28.078 ; 28.078 ; Rise       ; clk             ;
+;  HEX3[3]  ; clk        ; 28.061 ; 28.061 ; Rise       ; clk             ;
+;  HEX3[4]  ; clk        ; 28.089 ; 28.089 ; Rise       ; clk             ;
+;  HEX3[5]  ; clk        ; 28.156 ; 28.156 ; Rise       ; clk             ;
+;  HEX3[6]  ; clk        ; 28.185 ; 28.185 ; Rise       ; clk             ;
+; HEX4[*]   ; clk        ; 30.847 ; 30.847 ; Rise       ; clk             ;
+;  HEX4[0]  ; clk        ; 30.691 ; 30.691 ; Rise       ; clk             ;
+;  HEX4[1]  ; clk        ; 30.709 ; 30.709 ; Rise       ; clk             ;
+;  HEX4[2]  ; clk        ; 30.710 ; 30.710 ; Rise       ; clk             ;
+;  HEX4[3]  ; clk        ; 30.816 ; 30.816 ; Rise       ; clk             ;
+;  HEX4[4]  ; clk        ; 30.787 ; 30.787 ; Rise       ; clk             ;
+;  HEX4[5]  ; clk        ; 30.834 ; 30.834 ; Rise       ; clk             ;
+;  HEX4[6]  ; clk        ; 30.847 ; 30.847 ; Rise       ; clk             ;
+; HEX5[*]   ; clk        ; 30.455 ; 30.455 ; Rise       ; clk             ;
+;  HEX5[0]  ; clk        ; 30.450 ; 30.450 ; Rise       ; clk             ;
+;  HEX5[3]  ; clk        ; 30.455 ; 30.455 ; Rise       ; clk             ;
+;  HEX5[4]  ; clk        ; 30.435 ; 30.435 ; Rise       ; clk             ;
+;  HEX5[5]  ; clk        ; 30.435 ; 30.435 ; Rise       ; clk             ;
+; leds[*]   ; clk        ; 4.160  ; 4.160  ; Rise       ; clk             ;
+;  leds[0]  ; clk        ; 4.160  ; 4.160  ; Rise       ; clk             ;
+;  leds[1]  ; clk        ; 4.088  ; 4.088  ; Rise       ; clk             ;
+;  leds[2]  ; clk        ; 4.086  ; 4.086  ; Rise       ; clk             ;
+;  leds[3]  ; clk        ; 4.109  ; 4.109  ; Rise       ; clk             ;
+;  leds[4]  ; clk        ; 4.111  ; 4.111  ; Rise       ; clk             ;
+;  leds[5]  ; clk        ; 4.124  ; 4.124  ; Rise       ; clk             ;
+;  leds[6]  ; clk        ; 4.010  ; 4.010  ; Rise       ; clk             ;
+;  leds[7]  ; clk        ; 3.997  ; 3.997  ; Rise       ; clk             ;
+;  leds[8]  ; clk        ; 4.098  ; 4.098  ; Rise       ; clk             ;
+;  leds[9]  ; clk        ; 3.981  ; 3.981  ; Rise       ; clk             ;
++-----------+------------+--------+--------+------------+-----------------+
+
+
++-----------------------------------------------------------------------+
+; Minimum Clock to Output Times                                         ;
++-----------+------------+-------+-------+------------+-----------------+
+; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++-----------+------------+-------+-------+------------+-----------------+
+; HEX0[*]   ; clk        ; 4.990 ; 4.990 ; Rise       ; clk             ;
+;  HEX0[0]  ; clk        ; 5.479 ; 5.479 ; Rise       ; clk             ;
+;  HEX0[1]  ; clk        ; 5.088 ; 5.088 ; Rise       ; clk             ;
+;  HEX0[2]  ; clk        ; 5.463 ; 5.463 ; Rise       ; clk             ;
+;  HEX0[3]  ; clk        ; 5.184 ; 5.184 ; Rise       ; clk             ;
+;  HEX0[4]  ; clk        ; 5.088 ; 5.088 ; Rise       ; clk             ;
+;  HEX0[5]  ; clk        ; 4.990 ; 4.990 ; Rise       ; clk             ;
+;  HEX0[6]  ; clk        ; 5.328 ; 5.328 ; Rise       ; clk             ;
+; HEX1[*]   ; clk        ; 4.920 ; 4.920 ; Rise       ; clk             ;
+;  HEX1[0]  ; clk        ; 5.005 ; 5.005 ; Rise       ; clk             ;
+;  HEX1[1]  ; clk        ; 4.974 ; 4.974 ; Rise       ; clk             ;
+;  HEX1[2]  ; clk        ; 4.920 ; 4.920 ; Rise       ; clk             ;
+;  HEX1[3]  ; clk        ; 4.970 ; 4.970 ; Rise       ; clk             ;
+;  HEX1[4]  ; clk        ; 5.021 ; 5.021 ; Rise       ; clk             ;
+;  HEX1[5]  ; clk        ; 5.022 ; 5.022 ; Rise       ; clk             ;
+;  HEX1[6]  ; clk        ; 5.043 ; 5.043 ; Rise       ; clk             ;
+; HEX2[*]   ; clk        ; 5.503 ; 5.503 ; Rise       ; clk             ;
+;  HEX2[0]  ; clk        ; 5.670 ; 5.670 ; Rise       ; clk             ;
+;  HEX2[1]  ; clk        ; 5.503 ; 5.503 ; Rise       ; clk             ;
+;  HEX2[2]  ; clk        ; 5.562 ; 5.562 ; Rise       ; clk             ;
+;  HEX2[3]  ; clk        ; 5.574 ; 5.574 ; Rise       ; clk             ;
+;  HEX2[4]  ; clk        ; 5.656 ; 5.656 ; Rise       ; clk             ;
+;  HEX2[5]  ; clk        ; 5.687 ; 5.687 ; Rise       ; clk             ;
+;  HEX2[6]  ; clk        ; 5.675 ; 5.675 ; Rise       ; clk             ;
+; HEX3[*]   ; clk        ; 6.037 ; 6.037 ; Rise       ; clk             ;
+;  HEX3[0]  ; clk        ; 6.174 ; 6.174 ; Rise       ; clk             ;
+;  HEX3[1]  ; clk        ; 6.037 ; 6.037 ; Rise       ; clk             ;
+;  HEX3[2]  ; clk        ; 6.065 ; 6.065 ; Rise       ; clk             ;
+;  HEX3[3]  ; clk        ; 6.039 ; 6.039 ; Rise       ; clk             ;
+;  HEX3[4]  ; clk        ; 6.060 ; 6.060 ; Rise       ; clk             ;
+;  HEX3[5]  ; clk        ; 6.130 ; 6.130 ; Rise       ; clk             ;
+;  HEX3[6]  ; clk        ; 6.170 ; 6.170 ; Rise       ; clk             ;
+; HEX4[*]   ; clk        ; 7.768 ; 7.768 ; Rise       ; clk             ;
+;  HEX4[0]  ; clk        ; 7.768 ; 7.768 ; Rise       ; clk             ;
+;  HEX4[1]  ; clk        ; 7.787 ; 7.787 ; Rise       ; clk             ;
+;  HEX4[2]  ; clk        ; 7.784 ; 7.784 ; Rise       ; clk             ;
+;  HEX4[3]  ; clk        ; 7.889 ; 7.889 ; Rise       ; clk             ;
+;  HEX4[4]  ; clk        ; 7.860 ; 7.860 ; Rise       ; clk             ;
+;  HEX4[5]  ; clk        ; 7.910 ; 7.910 ; Rise       ; clk             ;
+;  HEX4[6]  ; clk        ; 7.921 ; 7.921 ; Rise       ; clk             ;
+; HEX5[*]   ; clk        ; 8.195 ; 8.195 ; Rise       ; clk             ;
+;  HEX5[0]  ; clk        ; 8.210 ; 8.210 ; Rise       ; clk             ;
+;  HEX5[3]  ; clk        ; 8.215 ; 8.215 ; Rise       ; clk             ;
+;  HEX5[4]  ; clk        ; 8.195 ; 8.195 ; Rise       ; clk             ;
+;  HEX5[5]  ; clk        ; 8.195 ; 8.195 ; Rise       ; clk             ;
+; leds[*]   ; clk        ; 3.981 ; 3.981 ; Rise       ; clk             ;
+;  leds[0]  ; clk        ; 4.160 ; 4.160 ; Rise       ; clk             ;
+;  leds[1]  ; clk        ; 4.088 ; 4.088 ; Rise       ; clk             ;
+;  leds[2]  ; clk        ; 4.086 ; 4.086 ; Rise       ; clk             ;
+;  leds[3]  ; clk        ; 4.109 ; 4.109 ; Rise       ; clk             ;
+;  leds[4]  ; clk        ; 4.111 ; 4.111 ; Rise       ; clk             ;
+;  leds[5]  ; clk        ; 4.124 ; 4.124 ; Rise       ; clk             ;
+;  leds[6]  ; clk        ; 4.010 ; 4.010 ; Rise       ; clk             ;
+;  leds[7]  ; clk        ; 3.997 ; 3.997 ; Rise       ; clk             ;
+;  leds[8]  ; clk        ; 4.098 ; 4.098 ; Rise       ; clk             ;
+;  leds[9]  ; clk        ; 3.981 ; 3.981 ; Rise       ; clk             ;
++-----------+------------+-------+-------+------------+-----------------+
+
+
++-----------------------------------------------------------------------------+
+; Multicorner Timing Analysis Summary                                         ;
++------------------+-------+-------+----------+---------+---------------------+
+; Clock            ; Setup ; Hold  ; Recovery ; Removal ; Minimum Pulse Width ;
++------------------+-------+-------+----------+---------+---------------------+
+; Worst-case Slack ; 4.316 ; 0.215 ; N/A      ; N/A     ; 9.000               ;
+;  clk             ; 4.316 ; 0.215 ; N/A      ; N/A     ; 9.000               ;
+; Design-wide TNS  ; 0.0   ; 0.0   ; 0.0      ; 0.0     ; 0.0                 ;
+;  clk             ; 0.000 ; 0.000 ; N/A      ; N/A     ; 0.000               ;
++------------------+-------+-------+----------+---------+---------------------+
+
+
++-----------------------------------------------------------------------+
+; Setup Times                                                           ;
++-----------+------------+-------+-------+------------+-----------------+
+; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++-----------+------------+-------+-------+------------+-----------------+
+; reset     ; clk        ; 8.750 ; 8.750 ; Rise       ; clk             ;
++-----------+------------+-------+-------+------------+-----------------+
+
+
++-------------------------------------------------------------------------+
+; Hold Times                                                              ;
++-----------+------------+--------+--------+------------+-----------------+
+; Data Port ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++-----------+------------+--------+--------+------------+-----------------+
+; reset     ; clk        ; -2.364 ; -2.364 ; Rise       ; clk             ;
++-----------+------------+--------+--------+------------+-----------------+
+
+
++-------------------------------------------------------------------------+
+; Clock to Output Times                                                   ;
++-----------+------------+--------+--------+------------+-----------------+
+; Data Port ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++-----------+------------+--------+--------+------------+-----------------+
+; HEX0[*]   ; clk        ; 40.209 ; 40.209 ; Rise       ; clk             ;
+;  HEX0[0]  ; clk        ; 40.209 ; 40.209 ; Rise       ; clk             ;
+;  HEX0[1]  ; clk        ; 39.278 ; 39.278 ; Rise       ; clk             ;
+;  HEX0[2]  ; clk        ; 40.150 ; 40.150 ; Rise       ; clk             ;
+;  HEX0[3]  ; clk        ; 39.474 ; 39.474 ; Rise       ; clk             ;
+;  HEX0[4]  ; clk        ; 39.262 ; 39.262 ; Rise       ; clk             ;
+;  HEX0[5]  ; clk        ; 39.065 ; 39.065 ; Rise       ; clk             ;
+;  HEX0[6]  ; clk        ; 39.928 ; 39.928 ; Rise       ; clk             ;
+; HEX1[*]   ; clk        ; 43.366 ; 43.366 ; Rise       ; clk             ;
+;  HEX1[0]  ; clk        ; 43.170 ; 43.170 ; Rise       ; clk             ;
+;  HEX1[1]  ; clk        ; 43.161 ; 43.161 ; Rise       ; clk             ;
+;  HEX1[2]  ; clk        ; 43.173 ; 43.173 ; Rise       ; clk             ;
+;  HEX1[3]  ; clk        ; 43.272 ; 43.272 ; Rise       ; clk             ;
+;  HEX1[4]  ; clk        ; 43.312 ; 43.312 ; Rise       ; clk             ;
+;  HEX1[5]  ; clk        ; 43.345 ; 43.345 ; Rise       ; clk             ;
+;  HEX1[6]  ; clk        ; 43.366 ; 43.366 ; Rise       ; clk             ;
+; HEX2[*]   ; clk        ; 59.336 ; 59.336 ; Rise       ; clk             ;
+;  HEX2[0]  ; clk        ; 59.306 ; 59.306 ; Rise       ; clk             ;
+;  HEX2[1]  ; clk        ; 58.983 ; 58.983 ; Rise       ; clk             ;
+;  HEX2[2]  ; clk        ; 59.060 ; 59.060 ; Rise       ; clk             ;
+;  HEX2[3]  ; clk        ; 59.073 ; 59.073 ; Rise       ; clk             ;
+;  HEX2[4]  ; clk        ; 59.288 ; 59.288 ; Rise       ; clk             ;
+;  HEX2[5]  ; clk        ; 59.336 ; 59.336 ; Rise       ; clk             ;
+;  HEX2[6]  ; clk        ; 59.333 ; 59.333 ; Rise       ; clk             ;
+; HEX3[*]   ; clk        ; 63.152 ; 63.152 ; Rise       ; clk             ;
+;  HEX3[0]  ; clk        ; 63.152 ; 63.152 ; Rise       ; clk             ;
+;  HEX3[1]  ; clk        ; 62.844 ; 62.844 ; Rise       ; clk             ;
+;  HEX3[2]  ; clk        ; 62.878 ; 62.878 ; Rise       ; clk             ;
+;  HEX3[3]  ; clk        ; 62.820 ; 62.820 ; Rise       ; clk             ;
+;  HEX3[4]  ; clk        ; 62.891 ; 62.891 ; Rise       ; clk             ;
+;  HEX3[5]  ; clk        ; 63.096 ; 63.096 ; Rise       ; clk             ;
+;  HEX3[6]  ; clk        ; 63.149 ; 63.149 ; Rise       ; clk             ;
+; HEX4[*]   ; clk        ; 68.433 ; 68.433 ; Rise       ; clk             ;
+;  HEX4[0]  ; clk        ; 68.093 ; 68.093 ; Rise       ; clk             ;
+;  HEX4[1]  ; clk        ; 68.140 ; 68.140 ; Rise       ; clk             ;
+;  HEX4[2]  ; clk        ; 68.127 ; 68.127 ; Rise       ; clk             ;
+;  HEX4[3]  ; clk        ; 68.399 ; 68.399 ; Rise       ; clk             ;
+;  HEX4[4]  ; clk        ; 68.275 ; 68.275 ; Rise       ; clk             ;
+;  HEX4[5]  ; clk        ; 68.425 ; 68.425 ; Rise       ; clk             ;
+;  HEX4[6]  ; clk        ; 68.433 ; 68.433 ; Rise       ; clk             ;
+; HEX5[*]   ; clk        ; 67.496 ; 67.496 ; Rise       ; clk             ;
+;  HEX5[0]  ; clk        ; 67.491 ; 67.491 ; Rise       ; clk             ;
+;  HEX5[3]  ; clk        ; 67.496 ; 67.496 ; Rise       ; clk             ;
+;  HEX5[4]  ; clk        ; 67.476 ; 67.476 ; Rise       ; clk             ;
+;  HEX5[5]  ; clk        ; 67.476 ; 67.476 ; Rise       ; clk             ;
+; leds[*]   ; clk        ; 7.399  ; 7.399  ; Rise       ; clk             ;
+;  leds[0]  ; clk        ; 7.399  ; 7.399  ; Rise       ; clk             ;
+;  leds[1]  ; clk        ; 7.253  ; 7.253  ; Rise       ; clk             ;
+;  leds[2]  ; clk        ; 7.317  ; 7.317  ; Rise       ; clk             ;
+;  leds[3]  ; clk        ; 7.368  ; 7.368  ; Rise       ; clk             ;
+;  leds[4]  ; clk        ; 7.344  ; 7.344  ; Rise       ; clk             ;
+;  leds[5]  ; clk        ; 7.376  ; 7.376  ; Rise       ; clk             ;
+;  leds[6]  ; clk        ; 7.129  ; 7.129  ; Rise       ; clk             ;
+;  leds[7]  ; clk        ; 7.120  ; 7.120  ; Rise       ; clk             ;
+;  leds[8]  ; clk        ; 7.370  ; 7.370  ; Rise       ; clk             ;
+;  leds[9]  ; clk        ; 7.104  ; 7.104  ; Rise       ; clk             ;
++-----------+------------+--------+--------+------------+-----------------+
+
+
++-----------------------------------------------------------------------+
+; Minimum Clock to Output Times                                         ;
++-----------+------------+-------+-------+------------+-----------------+
+; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++-----------+------------+-------+-------+------------+-----------------+
+; HEX0[*]   ; clk        ; 4.990 ; 4.990 ; Rise       ; clk             ;
+;  HEX0[0]  ; clk        ; 5.479 ; 5.479 ; Rise       ; clk             ;
+;  HEX0[1]  ; clk        ; 5.088 ; 5.088 ; Rise       ; clk             ;
+;  HEX0[2]  ; clk        ; 5.463 ; 5.463 ; Rise       ; clk             ;
+;  HEX0[3]  ; clk        ; 5.184 ; 5.184 ; Rise       ; clk             ;
+;  HEX0[4]  ; clk        ; 5.088 ; 5.088 ; Rise       ; clk             ;
+;  HEX0[5]  ; clk        ; 4.990 ; 4.990 ; Rise       ; clk             ;
+;  HEX0[6]  ; clk        ; 5.328 ; 5.328 ; Rise       ; clk             ;
+; HEX1[*]   ; clk        ; 4.920 ; 4.920 ; Rise       ; clk             ;
+;  HEX1[0]  ; clk        ; 5.005 ; 5.005 ; Rise       ; clk             ;
+;  HEX1[1]  ; clk        ; 4.974 ; 4.974 ; Rise       ; clk             ;
+;  HEX1[2]  ; clk        ; 4.920 ; 4.920 ; Rise       ; clk             ;
+;  HEX1[3]  ; clk        ; 4.970 ; 4.970 ; Rise       ; clk             ;
+;  HEX1[4]  ; clk        ; 5.021 ; 5.021 ; Rise       ; clk             ;
+;  HEX1[5]  ; clk        ; 5.022 ; 5.022 ; Rise       ; clk             ;
+;  HEX1[6]  ; clk        ; 5.043 ; 5.043 ; Rise       ; clk             ;
+; HEX2[*]   ; clk        ; 5.503 ; 5.503 ; Rise       ; clk             ;
+;  HEX2[0]  ; clk        ; 5.670 ; 5.670 ; Rise       ; clk             ;
+;  HEX2[1]  ; clk        ; 5.503 ; 5.503 ; Rise       ; clk             ;
+;  HEX2[2]  ; clk        ; 5.562 ; 5.562 ; Rise       ; clk             ;
+;  HEX2[3]  ; clk        ; 5.574 ; 5.574 ; Rise       ; clk             ;
+;  HEX2[4]  ; clk        ; 5.656 ; 5.656 ; Rise       ; clk             ;
+;  HEX2[5]  ; clk        ; 5.687 ; 5.687 ; Rise       ; clk             ;
+;  HEX2[6]  ; clk        ; 5.675 ; 5.675 ; Rise       ; clk             ;
+; HEX3[*]   ; clk        ; 6.037 ; 6.037 ; Rise       ; clk             ;
+;  HEX3[0]  ; clk        ; 6.174 ; 6.174 ; Rise       ; clk             ;
+;  HEX3[1]  ; clk        ; 6.037 ; 6.037 ; Rise       ; clk             ;
+;  HEX3[2]  ; clk        ; 6.065 ; 6.065 ; Rise       ; clk             ;
+;  HEX3[3]  ; clk        ; 6.039 ; 6.039 ; Rise       ; clk             ;
+;  HEX3[4]  ; clk        ; 6.060 ; 6.060 ; Rise       ; clk             ;
+;  HEX3[5]  ; clk        ; 6.130 ; 6.130 ; Rise       ; clk             ;
+;  HEX3[6]  ; clk        ; 6.170 ; 6.170 ; Rise       ; clk             ;
+; HEX4[*]   ; clk        ; 7.768 ; 7.768 ; Rise       ; clk             ;
+;  HEX4[0]  ; clk        ; 7.768 ; 7.768 ; Rise       ; clk             ;
+;  HEX4[1]  ; clk        ; 7.787 ; 7.787 ; Rise       ; clk             ;
+;  HEX4[2]  ; clk        ; 7.784 ; 7.784 ; Rise       ; clk             ;
+;  HEX4[3]  ; clk        ; 7.889 ; 7.889 ; Rise       ; clk             ;
+;  HEX4[4]  ; clk        ; 7.860 ; 7.860 ; Rise       ; clk             ;
+;  HEX4[5]  ; clk        ; 7.910 ; 7.910 ; Rise       ; clk             ;
+;  HEX4[6]  ; clk        ; 7.921 ; 7.921 ; Rise       ; clk             ;
+; HEX5[*]   ; clk        ; 8.195 ; 8.195 ; Rise       ; clk             ;
+;  HEX5[0]  ; clk        ; 8.210 ; 8.210 ; Rise       ; clk             ;
+;  HEX5[3]  ; clk        ; 8.215 ; 8.215 ; Rise       ; clk             ;
+;  HEX5[4]  ; clk        ; 8.195 ; 8.195 ; Rise       ; clk             ;
+;  HEX5[5]  ; clk        ; 8.195 ; 8.195 ; Rise       ; clk             ;
+; leds[*]   ; clk        ; 3.981 ; 3.981 ; Rise       ; clk             ;
+;  leds[0]  ; clk        ; 4.160 ; 4.160 ; Rise       ; clk             ;
+;  leds[1]  ; clk        ; 4.088 ; 4.088 ; Rise       ; clk             ;
+;  leds[2]  ; clk        ; 4.086 ; 4.086 ; Rise       ; clk             ;
+;  leds[3]  ; clk        ; 4.109 ; 4.109 ; Rise       ; clk             ;
+;  leds[4]  ; clk        ; 4.111 ; 4.111 ; Rise       ; clk             ;
+;  leds[5]  ; clk        ; 4.124 ; 4.124 ; Rise       ; clk             ;
+;  leds[6]  ; clk        ; 4.010 ; 4.010 ; Rise       ; clk             ;
+;  leds[7]  ; clk        ; 3.997 ; 3.997 ; Rise       ; clk             ;
+;  leds[8]  ; clk        ; 4.098 ; 4.098 ; Rise       ; clk             ;
+;  leds[9]  ; clk        ; 3.981 ; 3.981 ; Rise       ; clk             ;
++-----------+------------+-------+-------+------------+-----------------+
+
+
++-------------------------------------------------------------------+
+; Setup Transfers                                                   ;
++------------+----------+----------+----------+----------+----------+
+; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+----------+----------+----------+----------+----------+
+; clk        ; clk      ; 15371211 ; 0        ; 0        ; 0        ;
++------------+----------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
++-------------------------------------------------------------------+
+; Hold Transfers                                                    ;
++------------+----------+----------+----------+----------+----------+
+; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+----------+----------+----------+----------+----------+
+; clk        ; clk      ; 15371211 ; 0        ; 0        ; 0        ;
++------------+----------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
+---------------
+; Report TCCS ;
+---------------
+No dedicated SERDES Transmitter circuitry present in device or used in design
+
+
+---------------
+; Report RSKM ;
+---------------
+No dedicated SERDES Receiver circuitry present in device or used in design
+
+
++------------------------------------------------+
+; Unconstrained Paths                            ;
++---------------------------------+-------+------+
+; Property                        ; Setup ; Hold ;
++---------------------------------+-------+------+
+; Illegal Clocks                  ; 0     ; 0    ;
+; Unconstrained Clocks            ; 0     ; 0    ;
+; Unconstrained Input Ports       ; 1     ; 1    ;
+; Unconstrained Input Port Paths  ; 121   ; 121  ;
+; Unconstrained Output Ports      ; 49    ; 49   ;
+; Unconstrained Output Port Paths ; 634   ; 634  ;
++---------------------------------+-------+------+
+
+
++------------------------------------+
+; TimeQuest Timing Analyzer Messages ;
++------------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit TimeQuest Timing Analyzer
+    Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+    Info: Processing started: Tue Jun 03 09:55:44 2025
+Info: Command: quartus_sta top_BraRV32 -c top_BraRV32
+Info: qsta_default_script.tcl version: #1
+Warning (20028): Parallel compilation is not licensed and has been disabled
+Info (21077): Low junction temperature is 0 degrees C
+Info (21077): High junction temperature is 85 degrees C
+Info (332104): Reading SDC File: 'top_BraRV32.sdc'
+Info: Found TIMEQUEST_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
+Info: Analyzing Slow Model
+Info (332146): Worst-case setup slack is 4.316
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):     4.316         0.000 clk 
+Info (332146): Worst-case hold slack is 0.391
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):     0.391         0.000 clk 
+Info (332140): No Recovery paths to report
+Info (332140): No Removal paths to report
+Info (332146): Worst-case minimum pulse width slack is 9.000
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):     9.000         0.000 clk 
+Info (332001): The selected device family is not supported by the report_metastability command.
+Info: Analyzing Fast Model
+Info (332146): Worst-case setup slack is 12.727
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):    12.727         0.000 clk 
+Info (332146): Worst-case hold slack is 0.215
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):     0.215         0.000 clk 
+Info (332140): No Recovery paths to report
+Info (332140): No Removal paths to report
+Info (332146): Worst-case minimum pulse width slack is 9.000
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):     9.000         0.000 clk 
+Info (332001): The selected device family is not supported by the report_metastability command.
+Info (332102): Design is not fully constrained for setup requirements
+Info (332102): Design is not fully constrained for hold requirements
+Info: Quartus II 64-Bit TimeQuest Timing Analyzer was successful. 0 errors, 1 warning
+    Info: Peak virtual memory: 4852 megabytes
+    Info: Processing ended: Tue Jun 03 09:55:59 2025
+    Info: Elapsed time: 00:00:15
+    Info: Total CPU time (on all processors): 00:00:14
+
+

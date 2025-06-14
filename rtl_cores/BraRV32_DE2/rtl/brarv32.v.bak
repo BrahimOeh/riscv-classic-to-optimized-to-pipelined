@@ -1,0 +1,550 @@
+/*******************************************************************/
+// BraRV32, a collection of minimalistic RISC-V RV32 cores.
+// This version: The "Quark", the most elementary version of FemtoRV32.
+//             A single VERILOG file, compact & understandable code.
+//             (200 lines of code, 400 lines counting comments)
+//
+// Instruction set: RV32I + RDCYCLES
+//
+// Parameters:
+//  Reset address can be defined using RESET_ADDR (default is 0).
+//
+//  The ADDR_WIDTH parameter lets you define the width of the internal
+//  address bus (and address computation logic).
+//
+// Macros:
+//    optionally one may define NRV_IS_IO_ADDR(addr), that is supposed to:
+//              evaluate to 1 if addr is in mapped IO space,
+//              evaluate to 0 otherwise
+//    (additional wait states are used when in IO space).
+//    If left undefined, wait states are always used.
+//
+//    NRV_COUNTER_WIDTH may be defined to reduce the number of bits used
+//    by the ticks counter. If not defined, a 32-bits counter is generated.
+//    (reducing its width may be useful for space-constrained designs).
+//
+//    NRV_TWOLEVEL_SHIFTER may be defined to make shift operations faster
+//    (uses a two-level shifter inspired by picorv32).
+//
+// Bruno Levy, Matthias Koch, 2020-2021
+/*******************************************************************/
+
+// Firmware generation flags for this processor
+`define NRV_ARCH     "rv32i"
+`define NRV_ABI      "ilp32"
+`define NRV_OPTIMIZE "-Os"
+`define BENCH 1
+
+module BraRV32(
+   input 	 clk,
+
+   output [31:0] mem_addr,  // address bus
+   output [31:0] mem_wdata, // data to be written
+   output [3:0]  mem_wmask, // write mask for the 4 bytes of each word
+   input [31:0]  mem_rdata, // input lines for both data and instr
+   output 	 mem_rstrb, // active to initiate memory read (used by IO)
+   input 	 mem_rbusy, // asserted if memory is busy reading value
+   input 	 mem_wbusy, // asserted if memory is busy writing value
+
+   input 	 reset      // set to 0 to reset the processor
+   /*===================== Exposed_for_FPGA_implementation ====================================*/
+   
+   output [9:0] RF10; // holds Fib(15)= 610 = 0b1001100010 → 10-bits
+   
+   
+   
+   
+   
+   
+   
+   /*==========================================================================================*/
+);
+   parameter RESET_ADDR       = 32'h00000000;
+   parameter ADDR_WIDTH       = 24;
+
+`ifdef NRV_COUNTER_WIDTH
+   reg [`NRV_COUNTER_WIDTH-1:0]  cycles;
+`else
+   reg [31:0]  cycles;
+`endif
+   always @(posedge clk) cycles <= cycles + 1;
+  
+   wire [4:0] rdId;
+   wire [7:0] funct3Is;
+   wire [31:0] Uimm ;
+   wire [31:0] Iimm   ;
+   wire [31:0] Bimm ;
+   wire [31:0] Simm ;
+   wire [31:0] Jimm ;
+	  wire isLoad;  
+	  wire isALUimm;
+	  wire isStore;   
+	  wire isALUreg;
+	  wire isSYSTEM;  
+	  wire isJAL;    
+	  wire isJALR;    
+	  wire isLUI;     
+	  wire isAUIPC;
+	  wire isBranch;
+	  wire isALU;
+	  wire writeBack;
+	wire [31:0] writeBackData;
+	  wire [31:0] aluIn1;
+	  wire [31:0] aluIn2;
+	  wire aluBusy;
+	  wire aluWr;
+	  wire [31:0] aluPlus;
+	  wire [32:0] aluMinus ;
+	  wire        LT;
+	  wire        LTU;		
+	  wire        EQ;
+	  wire funct3IsShift;
+	  wire [31:0] aluOut;
+	  wire predicate;
+	  wire [ADDR_WIDTH-1:0] PCplus4;
+	  wire [ADDR_WIDTH-1:0] PCplusImm;
+	  wire [ADDR_WIDTH-1:0] loadstore_addr;
+	  wire mem_byteAccess;
+	  wire mem_halfwordAccess;
+	  wire LOAD_sign;
+	  wire [31:0] LOAD_data;
+	  wire [15:0] LOAD_halfword;
+	  wire  [7:0] LOAD_byte;
+	  wire [3:0] STORE_wmask;
+	  wire jumpToPCplusImm ;
+	  wire needToWait ;
+	  reg  [31:2] instr;          // Latched instruction. Note that bits 0 and 1 are
+	  // The register file.
+	  reg [31:0] rs1;
+	  reg [31:0] rs2;
+	  reg [31:0] registerFile [31:0];
+	 
+	  reg  [31:0] aluReg;       // The internal register of the ALU, used by shift.
+	  reg  [4:0]  aluShamt;     // Current shift amount (cannot exceed a shift amount of 32bits → 5bits)
+	  reg  [ADDR_WIDTH-1:0] PC; // The program counter.
+	  localparam NB_STATES = 4;
+	  reg [NB_STATES-1:0] state;
+	  
+   localparam FETCH_INSTR_bit     = 0;
+   localparam WAIT_INSTR_bit      = 1;
+   localparam EXECUTE_bit         = 2;
+   localparam WAIT_ALU_OR_MEM_bit = 3;
+
+
+   localparam FETCH_INSTR     = 1 << FETCH_INSTR_bit;
+   localparam WAIT_INSTR      = 1 << WAIT_INSTR_bit;
+   localparam EXECUTE         = 1 << EXECUTE_bit;
+   localparam WAIT_ALU_OR_MEM = 1 << WAIT_ALU_OR_MEM_bit;
+   
+	integer i;
+   `ifdef BENCH
+   	initial begin
+      	cycles = 0;
+      	aluShamt = 0;
+		registerFile[0] = 32'b0;
+		registerFile[1] = 32'b0;
+		registerFile[2] = 32'h00001000;
+			for (i = 3; i < 32; i = i + 1)
+				registerFile[i] = 32'h0;
+			end
+	//no double assignements inside an intial begin .. end block or else you'd get a
+	//(vlog-13205) Syntax error found in the scope following 'registerFile'. Is there a missing '::'?
+
+	
+		 // 0x190 → memory[100] and since it's word addressable we should scale by 4
+										// hence 0x64<<2 = 0x190 → 400 → PC = 400/4 = memory[100] therefore *sp → mem[100]
+    `endif
+ /***************************************************************************/
+ // Instruction decoding.
+ /***************************************************************************/
+
+ // Extracts rd,rs1,rs2,funct3,imm and opcode from instruction.
+ // Reference: Table page 104 of:
+ // https://content.riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf
+ 
+/* declarations */
+ // The destination register
+ assign rdId = instr[11:7];
+
+ // The ALU function, decoded in 1-hot form (doing so reduces LUT count)
+ // It is used as follows: funct3Is[val] <=> funct3 == val
+ (* onehot *)
+ assign funct3Is = 8'b00000001 << instr[14:12];
+
+ // The five immediate formats, see RiscV reference (link above), Fig. 2.4 p. 12
+ assign Uimm = {    instr[31],   instr[30:12], {12{1'b0}}};
+ assign Iimm = {{21{instr[31]}}, instr[30:20]};
+ /* verilator lint_off UNUSED */ // MSBs of SBJimms are not used by addr adder.
+ assign  Simm = {{21{instr[31]}}, instr[30:25],instr[11:7]};
+ assign  Bimm = {{20{instr[31]}}, instr[7],instr[30:25],instr[11:8],1'b0};
+ assign  Jimm = {{12{instr[31]}}, instr[19:12],instr[20],instr[30:21],1'b0};
+ /* verilator lint_on UNUSED */
+
+   // Base RISC-V (RV32I) has only 10 different instructions !
+   assign isLoad    =  (instr[6:2] == 5'b00000); // rd <- mem[rs1+Iimm]
+   assign isALUimm  =  (instr[6:2] == 5'b00100); // rd <- rs1 OP Iimm
+   assign isStore   =  (instr[6:2] == 5'b01000); // mem[rs1+Simm] <- rs2
+   assign isALUreg  =  (instr[6:2] == 5'b01100); // rd <- rs1 OP rs2
+   assign isSYSTEM  =  (instr[6:2] == 5'b11100); // rd <- cycles
+   assign isJAL     =  instr[3]; // (instr[6:2] == 5'b11011); // rd <- PC+4; PC<-PC+Jimm
+   assign isJALR    =  (instr[6:2] == 5'b11001); // rd <- PC+4; PC<-rs1+Iimm
+   assign isLUI     =  (instr[6:2] == 5'b01101); // rd <- Uimm
+   assign isAUIPC   =  (instr[6:2] == 5'b00101); // rd <- PC + Uimm
+   assign isBranch  =  (instr[6:2] == 5'b11000); // if(rs1 OP rs2) PC<-PC+Bimm
+
+   assign isALU = isALUimm | isALUreg;
+
+   /***************************************************************************/
+   // The register file.
+   /***************************************************************************/
+   
+   (* no_rw_check *)
+    assign writeBack = ~(isBranch | isStore ) &
+	            (state[EXECUTE_bit] | state[WAIT_ALU_OR_MEM_bit]);
+   // register write-back enable.
+   assign writeBackData  =
+      (isSYSTEM            ? cycles     : 32'b0) |  // SYSTEM
+      (isLUI               ? Uimm       : 32'b0) |  // LUI
+      (isALU               ? aluOut     : 32'b0) |  // ALUreg, ALUimm
+      (isAUIPC             ? PCplusImm  : 32'b0) |  // AUIPC
+      (isJALR   | isJAL    ? PCplus4    : 32'b0) |  // JAL, JALR
+      (isLoad              ? LOAD_data  : 32'b0) ;  // Load
+   always @(posedge clk) begin
+     if (writeBack)
+       if (rdId != 0)
+         registerFile[rdId] <= writeBackData;
+   end
+   
+   assign RF10 = registerFile[10];
+  /* always @(posedge clk) begin
+       if (reset)
+           RF <= 0;
+       else
+           RF <= registerFile[10]; //the register that holds the final value is exposed to be used in 
+							      // the testbench for 7-seg HEX display .
+   end */
+
+   /***************************************************************************/
+   // The ALU. Does operations and tests combinatorially, except shifts.
+   /***************************************************************************/
+
+   // First ALU source, always rs1 (PC+4 and PC+immediate are treated combinationally)
+   assign aluIn1 = rs1;
+
+   // Second ALU source, depends on opcode:
+   //    ALUreg, Branch:     rs2
+   //    ALUimm, Load, JALR: Iimm
+   assign aluIn2 = isALUreg | isBranch ? rs2 : Iimm;
+
+							 //												     n-1
+   assign aluBusy = |aluShamt; // ALU is busy if shift amount is non-zero,|x =    │ x[k] ← ORing the bits of the x reg
+                  // The adder is used by both arithmetic instructions and JALR. k=0
+   assign aluPlus = aluIn1 + aluIn2;
+
+   // Use a single 33 bits subtract to do subtraction and all comparisons
+   // (trick inspired/borrowed from swapforth/J1)
+   assign aluMinus = {1'b1, ~aluIn2} + {1'b0,aluIn1} + 33'b1; // A-B = A+~B+1 extra bit to asses overflow
+   /*instead of a more complex assign aluMinus = {~aluIn2[31], ~aluIn2} + {aluIn1[31],aluIn1} + 33'b1 */
+   assign        LT  = (aluIn1[31] ^ aluIn2[31]) ? aluIn1[31] : aluMinus[32]; 
+   /* A<B ↔ A-B<0 ▬> A[MSB]≠B[MSB] <▬> A[MSB] = B[MSB] → A[MSB] XOR B[MSB] = 0 (same signs) ▬> (A-B)[MSB] = 1 
+	*both inputs supposed $signed*  │					  		(+)-(+) = ?   001       00000000000000_001
+	*both inputs supposed $signed*  │					  		(-)-(-) = ? - 011 → +   11111111111111_100
+	*both inputs supposed $signed*  │					  		(+)-(-) = +         +                    1
+	*both inputs supposed $signed*  │					  		(-)-(+) = -             11111111111111_110 
+									│					→ $ignBit = 1 , cout = 0 ← ▬▬> A < B ▬▬> LT = 1
+									│					▬> LT = aluMinus[MSB]
+								    │→ A ≠ B → A[MSB] XOR B[MSB] = 1(different signs) │→ A[MSB] = 1 → A < B ▬▬> LT = 1*/  
+   assign        LTU = aluMinus[32];// 								  				  │→ A[MSB] = 0 → A > B ▬▬> LT = 0*/			
+   assign        EQ  = (aluMinus[31:0] == 0);
+
+   // Notes:
+   // - instr[30] is 1 for SUB and 0 for ADD
+   // - for SUB, need to test also instr[5] to discriminate ADDI:
+   //    (1 for ADD/SUB, 0 for ADDI, and Iimm used by ADDI overlaps bit 30 !)
+   // - instr[30] is 1 for SRA (do sign extension) and 0 for SRL
+   assign funct3IsShift = funct3Is[1] | funct3Is[5];
+   assign aluOut =
+     (funct3Is[0]  ? instr[30] & instr[5] ? aluMinus[31:0] : aluPlus : 32'b0) |
+     (funct3Is[2]  ? {31'b0, LT}                                     : 32'b0) |
+     (funct3Is[3]  ? {31'b0, LTU}                                    : 32'b0) |
+     (funct3Is[4]  ? aluIn1 ^ aluIn2                                 : 32'b0) |
+     (funct3Is[6]  ? aluIn1 | aluIn2                                 : 32'b0) |
+     (funct3Is[7]  ? aluIn1 & aluIn2                                 : 32'b0) |
+     (funct3IsShift ? aluReg                                         : 32'b0) ;
+
+
+   always @(posedge clk) begin
+      if(aluWr) begin
+         if (funct3IsShift) begin  // SLL, SRA, SRL
+	    aluReg <= aluIn1;		   /*just like the PIC internal alu work register*/
+	    aluShamt <= aluIn2[4:0];
+	 end
+      end
+
+`ifdef NRV_TWOLEVEL_SHIFTER
+      else if(|aluShamt[4:2]) begin // Shift by 4 [4*(b2*2²)+4*(b1*2¹)+4*(b0*2º)] ←→[4|3|2|-|-]→[2^4|2³|2²]→4[2²|2¹|2º]
+         aluShamt <= aluShamt - 4;/* X   X   1   (-4)   X   X   0   X   0
+									 ↑   ↑   ↑ ▬▬▬▬▬▬▬>
+									 4	 3	 2			4   3   2   1   0
+									______________________________________
+Decimal(n)	  Binary of n	 Binary of (n - 4)	 Change in last 3 bits			operation
+    8	          1000				0100			000 → 100				
+    9		      1001				0101			001 → 101					1000 → 1_000 →boundary at 4 (bit2)← 
+    10		      1010				0110			010 → 110						 → 0_200 →borrow (8 = 4*2)←
+    11		      1011				0111			011 → 111						 → 0_100 →substract the 4←
+    12		      1100				1000			100 → 000						 → 0100     →result←
+    13		      1101				1001			101 → 001					1011 → 1_011 →boundary at 4 (bit2)← 
+    14		      1110				1010			110 → 010						 → 0_211 →borrow (8 = 4*2)←
+    15		      1111				1011			111 → 011						 → 0_111 →substract the 4←								
+																					 → 0111     →result←
+															 				   10011 → 10_011 →boundary at 4 (bit2)← 
+	Subtracting 4 affects only the bits starting at position 2 and below.			 → 0_311 →substract the 4←																	 → 00_411 →borrow (16= 4*4)←		
+	The pattern in the last 3 bits undergoes a cyclic shift, as subtracting 4       │→ 3*4=12=1100
+	effectively performs a modulo-8 shift.											│									 
+																					│→ 0_111 + 0_200(2*4=8)→0_111+1_000
+															                         → 1111     →result←     */
+	 aluReg <= funct3Is[1] ? aluReg << 4 :
+		   {{4{instr[30] & aluReg[31]}}, aluReg[31:4]};
+      end  else
+`endif
+      // Compact form of:
+      // funct3=001              -> SLL  (aluReg <= aluReg << 1)
+      // funct3=101 &  instr[30] -> SRA  (aluReg <= {aluReg[31], aluReg[31:1]})
+      // funct3=101 & !instr[30] -> SRL  (aluReg <= {1'b0,       aluReg[31:1]})
+	  
+/*just like for serial communication we shitft a bit of data every clock cycle*/
+      if (|aluShamt) begin
+         aluShamt <= aluShamt - 1; 
+	 aluReg <= funct3Is[1] ? aluReg << 1 :              // SLL
+		   {instr[30] & aluReg[31], aluReg[31:1]};  // SRA,SRL
+      end
+   end
+/*✅ Current Behavior :
+	if (shiftInProgress && |aluShamt) begin
+		aluShamt <= aluShamt - 1;
+		  aluReg <= ...;
+    if (aluShamt == 1)
+		shiftInProgress <= 1'b0;
+	end
+On the last shift cycle (aluShamt == 1), the value becomes 0 on the next clock cycle, but only because we subtract 1
+from it.	
+So:
+	✅ aluShamt naturally reaches 0
+	✅ shiftInProgress is cleared on that last cycle (added flag for debugging).*/
+
+   /***************************************************************************/
+   // The predicate for conditional branches.
+   /***************************************************************************/
+
+   assign predicate =
+        funct3Is[0] &  EQ  | // BEQ
+        funct3Is[1] & !EQ  | // BNE
+        funct3Is[4] &  LT  | // BLT
+        funct3Is[5] & !LT  | // BGE
+        funct3Is[6] &  LTU | // BLTU
+        funct3Is[7] & !LTU ; // BGEU
+
+   /***************************************************************************/
+   // Program counter and branch target computation.
+   /***************************************************************************/
+
+   assign PCplus4 = PC + 4;
+
+   // An adder used to compute branch address, JAL address and AUIPC.
+   // branch->PC+Bimm    AUIPC->PC+Uimm    JAL->PC+Jimm
+   // Equivalent to PCplusImm = PC + (isJAL ? Jimm : isAUIPC ? Uimm : Bimm)
+   assign PCplusImm = PC + ( instr[3] ? Jimm[ADDR_WIDTH-1:0] :
+					    instr[4] ? Uimm[ADDR_WIDTH-1:0] :
+					               Bimm[ADDR_WIDTH-1:0] );
+
+   // A separate adder to compute the destination of load/store,depending on the instruction 
+   //we add the base address to either the load_imm or store_imm
+   // testing instr[5] is equivalent to testing isStore in this context.
+   assign loadstore_addr = rs1[ADDR_WIDTH-1:0] +
+		   (instr[5] ? Simm[ADDR_WIDTH-1:0] : Iimm[ADDR_WIDTH-1:0]);
+   
+
+   /* verilator lint_off WIDTH */
+   // internal address registers and cycles counter may have less than 
+   // 32 bits, so we deactivate width test for mem_addr and writeBackData
+
+   assign mem_addr = state[WAIT_INSTR_bit] | state[FETCH_INSTR_bit] ?
+		     PC : loadstore_addr ;
+	/*state[WAIT_INSTR_bit] | state[FETCH_INSTR_bit] is TRUE only when im FETCHing (state==WAIT_INSTR)
+	therefore the need for a continous assignement assign mem_addr = PC (if anything on the Right hand 
+	side changes)the value of mem_addr immediately changes too effectively determining whether it's a
+	an instruction address or some data to be loaded/stored (unified memory) */
+
+   /***************************************************************************/
+   // The value written back to the register file.
+   /***************************************************************************/
+      
+   /* verilator lint_on WIDTH */
+
+
+   /***************************************************************************/
+   // LOAD/STORE
+   /***************************************************************************/
+
+   // All memory accesses are aligned on 32 bits(4 Bytes → a multiple of 4)boundary. For this
+   // reason, we need some circuitry that does unaligned halfword
+   // and byte load/store, based on:
+   // - funct3[1:0]:  00->byte 01->halfword 10->word
+   // - mem_addr[1:0]: indicates which byte/halfword is accessed
+
+   assign mem_byteAccess     = instr[13:12] == 2'b00; // funct3[1:0] == 2'b00;
+   assign mem_halfwordAccess = instr[13:12] == 2'b01; // funct3[1:0] == 2'b01;
+
+   // LOAD, in addition to funct3[1:0], LOAD depends on:
+   // - funct3[2] (instr[14]): 0->do sign expansion   1->no sign expansion
+
+   assign LOAD_sign =
+	!instr[14] & (mem_byteAccess ? LOAD_byte[7] : LOAD_halfword[15]);
+
+   assign LOAD_data =
+         mem_byteAccess ? {{24{LOAD_sign}},     LOAD_byte} :
+     mem_halfwordAccess ? {{16{LOAD_sign}}, LOAD_halfword} :
+                          mem_rdata ;
+
+   assign LOAD_halfword =
+	       loadstore_addr[1] ? mem_rdata[31:16] : mem_rdata[15:0];             /*↓↓↓*/
+	/*halfowrd is aligned on a 2byte boundary (0x0 → 0x2 → 0x4 → 0x6 ...)←→(000→010→100→110 ...)
+	The LSB for unaligned access on unknowen 2 byte boundary mod2(0x0)|mod2(0x1)|mod2(0x2)
+	case (loadstore_addr[1:0])
+		2'b00: LOAD_halfword = mem_rdata[15:0];                          // Case 0: Lower halfword
+		2'b01: LOAD_halfword = {mem_rdata[23:16], mem_rdata[15:8]};       // Case 1: Middle halfword
+		2'b10: LOAD_halfword = mem_rdata[31:16];                          // Case 2: Upper halfword
+		default: LOAD_halfword = 16'hXXXX;                                // Case 3: Invalid/unreachable (2'b11)
+	endcase
+	assign[15:0] LOAD_halfword = loadstore_addr[1] ? mem_rdata[31:16] :
+								 loadstore_addr[0] ? {mem_rdata[23:16], mem_rdata[15:8]} :
+								 mem_rdata[15:0];*/
+   assign LOAD_byte =
+	       loadstore_addr[0] ? LOAD_halfword[15:8] : LOAD_halfword[7:0];       /*↑↑↑*/
+
+   // STORE
+
+   assign mem_wdata[ 7: 0] = rs2[7:0];
+   assign mem_wdata[15: 8] = loadstore_addr[0] ? rs2[7:0]  : rs2[15: 8];
+   assign mem_wdata[23:16] = loadstore_addr[1] ? rs2[7:0]  : rs2[23:16];
+   assign mem_wdata[31:24] = loadstore_addr[0] ? rs2[7:0]  :
+			     loadstore_addr[1] ? rs2[15:8] : rs2[31:24];
+
+   // The memory write mask:
+   //    1111                     if writing a word
+   //    0011 or 1100             if writing a halfword
+   //                                (depending on loadstore_addr[1])
+   //    0001, 0010, 0100 or 1000 if writing a byte
+   //                                (depending on loadstore_addr[1:0])
+
+   assign STORE_wmask =
+	      mem_byteAccess      ?
+	            (loadstore_addr[1] ?
+		          (loadstore_addr[0] ? 4'b1000 : 4'b0100) :
+		          (loadstore_addr[0] ? 4'b0010 : 4'b0001)
+                    ) :
+	      mem_halfwordAccess ?
+	            (loadstore_addr[1] ? 4'b1100 : 4'b0011) :
+              4'b1111;
+
+   /*************************************************************************/
+   // And, last but not least, the state machine.
+   /*************************************************************************/
+
+   // The signals (internal and external) that are determined
+   // combinatorially from state and other signals.
+
+
+
+   // The memory-read signal.
+   assign mem_rstrb = state[EXECUTE_bit] & isLoad | state[FETCH_INSTR_bit];
+
+   // The mask for memory-write.
+   assign mem_wmask = {4{state[EXECUTE_bit] & isStore}} & STORE_wmask;
+
+   // aluWr starts computation (shifts) in the ALU.
+   assign aluWr = state[EXECUTE_bit] & isALU;
+
+   assign jumpToPCplusImm = isJAL | (isBranch & predicate);
+`ifdef NRV_IS_IO_ADDR
+   assign needToWait = isLoad |
+		     isStore  & `NRV_IS_IO_ADDR(mem_addr) |
+		     isALU & funct3IsShift;
+`else
+   assign needToWait = isLoad | isStore | isALU & funct3IsShift;
+`endif
+
+   always @(posedge clk) begin
+      if(!reset) begin
+         state      <= WAIT_ALU_OR_MEM; // Just waiting for !mem_wbusy
+         PC         <= RESET_ADDR[ADDR_WIDTH-1:0];
+      end else
+
+      // See note [1] at the end of this file.
+      (* parallel_case *)
+      case(1'b1)
+
+        state[WAIT_INSTR_bit]: begin
+           if(!mem_rbusy) begin // may be high when executing from SPI flash or from an EEPROM I²C
+              rs1 <= registerFile[mem_rdata[19:15]]; /* read register file of <current instruction>
+			  into the non-architectural registers A(rs1) and rs2(WriteData) Figure 7.25 page 442 of the 
+	          Digital_Design_and_Computer_Architecture_RISC-V_Edition*/			  
+              rs2 <= registerFile[mem_rdata[24:20]];
+              instr <= mem_rdata[31:2]; // fetching <next instruction> since <= is a non-blocking assignement
+              state <= EXECUTE;       
+           end
+        end
+
+        state[EXECUTE_bit]: begin
+           PC <= isJALR          ? {aluPlus[ADDR_WIDTH-1:1],1'b0}:
+		   /*uctions assumed to be always on a 4 byte boundary therfore omitting the least 
+		   significant 2 bits but to ensure backward compatibility with 16-bit RISC-V instrution set 
+		   we only ommit one*/
+                 jumpToPCplusImm ? PCplusImm :
+                 PCplus4;
+	   state <= needToWait ? WAIT_ALU_OR_MEM : FETCH_INSTR;
+        end
+
+        state[WAIT_ALU_OR_MEM_bit]: begin
+           if(!aluBusy & !mem_rbusy & !mem_wbusy) state <= FETCH_INSTR;
+        end
+
+        default: begin // FETCH_INSTR
+          state <= WAIT_INSTR;
+        end
+
+      endcase
+   end
+
+   /***************************************************************************/
+   // Cycle counter
+   /***************************************************************************/
+endmodule
+
+/*****************************************************************************/
+// Notes:
+//
+// [1] About the "reverse case" statement, also used in Claire Wolf's picorv32:
+// It is just a cleaner way of writing a series of cascaded if() statements,
+// To understand it, think about the case statement *in general* as follows:
+// case (expr)
+//       val_1: statement_1
+//       val_2: statement_2
+//   ... val_n: statement_n
+// endcase
+// The first statement_i such that expr == val_i is executed.
+// Now if expr is 1'b1:
+// case (1'b1)
+//       cond_1: statement_1
+//       cond_2: statement_2
+//   ... cond_n: statement_n
+// endcase
+// It is *exactly the same thing*, the first statement_i such that
+// expr == cond_i is executed (that is, such that 1'b1 == cond_i,
+// in other words, such that cond_i is true)
+// More on this:
+//     https://stackoverflow.com/questions/15418636/case-statement-in-verilog
+//
+// [2] state uses 1-hot encoding (at any time, state has only one bit set to 1).
+// It uses a larger number of bits (one bit per state), but often results in
+// a both more compact (fewer LUTs) and faster state machine.

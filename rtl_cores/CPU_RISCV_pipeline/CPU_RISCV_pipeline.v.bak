@@ -1,0 +1,46 @@
+module  RiscV_pipeline (//INPUTS
+							reset,clk,
+							//OUTPUTS
+							StallF,StallD,FlushD,FlushE,
+							ForwardAE,ForwardBE
+							
+
+
+);
+     input            reset , clk;
+
+	  
+    output reg [1:0] ForwardAE,ForwardBE;
+    output            StallF,StallD,FlushD,FlushE;
+	//wires
+wire [6:0] op
+wire       funct7,jump,beq,bne,blt,bltu,bge,bgeu,Mem_Write,RegWrite,ALUSrc,ResultSrc
+wire [2:0] funct3,ImmSrc ,size
+wire [3:0] ALUControl
+Control_unit_pipeline control(
+    .clk(clk), .reset(reset),.funct7(funct7),.funct3(funct3),.op(op), 
+    
+	 .JumpD(jump),done,.beqD(beq),.bneD(bne),.bltD(blt),.bgeD(bge),.bltuD(bltu),.bgeuD(bgeu),
+    .Mem_WriteD(Mem_Write),.RegWriteD(RegWrite),.ALUSrcD(ALUSrc),
+    .ResultSrcD(ResultSrc),
+	 .ALUControlD(ALUControl) ,
+    .ImmSrcD (ImmSrc), .sizeD(size)
+	 
+	 
+);
+module datapath (
+    .OP(op), funct3(funct3), .funct7(funct7),
+	 
+    Rs1DOut, Rs2DOut, Rs1EOut, Rs2EOut, RdEOut, PCSrcEOut, ResultSrcEOut, RdMOut, RdWOut, RegWriteMOut, RegWriteWOut,
+	 
+    .CLK(clk), .RESET(reset),
+    .ImmSrcD(ImmSrc), .sizeD(size),.ALUSrcD(ALUSrc),.beqD(beq),.bneD(bne),.bltD(blt),.bgeD(bge),.bltuD(bltu),.bgeuD(bgeu), .JumpD(jump), .ALUControlD(ALUControl), .MemWriteD(Mem_Write), .ResultSrcD(ResultSrc), .RegWriteD(RegWrite),
+	 
+    StallF, StallD, FlushD, FlushE, ForwardAE, ForwardBE
+);
+
+	 
+
+	 
+
+endmodule 

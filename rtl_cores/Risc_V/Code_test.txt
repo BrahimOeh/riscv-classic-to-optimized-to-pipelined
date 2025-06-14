@@ -1,0 +1,109 @@
+//fibbo code
+	  //Start code
+    MEMORY[0]  <= 8'b00000000; // Instruction : addi x1, x0, 0
+    MEMORY[1]  <= 8'b00000000; // Instruction : addi x1, x0, 0
+    MEMORY[2]  <= 8'b00000000; // Instruction : addi x1, x0, 0
+    MEMORY[3]  <= 8'b10010011; // Instruction : addi x1, x0, 0
+	 
+	 
+    MEMORY[4]  <= 8'b00000000; // Instruction : addi x2, x0, 1
+    MEMORY[5]  <= 8'b00010000; // Instruction : addi x2, x0, 1
+    MEMORY[6]  <= 8'b00000001; // Instruction : addi x2, x0, 1
+    MEMORY[7]  <= 8'b00010011; // Instruction : addi x2, x0, 1
+	 
+    MEMORY[8]  <= 8'b00000011; // Instruction : addi x5, x0, 55
+    MEMORY[9]  <= 8'b01110000; // Instruction : addi x5, x0, 55
+    MEMORY[10] <= 8'b00000010; // Instruction : addi x5, x0, 55
+    MEMORY[11] <= 8'b10010011; // Instruction : addi x5, x0, 55
+	 
+    MEMORY[12] <= 8'b00000000; // Instruction : add x3, x1, x2
+    MEMORY[13] <= 8'b00100000; // Instruction : add x3, x1, x2
+    MEMORY[14] <= 8'b10000001; // Instruction : add x3, x1, x2
+    MEMORY[15] <= 8'b10110011; // Instruction : add x3, x1, x2
+	 
+    MEMORY[16] <= 8'b00000000; // Instruction : addi x1, x2, 0
+    MEMORY[17] <= 8'b00000001; // Instruction : addi x1, x2, 0
+    MEMORY[18] <= 8'b00000000; // Instruction : addi x1, x2, 0
+    MEMORY[19] <= 8'b10010011; // Instruction : addi x1, x2, 0
+	 
+    MEMORY[20] <= 8'b00000000; // Instruction : addi x2, x3, 0
+    MEMORY[21] <= 8'b00000001; // Instruction : addi x2, x3, 0
+    MEMORY[22] <= 8'b10000001; // Instruction : addi x2, x3, 0
+    MEMORY[23] <= 8'b00010011; // Instruction : addi x2, x3, 0
+	 
+    MEMORY[24] <= 8'b11111110; // Instruction : bne x3, x5, loop
+    MEMORY[25] <= 8'b01010001; // Instruction : bne x3, x5, loop
+    MEMORY[26] <= 8'b10011010; // Instruction : bne x3, x5, loop
+    MEMORY[27] <= 8'b11100011; // Instruction : bne x3, x5, loop
+	 
+				for (i = 28; i < MEMORY_SIZE; i = i + 1) 
+							MEMORY[i] <= 8'b00000000;
+				end
+				
+	//end code
+
+
+
+
+//lw and sw test
+
+
+ // Initialisation de la mémoire avec le deuxième programme
+// addi x2, x0, 56
+MEMORY[0]  <= 8'b00000011;
+MEMORY[1]  <= 8'b10000000;
+MEMORY[2]  <= 8'b00000001;
+MEMORY[3]  <= 8'b00010011;
+
+// addi x1, x0, 60
+MEMORY[4]  <= 8'b00000011;
+MEMORY[5]  <= 8'b11000000;
+MEMORY[6]  <= 8'b00000000;
+MEMORY[7]  <= 8'b10010011;
+
+// addi x3, x0, 3
+MEMORY[8]  <= 8'b00000000;
+MEMORY[9]  <= 8'b00110000;
+MEMORY[10] <= 8'b00000001;
+MEMORY[11] <= 8'b10010011;
+
+// addi x4, x0, 4
+MEMORY[12] <= 8'b00000000;
+MEMORY[13] <= 8'b01000000;
+MEMORY[14] <= 8'b00000010;
+MEMORY[15] <= 8'b00010011;
+
+// sw x3, 0(x2)
+MEMORY[16] <= 8'b00000000;
+MEMORY[17] <= 8'b00110001;
+MEMORY[18] <= 8'b00100000;
+MEMORY[19] <= 8'b00100011;
+
+// sw x4, 4(x2)
+MEMORY[20] <= 8'b00000000;
+MEMORY[21] <= 8'b01000001;
+MEMORY[22] <= 8'b00100010;
+MEMORY[23] <= 8'b00100011;
+
+// lw x5, 0(x2)
+MEMORY[24] <= 8'b00000000;
+MEMORY[25] <= 8'b00000001;
+MEMORY[26] <= 8'b00100010;
+MEMORY[27] <= 8'b10000011;
+
+// lw x6, 4(x2)
+MEMORY[28] <= 8'b00000000;
+MEMORY[29] <= 8'b01000001;
+MEMORY[30] <= 8'b00100011;
+MEMORY[31] <= 8'b00000011;
+
+// add x7, x5, x6
+MEMORY[32] <= 8'b00000000;
+MEMORY[33] <= 8'b01010010;
+MEMORY[34] <= 8'b00000011;
+MEMORY[35] <= 8'b10110011;
+
+// Remplir le reste de la mémoire avec 0
+for (i = 36; i < MEMORY_SIZE; i = i + 1)
+    MEMORY[i] <= 8'b00000000;
+end

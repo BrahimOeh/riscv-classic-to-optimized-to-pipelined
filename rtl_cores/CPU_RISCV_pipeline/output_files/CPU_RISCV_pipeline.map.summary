@@ -1,0 +1,17 @@
+Analysis & Synthesis Status : Successful - Wed Jun 11 09:13:06 2025
+Quartus Prime Version : 24.1std.0 Build 1077 03/04/2025 SC Lite Edition
+Revision Name : CPU_RISCV_pipeline
+Top-level Entity Name : CPU_RISCV_pipeline
+Family : Cyclone V
+Logic utilization (in ALMs) : N/A
+Total registers : 2652
+Total pins : 76
+Total virtual pins : 0
+Total block memory bits : 0
+Total DSP Blocks : 0
+Total HSSI RX PCSs : 0
+Total HSSI PMA RX Deserializers : 0
+Total HSSI TX PCSs : 0
+Total HSSI PMA TX Serializers : 0
+Total PLLs : 0
+Total DLLs : 0

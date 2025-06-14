@@ -1,0 +1,29 @@
+Approach 2: Using files for simple communication (easy, no DPI)
+Your Python function writes the integer to a file, say value.txt.
+
+Your Verilog testbench reads this file and sets i accordingly using $fscanf.
+
+Python side:
+
+═══════════════════════════════════════╗
+def my_func():                         ║
+    return 42                          ║
+                                       ║
+with open("value.txt", "w") as f:      ║
+    f.write(str(my_func()))            ║                    ║
+═══════════════════════════════════════╝
+Verilog side :
+═════════════════════════════════════════════════════════╗
+integer i, fd;                                           ║
+initial begin                                            ║
+  fd = $fopen("value.txt", "r");                         ║
+  if (fd) begin                                          ║
+    $fscanf(fd, "%d", i);                                ║
+    $fclose(fd);                                         ║
+    $display("Value read from Python: %0d", i);          ║
+  end                                                    ║
+  else                                                   ║
+    $display("Failed to open file");			 ║
+end                                                      ║
+═════════════════════════════════════════════════════════╝
+Run the Python script before starting simulation

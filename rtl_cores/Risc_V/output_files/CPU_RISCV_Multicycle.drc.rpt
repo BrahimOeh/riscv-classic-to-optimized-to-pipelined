@@ -1,0 +1,504 @@
+Design Assistant report for CPU_RISCV_Multicycle
+Sun Jun  8 21:25:02 2025
+Quartus Prime Version 24.1std.0 Build 1077 03/04/2025 SC Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Design Assistant Summary
+  3. Parallel Compilation
+  4. Design Assistant Settings
+  5. Medium Violations
+  6. Information only Violations
+  7. Design Assistant Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2025  Altera Corporation. All rights reserved.
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, the Altera Quartus Prime License Agreement,
+the Altera IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Altera and sold by Altera or its authorized distributors.  Please
+refer to the Altera Software License Subscription Agreements 
+on the Quartus Prime software download page.
+
+
+
++-------------------------------------------------------------------------+
+; Design Assistant Summary                                                ;
++-----------------------------------+-------------------------------------+
+; Design Assistant Status           ; Analyzed - Sun Jun  8 21:25:02 2025 ;
+; Revision Name                     ; CPU_RISCV_Multicycle                ;
+; Top-level Entity Name             ; Risc_V                              ;
+; Family                            ; Cyclone V                           ;
+; Total Critical Violations         ; 0                                   ;
+; Total High Violations             ; 0                                   ;
+; Total Medium Violations           ; 1                                   ;
+; - Rule R102                       ; 1                                   ;
+; Total Information only Violations ; 277                                 ;
+; - Rule T101                       ; 227                                 ;
+; - Rule T102                       ; 50                                  ;
++-----------------------------------+-------------------------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 8           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 2           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.0%      ;
++----------------------------+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Design Assistant Settings                                                                                                                                                                ;
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+----+
+; Option                                                                                                                                                               ; Setting      ; To ;
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+----+
+; Design Assistant mode                                                                                                                                                ; Post-Fitting ;    ;
+; Threshold value for clock net not mapped to clock spines rule                                                                                                        ; 25           ;    ;
+; Minimum number of clock port feed by gated clocks                                                                                                                    ; 30           ;    ;
+; Minimum number of node fan-out                                                                                                                                       ; 30           ;    ;
+; Maximum number of nodes to report                                                                                                                                    ; 50           ;    ;
+; Rule C101: Gated clock should be implemented according to the Intel FPGA standard scheme                                                                             ; On           ;    ;
+; Rule C102: Logic cell should not be used to generate an inverted clock signal                                                                                        ; On           ;    ;
+; Rule C103: Gated clock does not feed at least a pre-defined number of clock ports to effectively save power                                                          ; On           ;    ;
+; Rule C104: Clock signal source should drive only clock input ports                                                                                                   ; On           ;    ;
+; Rule C105: Clock signal should be a global signal                                                                                                                    ; On           ;    ;
+; Rule C106: Clock signal source should not drive registers triggered by different clock edges                                                                         ; On           ;    ;
+; Rule R101: Combinational logic used as a reset signal should be synchronized                                                                                         ; On           ;    ;
+; Rule R102: External reset signals should be synchronized using two cascaded registers                                                                                ; On           ;    ;
+; Rule R103: External reset signal should be correctly synchronized                                                                                                    ; On           ;    ;
+; Rule R104: The reset signal that is generated in one clock domain and used in another clock domain should be correctly synchronized                                  ; On           ;    ;
+; Rule R105: The reset signal that is generated in one clock domain and used in another clock domain should be synchronized                                            ; On           ;    ;
+; Rule T101: Nodes with more than the specified number of fan-outs                                                                                                     ; On           ;    ;
+; Rule T102: Top nodes with the highest number of fan-outs                                                                                                             ; On           ;    ;
+; Rule A101: Design should not contain combinational loops                                                                                                             ; On           ;    ;
+; Rule A102: Register output should not drive its own control signal directly or through combinational logic                                                           ; On           ;    ;
+; Rule A103: Design should not contain delay chains                                                                                                                    ; On           ;    ;
+; Rule A104: Design should not contain ripple clock structures                                                                                                         ; On           ;    ;
+; Rule A105: Pulses should not be implemented asynchronously                                                                                                           ; On           ;    ;
+; Rule A106: Multiple pulses should not be generated in design                                                                                                         ; On           ;    ;
+; Rule A107: Design should not contain SR latches                                                                                                                      ; On           ;    ;
+; Rule A108: Design should not contain latches                                                                                                                         ; On           ;    ;
+; Rule S101: Output enable and input of the same tri-state node should not be driven by same signal source                                                             ; On           ;    ;
+; Rule S102: Synchronous port and asynchronous port of the same register should not be driven by the same signal source                                                ; On           ;    ;
+; Rule S103: More than one asynchronous port of a register should not be driven by the same signal source                                                              ; On           ;    ;
+; Rule S104: Clock port and any other port of a register should not be driven by the same signal source                                                                ; On           ;    ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains                                                                        ; On           ;    ;
+; Rule D102: Multiple data bits that are transferred across asynchronous clock domains are synchronized, but not all bits may be aligned in the receiving clock domain ; On           ;    ;
+; Rule D103: Data bits are not correctly synchronized when transferred between asynchronous clock domains                                                              ; On           ;    ;
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+----+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Medium Violations                                                                                                                                       ;
++---------------------------------------------------------------------------------------+-----------------------------------------------------------------+
+; Rule name                                                                             ; Name                                                            ;
++---------------------------------------------------------------------------------------+-----------------------------------------------------------------+
+; Rule R102: External reset signals should be synchronized using two cascaded registers ; reset                                                           ;
+;  Reset signal destination node(s) list                                                ; cycle_number[1]~reg0                                            ;
+;  Reset signal destination node(s) list                                                ; cycle_number[2]~reg0                                            ;
+;  Reset signal destination node(s) list                                                ; cycle_number[3]~reg0                                            ;
+;  Reset signal destination node(s) list                                                ; cycle_number[4]~reg0                                            ;
+;  Reset signal destination node(s) list                                                ; cycle_number[5]~reg0                                            ;
+;  Reset signal destination node(s) list                                                ; cycle_number[6]~reg0                                            ;
+;  Reset signal destination node(s) list                                                ; cycle_number[7]~reg0                                            ;
+;  Reset signal destination node(s) list                                                ; cycle_number[8]~reg0                                            ;
+;  Reset signal destination node(s) list                                                ; cycle_number[0]~reg0                                            ;
+;  Reset signal destination node(s) list                                                ; datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[0] ;
++---------------------------------------------------------------------------------------+-----------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Information only Violations                                                                                                                                                                                         ;
++------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+---------+
+; Rule name                                                        ; Name                                                                                                                                   ; Fan-Out ;
++------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+---------+
+; Rule T101: Nodes with more than the specified number of fan-outs ; clock~inputCLKENA0                                                                                                                     ; 2372    ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; reset~inputCLKENA0                                                                                                                     ; 2372    ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcBMux|Mux31~1                                                                                    ; 69      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; Control_unit:ctrl|Main_FSM:Fsm|state.Fetch                                                                                             ; 212     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Add0~5                                                                           ; 278     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; Control_unit:ctrl|PCWrite~3                                                                                                            ; 46      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcBMux|Mux30~0                                                                                    ; 137     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Add0~21                                                                          ; 173     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux31~0                                                                                  ; 550     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcAMux|Mux26~0                                                                                    ; 33      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Add0~9                                                                           ; 170     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux29~0                                                                                  ; 41      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Mod0|lpm_divide_65m:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|op_26~1     ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[22]                                                                       ; 161     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Add2~9                                                                           ; 172     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux30~0                                                                                  ; 42      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~25                                                                                 ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[10]                                                                       ; 33      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; Control_unit:ctrl|Main_FSM:Fsm|WideOr12~0                                                                                              ; 537     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; Control_unit:ctrl|Main_FSM:Fsm|state.MemWrite                                                                                          ; 100     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Add0~25                                                                          ; 266     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; Control_unit:ctrl|Main_FSM:Fsm|state.MemRead                                                                                           ; 99      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Add2~5                                                                           ; 166     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux27~0                                                                                  ; 41      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcBMux|Mux27~1                                                                                    ; 61      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|LessThan3~4                                                                      ; 39      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux1~0                                                                                   ; 37      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; Control_unit:ctrl|ALU_decoder:alu_dec|Mux0~128                                                                                         ; 61      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop_with_enable:PCFlipFlop|out[0]                                                                           ; 519     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Add2~21                                                                          ; 172     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Add2~13                                                                          ; 169     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux28~0                                                                                  ; 38      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Mod0|lpm_divide_65m:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|op_25~1     ; 34      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[30]                                                                               ; 129     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~21                                                                                 ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[9]                                                                        ; 33      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Decoder3~1                                                                       ; 64      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux25~128                                                                                ; 39      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcBMux|Mux25~1                                                                                    ; 59      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; Control_unit:ctrl|Main_FSM:Fsm|WideOr13                                                                                                ; 51      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Add2~17                                                                          ; 172     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Decoder3~34                                                                      ; 67      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux26~0                                                                                  ; 46      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|op_20~1     ; 31      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[31]                                                                       ; 44      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; Control_unit:ctrl|Size_decoder:size_data|size[1]~2                                                                                     ; 262     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|LessThan2~4                                                                      ; 39      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux5~0                                                                                   ; 37      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; Control_unit:ctrl|ALU_decoder:alu_dec|Mux9~129                                                                                         ; 56      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Add0~13                                                                          ; 170     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|LessThan1~4                                                                      ; 145     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux0~0                                                                                   ; 37      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; Control_unit:ctrl|Main_FSM:Fsm|ResultSrc[1]                                                                                            ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; Control_unit:ctrl|Main_FSM:Fsm|ResultSrc[0]~0                                                                                          ; 33      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux2~0                                                                                   ; 38      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcAMux|Mux26~1                                                                                    ; 33      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Add1~5                                                                           ; 119     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Add1~1                                                                           ; 119     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Add1~9                                                                           ; 119     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|two_to_one_mux:addressMux|out[0]~6                                                                                  ; 76      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Add1~13                                                                          ; 119     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Decoder2~1                                                                       ; 103     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|MEMORY[0][4]~133                                                                 ; 124     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|LessThan0~6                                                                      ; 56      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux20~0                                                                                  ; 37      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcBMux|Mux20~1                                                                                    ; 49      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[20]                                                                       ; 162     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Decoder2~34                                                                      ; 96      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Add0~1                                                                           ; 137     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Add0~17                                                                          ; 170     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|MEMORY[0][4]~132                                                                 ; 129     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|two_to_one_mux:addressMux|out[4]~2                                                                                  ; 44      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|two_to_one_mux:addressMux|out[2]~1                                                                                  ; 50      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|LessThan0~11                                                                     ; 56      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux18~0                                                                                  ; 37      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Mod0|lpm_divide_65m:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|op_23~1     ; 33      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[29]                                                                               ; 129     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Decoder2~35                                                                      ; 96      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Decoder3~35                                                                      ; 66      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|MEMORY[0][4]~135                                                                 ; 131     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|two_to_one_mux:addressMux|out[3]~3                                                                                  ; 92      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|two_to_one_mux:addressMux|out[6]~7                                                                                  ; 40      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|MEMORY[127][6]~136                                                               ; 128     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|MEMORY[126][7]~128                                                               ; 129     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[8]                                                                                ; 134     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[23]                                                                       ; 161     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[31]                                                                               ; 119     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[7]                                                                                ; 130     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~13                                                                                 ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[11]                                                                       ; 33      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|two_to_one_mux:addressMux|out[5]~5                                                                                  ; 63      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|two_to_one_mux:addressMux|out[1]~4                                                                                  ; 103     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[27]                                                                               ; 129     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux4~0                                                                                   ; 37      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[25]                                                                               ; 130     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~6                                                                                  ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[8]                                                                        ; 33      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[16]                                                                               ; 128     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~9                                                                                  ; 34      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; Control_unit:ctrl|Main_FSM:Fsm|WideOr18                                                                                                ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; Control_unit:ctrl|Main_FSM:Fsm|state.JAL_s                                                                                             ; 129     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[7]                                                                        ; 34      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Decoder3~3                                                                       ; 64      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Decoder2~3                                                                       ; 96      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[15]                                                                               ; 129     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux16~0                                                                                  ; 38      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcBMux|Mux16~0                                                                                    ; 39      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[15]                                                                       ; 162     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|instruction_and_data_memory:memory|Decoder0~199                                                                     ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[23]                                                                               ; 130     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~27                                                                                 ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux8~0                                                                                   ; 37      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|Mux6~0                                                                                                      ; 944     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcAMux|Mux26~2                                                                                    ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~26                                                                                 ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[16]                                                                       ; 162     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[0]                                                                                ; 136     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~5                                                                                  ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~8                                                                                  ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~7                                                                                  ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~10                                                                                 ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~12                                                                                 ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~11                                                                                 ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[21]                                                                       ; 160     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~1                                                                                  ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~2                                                                                  ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~3                                                                                  ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~4                                                                                  ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~16                                                                                 ; 33      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~15                                                                                 ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~14                                                                                 ; 35      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~20                                                                                 ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~19                                                                                 ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~18                                                                                 ; 33      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~17                                                                                 ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~0                                                                                  ; 35      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~24                                                                                 ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~23                                                                                 ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~22                                                                                 ; 34      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~30                                                                                 ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~31                                                                                 ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~28                                                                                 ; 36      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|register_file:registers|Decoder0~29                                                                                 ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[24]                                                                               ; 130     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux7~0                                                                                   ; 37      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[18]                                                                       ; 162     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[18]                                                                               ; 128     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux13~0                                                                                  ; 37      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[17]                                                                       ; 162     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[9]~DUPLICATE                                                                      ; 130     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux22~0                                                                                  ; 38      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcBMux|Mux22~1                                                                                    ; 51      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcBMux|Mux24~1                                                                                    ; 53      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[19]                                                                               ; 129     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux12~0                                                                                  ; 38      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcBMux|Mux12~0                                                                                    ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[19]                                                                       ; 34      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[11]                                                                               ; 130     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[3]                                                                                ; 131     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcBMux|Mux13~0                                                                                    ; 33      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux14~0                                                                                  ; 37      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcBMux|Mux14~0                                                                                    ; 34      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[17]                                                                               ; 129     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcBMux|Mux15~0                                                                                    ; 38      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux15~0                                                                                  ; 38      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcBMux|Mux17~0                                                                                    ; 42      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[14]                                                                               ; 129     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux17~0                                                                                  ; 38      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcBMux|Mux19~0                                                                                    ; 44      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux19~0                                                                                  ; 37      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcBMux|Mux21~1                                                                                    ; 50      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[10]                                                                               ; 130     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux21~0                                                                                  ; 39      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[21]                                                                               ; 130     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux10~0                                                                                  ; 37      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux11~0                                                                                  ; 37      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[20]                                                                               ; 130     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; Control_unit:ctrl|ALU_decoder:alu_dec|Mux11~129                                                                                        ; 40      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcBMux|Mux27~0                                                                                    ; 39      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[4]                                                                                ; 133     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcAMux|Mux0~0                                                                                     ; 51      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcBMux|Mux31~0                                                                                    ; 68      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux9~0                                                                                   ; 39      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[22]                                                                               ; 130     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|Mux22~0                                                                                                     ; 65      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcBMux|Mux29~0                                                                                    ; 126     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[2]                                                                                ; 131     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux24~0                                                                                  ; 38      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcBMux|Mux26~1                                                                                    ; 60      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[1]                                                                                ; 132     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|two_to_one_mux:addressMux|out[6]~0                                                                                  ; 134     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[5]~DUPLICATE                                                                      ; 129     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|sel[792]~6  ; 56      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[28]                                                                               ; 129     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux3~0                                                                                   ; 40      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux6~0                                                                                   ; 37      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcBMux|Mux28~0                                                                                    ; 61      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:resultMux|Mux23~0                                                                                  ; 37      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Mod0|lpm_divide_65m:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|op_22~1     ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|sel[726]~9  ; 52      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcBMux|Mux23~1                                                                                    ; 52      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcBMux|Mux18~0                                                                                    ; 43      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[13]                                                                               ; 130     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|sel[396]~22 ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|sel[429]~21 ; 34      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|sel[462]~20 ; 36      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|sel[495]~19 ; 38      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|sel[528]~18 ; 40      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|sel[561]~16 ; 42      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|sel[594]~15 ; 44      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|sel[627]~14 ; 46      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|sel[660]~13 ; 48      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|sel[693]~11 ; 50      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|sel[759]~8  ; 54      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|sel[825]~4  ; 58      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|sel[858]~3  ; 61      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Mod0|lpm_divide_65m:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|op_21~1     ; 31      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|sel[891]~2  ; 63      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|sel[924]~1  ; 65      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|sel[957]~0  ; 67      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|three_to_one_mux:srcBMux|Mux0~1                                                                                     ; 46      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[26]~DUPLICATE                                                                     ; 129     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[6]                                                                                ; 129     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[12]                                                                               ; 117     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|op_22~1     ; 33      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|op_21~1     ; 32      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|op_23~1     ; 34      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; clock~inputCLKENA0                                                                                                                     ; 2372    ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; reset~inputCLKENA0                                                                                                                     ; 2372    ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|alu:ALU|Mux6~0                                                                                                      ; 944     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|three_to_one_mux:resultMux|Mux31~0                                                                                  ; 550     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; Control_unit:ctrl|Main_FSM:Fsm|WideOr12~0                                                                                              ; 537     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop_with_enable:PCFlipFlop|out[0]                                                                           ; 519     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|instruction_and_data_memory:memory|Add0~5                                                                           ; 278     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|instruction_and_data_memory:memory|Add0~25                                                                          ; 266     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; Control_unit:ctrl|Size_decoder:size_data|size[1]~2                                                                                     ; 262     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; Control_unit:ctrl|Main_FSM:Fsm|state.Fetch                                                                                             ; 212     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|instruction_and_data_memory:memory|Add0~21                                                                          ; 173     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|instruction_and_data_memory:memory|Add2~21                                                                          ; 172     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|instruction_and_data_memory:memory|Add2~17                                                                          ; 172     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|instruction_and_data_memory:memory|Add2~9                                                                           ; 172     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|instruction_and_data_memory:memory|Add0~9                                                                           ; 170     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|instruction_and_data_memory:memory|Add0~13                                                                          ; 170     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|instruction_and_data_memory:memory|Add0~17                                                                          ; 170     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|instruction_and_data_memory:memory|Add2~13                                                                          ; 169     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|instruction_and_data_memory:memory|Add2~5                                                                           ; 166     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[18]                                                                       ; 162     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[20]                                                                       ; 162     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[15]                                                                       ; 162     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[17]                                                                       ; 162     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[16]                                                                       ; 162     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[22]                                                                       ; 161     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[23]                                                                       ; 161     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[21]                                                                       ; 160     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|instruction_and_data_memory:memory|LessThan1~4                                                                      ; 145     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|instruction_and_data_memory:memory|Add0~1                                                                           ; 137     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|three_to_one_mux:srcBMux|Mux30~0                                                                                    ; 137     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[0]                                                                                ; 136     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[8]                                                                                ; 134     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|two_to_one_mux:addressMux|out[6]~0                                                                                  ; 134     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[4]                                                                                ; 133     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[1]                                                                                ; 132     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|instruction_and_data_memory:memory|MEMORY[0][4]~135                                                                 ; 131     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[3]                                                                                ; 131     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[2]                                                                                ; 131     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[22]                                                                               ; 130     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[23]                                                                               ; 130     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[20]                                                                               ; 130     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[11]                                                                               ; 130     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[25]                                                                               ; 130     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[24]                                                                               ; 130     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[13]                                                                               ; 130     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[10]                                                                               ; 130     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[9]~DUPLICATE                                                                      ; 130     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[7]                                                                                ; 130     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|d_flip_flop:writeDataFlipFlop|out[21]                                                                               ; 130     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; datapath:data_path|instruction_and_data_memory:memory|MEMORY[0][4]~132                                                                 ; 129     ;
++------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+---------+
+
+
++---------------------------+
+; Design Assistant Messages ;
++---------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Design Assistant
+    Info: Version 24.1std.0 Build 1077 03/04/2025 SC Lite Edition
+    Info: Processing started: Sun Jun  8 21:24:54 2025
+Info: Command: quartus_drc CPU_RISCV_Multicycle -c CPU_RISCV_Multicycle
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Critical Warning (332012): Synopsys Design Constraints File file not found: 'CPU_RISCV_Multicycle.sdc'. A Synopsys Design Constraints File is required by the Timing Analyzer to get proper timing constraints. Without it, the Compiler will not properly optimize the design.
+Info (332144): No user constrained base clocks found in the design
+Info (332143): No user constrained clock uncertainty found in the design. Calling "derive_clock_uncertainty"
+Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
+Warning (308023): (Medium) Rule R102: External reset signals should be synchronized using two cascaded registers. Found 1 node(s) related to this rule.
+    Warning (308010): Node  "reset" File: C:/Users/brahim/Desktop/Risc_V/risc_v.v Line: 2
+Info (308046): (Information) Rule T101: Nodes with more than the specified number of fan-outs. (Value defined:30). Found 227 node(s) with highest fan-out.
+    Info (308011): Node  "clock~inputCLKENA0" File: C:/Users/brahim/Desktop/Risc_V/risc_v.v Line: 2
+    Info (308011): Node  "reset~inputCLKENA0" File: C:/Users/brahim/Desktop/Risc_V/risc_v.v Line: 2
+    Info (308011): Node  "datapath:data_path|three_to_one_mux:srcBMux|Mux31~1" File: C:/Users/brahim/Desktop/Risc_V/three_to_one_mux.v Line: 8
+    Info (308011): Node  "Control_unit:ctrl|Main_FSM:Fsm|state.Fetch" File: C:/Users/brahim/Desktop/Risc_V/main_fsm.v Line: 35
+    Info (308011): Node  "datapath:data_path|instruction_and_data_memory:memory|Add0~5" File: C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v Line: 101
+    Info (308011): Node  "Control_unit:ctrl|PCWrite~3" File: C:/Users/brahim/Desktop/Risc_V/control_unit.v Line: 6
+    Info (308011): Node  "datapath:data_path|three_to_one_mux:srcBMux|Mux30~0" File: C:/Users/brahim/Desktop/Risc_V/three_to_one_mux.v Line: 8
+    Info (308011): Node  "datapath:data_path|instruction_and_data_memory:memory|Add0~21" File: C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v Line: 101
+    Info (308011): Node  "datapath:data_path|three_to_one_mux:resultMux|Mux31~0" File: C:/Users/brahim/Desktop/Risc_V/three_to_one_mux.v Line: 8
+    Info (308011): Node  "datapath:data_path|three_to_one_mux:srcAMux|Mux26~0" File: C:/Users/brahim/Desktop/Risc_V/three_to_one_mux.v Line: 8
+    Info (308011): Node  "datapath:data_path|instruction_and_data_memory:memory|Add0~9" File: C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v Line: 101
+    Info (308011): Node  "datapath:data_path|three_to_one_mux:resultMux|Mux29~0" File: C:/Users/brahim/Desktop/Risc_V/three_to_one_mux.v Line: 8
+    Info (308011): Node  "datapath:data_path|alu:ALU|lpm_divide:Mod0|lpm_divide_65m:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider|op_26~1"
+    Info (308011): Node  "datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[22]" File: C:/Users/brahim/Desktop/Risc_V/d_flip_flop_with_enable.v Line: 10
+    Info (308011): Node  "datapath:data_path|instruction_and_data_memory:memory|Add2~9" File: C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v Line: 102
+    Info (308011): Node  "datapath:data_path|three_to_one_mux:resultMux|Mux30~0" File: C:/Users/brahim/Desktop/Risc_V/three_to_one_mux.v Line: 8
+    Info (308011): Node  "datapath:data_path|register_file:registers|Decoder0~25" File: C:/Users/brahim/Desktop/Risc_V/register_file.v Line: 24
+    Info (308011): Node  "datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[10]" File: C:/Users/brahim/Desktop/Risc_V/d_flip_flop_with_enable.v Line: 10
+    Info (308011): Node  "Control_unit:ctrl|Main_FSM:Fsm|WideOr12~0" File: C:/Users/brahim/Desktop/Risc_V/main_fsm.v Line: 112
+    Info (308011): Node  "Control_unit:ctrl|Main_FSM:Fsm|state.MemWrite" File: C:/Users/brahim/Desktop/Risc_V/main_fsm.v Line: 35
+    Info (308011): Node  "datapath:data_path|instruction_and_data_memory:memory|Add0~25" File: C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v Line: 101
+    Info (308011): Node  "Control_unit:ctrl|Main_FSM:Fsm|state.MemRead" File: C:/Users/brahim/Desktop/Risc_V/main_fsm.v Line: 35
+    Info (308011): Node  "datapath:data_path|instruction_and_data_memory:memory|Add2~5" File: C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v Line: 102
+    Info (308011): Node  "datapath:data_path|three_to_one_mux:resultMux|Mux27~0" File: C:/Users/brahim/Desktop/Risc_V/three_to_one_mux.v Line: 8
+    Info (308011): Node  "datapath:data_path|three_to_one_mux:srcBMux|Mux27~1" File: C:/Users/brahim/Desktop/Risc_V/three_to_one_mux.v Line: 8
+    Info (308011): Node  "datapath:data_path|instruction_and_data_memory:memory|LessThan3~4" File: C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v Line: 83
+    Info (308011): Node  "datapath:data_path|three_to_one_mux:resultMux|Mux1~0" File: C:/Users/brahim/Desktop/Risc_V/three_to_one_mux.v Line: 8
+    Info (308011): Node  "Control_unit:ctrl|ALU_decoder:alu_dec|Mux0~128" File: C:/Users/brahim/Desktop/Risc_V/alu_decoder.v Line: 12
+    Info (308011): Node  "datapath:data_path|d_flip_flop_with_enable:PCFlipFlop|out[0]" File: C:/Users/brahim/Desktop/Risc_V/d_flip_flop_with_enable.v Line: 10
+    Info (308011): Node  "datapath:data_path|instruction_and_data_memory:memory|Add2~21" File: C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v Line: 102
+    Info (308002): Truncated list of Design Assistant messages to 30 messages. Go to sections under Design Assistant section of Compilation Report for complete lists of Design Assistant messages generated.
+Info (308044): (Information) Rule T102: Top nodes with the highest number of fan-outs. (Value defined:50). Found 50 node(s) with highest fan-out.
+    Info (308011): Node  "clock~inputCLKENA0" File: C:/Users/brahim/Desktop/Risc_V/risc_v.v Line: 2
+    Info (308011): Node  "reset~inputCLKENA0" File: C:/Users/brahim/Desktop/Risc_V/risc_v.v Line: 2
+    Info (308011): Node  "datapath:data_path|alu:ALU|Mux6~0" File: C:/Users/brahim/Desktop/Risc_V/alu.v Line: 18
+    Info (308011): Node  "datapath:data_path|three_to_one_mux:resultMux|Mux31~0" File: C:/Users/brahim/Desktop/Risc_V/three_to_one_mux.v Line: 8
+    Info (308011): Node  "Control_unit:ctrl|Main_FSM:Fsm|WideOr12~0" File: C:/Users/brahim/Desktop/Risc_V/main_fsm.v Line: 112
+    Info (308011): Node  "datapath:data_path|d_flip_flop_with_enable:PCFlipFlop|out[0]" File: C:/Users/brahim/Desktop/Risc_V/d_flip_flop_with_enable.v Line: 10
+    Info (308011): Node  "datapath:data_path|instruction_and_data_memory:memory|Add0~5" File: C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v Line: 101
+    Info (308011): Node  "datapath:data_path|instruction_and_data_memory:memory|Add0~25" File: C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v Line: 101
+    Info (308011): Node  "Control_unit:ctrl|Size_decoder:size_data|size[1]~2" File: C:/Users/brahim/Desktop/Risc_V/size_decoder.v Line: 8
+    Info (308011): Node  "Control_unit:ctrl|Main_FSM:Fsm|state.Fetch" File: C:/Users/brahim/Desktop/Risc_V/main_fsm.v Line: 35
+    Info (308011): Node  "datapath:data_path|instruction_and_data_memory:memory|Add0~21" File: C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v Line: 101
+    Info (308011): Node  "datapath:data_path|instruction_and_data_memory:memory|Add2~21" File: C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v Line: 102
+    Info (308011): Node  "datapath:data_path|instruction_and_data_memory:memory|Add2~17" File: C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v Line: 102
+    Info (308011): Node  "datapath:data_path|instruction_and_data_memory:memory|Add2~9" File: C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v Line: 102
+    Info (308011): Node  "datapath:data_path|instruction_and_data_memory:memory|Add0~9" File: C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v Line: 101
+    Info (308011): Node  "datapath:data_path|instruction_and_data_memory:memory|Add0~13" File: C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v Line: 101
+    Info (308011): Node  "datapath:data_path|instruction_and_data_memory:memory|Add0~17" File: C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v Line: 101
+    Info (308011): Node  "datapath:data_path|instruction_and_data_memory:memory|Add2~13" File: C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v Line: 102
+    Info (308011): Node  "datapath:data_path|instruction_and_data_memory:memory|Add2~5" File: C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v Line: 102
+    Info (308011): Node  "datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[18]" File: C:/Users/brahim/Desktop/Risc_V/d_flip_flop_with_enable.v Line: 10
+    Info (308011): Node  "datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[20]" File: C:/Users/brahim/Desktop/Risc_V/d_flip_flop_with_enable.v Line: 10
+    Info (308011): Node  "datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[15]" File: C:/Users/brahim/Desktop/Risc_V/d_flip_flop_with_enable.v Line: 10
+    Info (308011): Node  "datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[17]" File: C:/Users/brahim/Desktop/Risc_V/d_flip_flop_with_enable.v Line: 10
+    Info (308011): Node  "datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[16]" File: C:/Users/brahim/Desktop/Risc_V/d_flip_flop_with_enable.v Line: 10
+    Info (308011): Node  "datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[22]" File: C:/Users/brahim/Desktop/Risc_V/d_flip_flop_with_enable.v Line: 10
+    Info (308011): Node  "datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[23]" File: C:/Users/brahim/Desktop/Risc_V/d_flip_flop_with_enable.v Line: 10
+    Info (308011): Node  "datapath:data_path|d_flip_flop_with_enable:instrFlipFlop|out[21]" File: C:/Users/brahim/Desktop/Risc_V/d_flip_flop_with_enable.v Line: 10
+    Info (308011): Node  "datapath:data_path|instruction_and_data_memory:memory|LessThan1~4" File: C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v Line: 77
+    Info (308011): Node  "datapath:data_path|instruction_and_data_memory:memory|Add0~1" File: C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v Line: 101
+    Info (308011): Node  "datapath:data_path|three_to_one_mux:srcBMux|Mux30~0" File: C:/Users/brahim/Desktop/Risc_V/three_to_one_mux.v Line: 8
+    Info (308002): Truncated list of Design Assistant messages to 30 messages. Go to sections under Design Assistant section of Compilation Report for complete lists of Design Assistant messages generated.
+Info (308007): Design Assistant information: finished post-fitting analysis of current design -- generated 277 information messages and 1 warning messages
+Info: Quartus Prime Design Assistant was successful. 0 errors, 4 warnings
+    Info: Peak virtual memory: 4886 megabytes
+    Info: Processing ended: Sun Jun  8 21:25:02 2025
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:08
+
+

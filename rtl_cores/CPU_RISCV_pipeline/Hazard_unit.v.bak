@@ -1,0 +1,67 @@
+module  Hazard_unit (//INPUTS
+							Rs1D,Rs2D,
+							Rs1E,Rs2E,RdE, PCSrcE,ResultSrcE0,
+							RdM,RegWriteM,
+							RdW,RegWriteW
+							//OUTPUTS
+							StallF,StallD,FlushD,FlushE,
+							ForwardAE,ForwardBE,
+							
+
+
+);
+    output reg [1:0] ForwardAE,ForwardBE;
+    input            StallF,StallD,FlushD,FlushE;
+    input      [4:0] Rs1D,Rs2D,Rs1E,Rs2E,RdE,RdM,RdW;
+	 input            PCSrcE,ResultSrcE0,RegWriteM,RegWriteW;
+
+always @(*) begin
+//Forwarding
+
+if (((Rs1E == RdM) & RegWriteM) & (Rs1E != 0)) then 
+		ForwardAE <= 10;
+else if (((Rs1E == RdW) & RegWriteW) & (Rs1E != 0)) then 
+		ForwardAE <= 01;
+else ForwardAE <= 00;
+if (((Rs2E == RdM) & RegWriteM) & (Rs2E != 0)) then 
+		ForwardBE <= 10;
+else if (((Rs2E == RdW) & RegWriteW) & (Rs2E != 0)) then 
+		ForwardBE <= 01;
+else ForwardBE <= 00;
+ 
+end 
+
+//Stalls
+
+assign FlushE  = ResultSrcE0 & ((Rs1D == RdE) | (Rs2D == RdE)) | PCSrcE ;
+assign StallF  =FlushE;
+assign StallD  =FlushE;
+assign FlushD  = PCSrcE;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+endmodule 

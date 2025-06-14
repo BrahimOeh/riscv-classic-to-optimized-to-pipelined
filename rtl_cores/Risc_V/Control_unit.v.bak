@@ -1,0 +1,17 @@
+module control_unit(clk, reset,op,funct5,funct7
+						  PCWrite,AdrSrc,MemWrite,IRWrite,ResultSrc,ALUControl,ALUSrcA,ALUSrcB,ImmSrc,RegWrite,Mem_n_bytes);
+
+			// Port declarations
+			input         clk, reset;
+			input   [2:0] funct3;
+			input   [6:0] op,funct7;
+			
+			output  		  PCWrite,MemWrite,IRWrite,RegWrite,AdrSrc;
+			output  [1:0] ALUSrcA,ALUSrcB,ImmSrc,Mem_n_bytes,ResultSrc;
+			output  [4:0] ALUControl;	
+
+			//FSM
+						  
+						  
+						  
+endmodule

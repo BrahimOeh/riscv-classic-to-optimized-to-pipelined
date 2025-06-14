@@ -1,0 +1,945 @@
+Analysis & Synthesis report for CPU_RISCV_Multicycle
+Sun Jun  8 19:23:19 2025
+Quartus Prime Version 24.1std.0 Build 1077 03/04/2025 SC Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Analysis & Synthesis DSP Block Usage Summary
+  9. State Machine - |Risc_V|Control_unit:ctrl|Main_FSM:Fsm|state
+ 10. Registers Removed During Synthesis
+ 11. General Register Statistics
+ 12. Inverted Register Statistics
+ 13. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 14. Parameter Settings for User Entity Instance: Control_unit:ctrl|Main_FSM:Fsm
+ 15. Parameter Settings for User Entity Instance: datapath:data_path
+ 16. Parameter Settings for User Entity Instance: datapath:data_path|instruction_and_data_memory:memory
+ 17. Parameter Settings for Inferred Entity Instance: datapath:data_path|alu:ALU|lpm_divide:Div0
+ 18. Parameter Settings for Inferred Entity Instance: datapath:data_path|alu:ALU|lpm_divide:Mod0
+ 19. Port Connectivity Checks: "datapath:data_path|three_to_one_mux:srcBMux"
+ 20. Port Connectivity Checks: "datapath:data_path|immediate_extend:extend"
+ 21. Port Connectivity Checks: "Control_unit:ctrl"
+ 22. Post-Synthesis Netlist Statistics for Top Partition
+ 23. Elapsed Time Per Partition
+ 24. Analysis & Synthesis Messages
+ 25. Analysis & Synthesis Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2025  Altera Corporation. All rights reserved.
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, the Altera Quartus Prime License Agreement,
+the Altera IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Altera and sold by Altera or its authorized distributors.  Please
+refer to the Altera Software License Subscription Agreements 
+on the Quartus Prime software download page.
+
+
+
++-----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                      ;
++---------------------------------+-------------------------------------------------+
+; Analysis & Synthesis Status     ; Successful - Sun Jun  8 19:23:18 2025           ;
+; Quartus Prime Version           ; 24.1std.0 Build 1077 03/04/2025 SC Lite Edition ;
+; Revision Name                   ; CPU_RISCV_Multicycle                            ;
+; Top-level Entity Name           ; Risc_V                                          ;
+; Family                          ; Cyclone V                                       ;
+; Logic utilization (in ALMs)     ; N/A                                             ;
+; Total registers                 ; 2297                                            ;
+; Total pins                      ; 81                                              ;
+; Total virtual pins              ; 0                                               ;
+; Total block memory bits         ; 0                                               ;
+; Total DSP Blocks                ; 2                                               ;
+; Total HSSI RX PCSs              ; 0                                               ;
+; Total HSSI PMA RX Deserializers ; 0                                               ;
+; Total HSSI TX PCSs              ; 0                                               ;
+; Total HSSI PMA TX Serializers   ; 0                                               ;
+; Total PLLs                      ; 0                                               ;
+; Total DLLs                      ; 0                                               ;
++---------------------------------+-------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                               ;
++---------------------------------------------------------------------------------+--------------------+----------------------+
+; Option                                                                          ; Setting            ; Default Value        ;
++---------------------------------------------------------------------------------+--------------------+----------------------+
+; Device                                                                          ; 5CGXFC7C7F23C8     ;                      ;
+; Top-level entity name                                                           ; Risc_V             ; CPU_RISCV_Multicycle ;
+; Family name                                                                     ; Cyclone V          ; Cyclone V            ;
+; Use smart compilation                                                           ; Off                ; Off                  ;
+; Enable parallel Assembler and Timing Analyzer during compilation                ; On                 ; On                   ;
+; Enable compact report table                                                     ; Off                ; Off                  ;
+; Restructure Multiplexers                                                        ; Auto               ; Auto                 ;
+; MLAB Add Timing Constraints For Mixed-Port Feed-Through Mode Setting Don't Care ; Off                ; Off                  ;
+; Create Debugging Nodes for IP Cores                                             ; Off                ; Off                  ;
+; Preserve fewer node names                                                       ; On                 ; On                   ;
+; Intel FPGA IP Evaluation Mode                                                   ; Enable             ; Enable               ;
+; Verilog Version                                                                 ; Verilog_2001       ; Verilog_2001         ;
+; VHDL Version                                                                    ; VHDL_1993          ; VHDL_1993            ;
+; State Machine Processing                                                        ; Auto               ; Auto                 ;
+; Safe State Machine                                                              ; Off                ; Off                  ;
+; Extract Verilog State Machines                                                  ; On                 ; On                   ;
+; Extract VHDL State Machines                                                     ; On                 ; On                   ;
+; Ignore Verilog initial constructs                                               ; Off                ; Off                  ;
+; Iteration limit for constant Verilog loops                                      ; 5000               ; 5000                 ;
+; Iteration limit for non-constant Verilog loops                                  ; 250                ; 250                  ;
+; Add Pass-Through Logic to Inferred RAMs                                         ; On                 ; On                   ;
+; Infer RAMs from Raw Logic                                                       ; On                 ; On                   ;
+; Parallel Synthesis                                                              ; On                 ; On                   ;
+; DSP Block Balancing                                                             ; Auto               ; Auto                 ;
+; NOT Gate Push-Back                                                              ; On                 ; On                   ;
+; Power-Up Don't Care                                                             ; On                 ; On                   ;
+; Remove Redundant Logic Cells                                                    ; Off                ; Off                  ;
+; Remove Duplicate Registers                                                      ; On                 ; On                   ;
+; Ignore CARRY Buffers                                                            ; Off                ; Off                  ;
+; Ignore CASCADE Buffers                                                          ; Off                ; Off                  ;
+; Ignore GLOBAL Buffers                                                           ; Off                ; Off                  ;
+; Ignore ROW GLOBAL Buffers                                                       ; Off                ; Off                  ;
+; Ignore LCELL Buffers                                                            ; Off                ; Off                  ;
+; Ignore SOFT Buffers                                                             ; On                 ; On                   ;
+; Limit AHDL Integers to 32 Bits                                                  ; Off                ; Off                  ;
+; Optimization Technique                                                          ; Balanced           ; Balanced             ;
+; Carry Chain Length                                                              ; 70                 ; 70                   ;
+; Auto Carry Chains                                                               ; On                 ; On                   ;
+; Auto Open-Drain Pins                                                            ; On                 ; On                   ;
+; Perform WYSIWYG Primitive Resynthesis                                           ; Off                ; Off                  ;
+; Auto ROM Replacement                                                            ; On                 ; On                   ;
+; Auto RAM Replacement                                                            ; On                 ; On                   ;
+; Auto DSP Block Replacement                                                      ; On                 ; On                   ;
+; Auto Shift Register Replacement                                                 ; Auto               ; Auto                 ;
+; Allow Shift Register Merging across Hierarchies                                 ; Auto               ; Auto                 ;
+; Auto Clock Enable Replacement                                                   ; On                 ; On                   ;
+; Strict RAM Replacement                                                          ; Off                ; Off                  ;
+; Allow Synchronous Control Signals                                               ; On                 ; On                   ;
+; Force Use of Synchronous Clear Signals                                          ; Off                ; Off                  ;
+; Auto Resource Sharing                                                           ; Off                ; Off                  ;
+; Allow Any RAM Size For Recognition                                              ; Off                ; Off                  ;
+; Allow Any ROM Size For Recognition                                              ; Off                ; Off                  ;
+; Allow Any Shift Register Size For Recognition                                   ; Off                ; Off                  ;
+; Use LogicLock Constraints during Resource Balancing                             ; On                 ; On                   ;
+; Ignore translate_off and synthesis_off directives                               ; Off                ; Off                  ;
+; Timing-Driven Synthesis                                                         ; On                 ; On                   ;
+; Report Parameter Settings                                                       ; On                 ; On                   ;
+; Report Source Assignments                                                       ; On                 ; On                   ;
+; Report Connectivity Checks                                                      ; On                 ; On                   ;
+; Ignore Maximum Fan-Out Assignments                                              ; Off                ; Off                  ;
+; Synchronization Register Chain Length                                           ; 3                  ; 3                    ;
+; Power Optimization During Synthesis                                             ; Normal compilation ; Normal compilation   ;
+; HDL message level                                                               ; Level2             ; Level2               ;
+; Suppress Register Optimization Related Messages                                 ; Off                ; Off                  ;
+; Number of Removed Registers Reported in Synthesis Report                        ; 5000               ; 5000                 ;
+; Number of Swept Nodes Reported in Synthesis Report                              ; 5000               ; 5000                 ;
+; Number of Inverted Registers Reported in Synthesis Report                       ; 100                ; 100                  ;
+; Clock MUX Protection                                                            ; On                 ; On                   ;
+; Auto Gated Clock Conversion                                                     ; Off                ; Off                  ;
+; Block Design Naming                                                             ; Auto               ; Auto                 ;
+; SDC constraint protection                                                       ; Off                ; Off                  ;
+; Synthesis Effort                                                                ; Auto               ; Auto                 ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal                    ; On                 ; On                   ;
+; Pre-Mapping Resynthesis Optimization                                            ; Off                ; Off                  ;
+; Analysis & Synthesis Message Level                                              ; Medium             ; Medium               ;
+; Disable Register Merging Across Hierarchies                                     ; Auto               ; Auto                 ;
+; Resource Aware Inference For Block RAM                                          ; On                 ; On                   ;
+; Automatic Parallel Synthesis                                                    ; On                 ; On                   ;
+; Partial Reconfiguration Bitstream ID                                            ; Off                ; Off                  ;
++---------------------------------------------------------------------------------+--------------------+----------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 8           ;
+;                            ;             ;
+; Average used               ; 1.01        ;
+; Maximum used               ; 8           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.1%      ;
+;     Processor 3            ;   0.1%      ;
+;     Processor 4            ;   0.1%      ;
+;     Processor 5            ;   0.1%      ;
+;     Processor 6            ;   0.1%      ;
+;     Processor 7            ;   0.1%      ;
+;     Processor 8            ;   0.1%      ;
++----------------------------+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                           ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                       ; Library ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------+---------+
+; two_to_one_mux.v                 ; yes             ; User Verilog HDL File        ; C:/Users/brahim/Desktop/Risc_V/two_to_one_mux.v                    ;         ;
+; three_to_one_mux.v               ; yes             ; User Verilog HDL File        ; C:/Users/brahim/Desktop/Risc_V/three_to_one_mux.v                  ;         ;
+; Size_decoder.v                   ; yes             ; User Verilog HDL File        ; C:/Users/brahim/Desktop/Risc_V/Size_decoder.v                      ;         ;
+; Risc_V.v                         ; yes             ; User Verilog HDL File        ; C:/Users/brahim/Desktop/Risc_V/Risc_V.v                            ;         ;
+; register_file.v                  ; yes             ; User Verilog HDL File        ; C:/Users/brahim/Desktop/Risc_V/register_file.v                     ;         ;
+; Main_FSM.v                       ; yes             ; User Verilog HDL File        ; C:/Users/brahim/Desktop/Risc_V/Main_FSM.v                          ;         ;
+; Inst_decoder.v                   ; yes             ; User Verilog HDL File        ; C:/Users/brahim/Desktop/Risc_V/Inst_decoder.v                      ;         ;
+; instruction_and_data_memory.v    ; yes             ; User Verilog HDL File        ; C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v       ;         ;
+; immediate_extend.v               ; yes             ; User Verilog HDL File        ; C:/Users/brahim/Desktop/Risc_V/immediate_extend.v                  ;         ;
+; d_flip_flop_with_enable.v        ; yes             ; User Verilog HDL File        ; C:/Users/brahim/Desktop/Risc_V/d_flip_flop_with_enable.v           ;         ;
+; d_flip_flop.v                    ; yes             ; User Verilog HDL File        ; C:/Users/brahim/Desktop/Risc_V/d_flip_flop.v                       ;         ;
+; datapath.v                       ; yes             ; User Verilog HDL File        ; C:/Users/brahim/Desktop/Risc_V/datapath.v                          ;         ;
+; Control_unit.v                   ; yes             ; User Verilog HDL File        ; C:/Users/brahim/Desktop/Risc_V/Control_unit.v                      ;         ;
+; ALU_decoder.v                    ; yes             ; User Verilog HDL File        ; C:/Users/brahim/Desktop/Risc_V/ALU_decoder.v                       ;         ;
+; alu.v                            ; yes             ; User Verilog HDL File        ; C:/Users/brahim/Desktop/Risc_V/alu.v                               ;         ;
+; lpm_divide.tdf                   ; yes             ; Megafunction                 ; d:/quartus24.1/quartus/libraries/megafunctions/lpm_divide.tdf      ;         ;
+; abs_divider.inc                  ; yes             ; Megafunction                 ; d:/quartus24.1/quartus/libraries/megafunctions/abs_divider.inc     ;         ;
+; sign_div_unsign.inc              ; yes             ; Megafunction                 ; d:/quartus24.1/quartus/libraries/megafunctions/sign_div_unsign.inc ;         ;
+; aglobal241.inc                   ; yes             ; Megafunction                 ; d:/quartus24.1/quartus/libraries/megafunctions/aglobal241.inc      ;         ;
+; db/lpm_divide_3dm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/brahim/Desktop/Risc_V/db/lpm_divide_3dm.tdf               ;         ;
+; db/sign_div_unsign_9nh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/brahim/Desktop/Risc_V/db/sign_div_unsign_9nh.tdf          ;         ;
+; db/alt_u_div_o2f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/brahim/Desktop/Risc_V/db/alt_u_div_o2f.tdf                ;         ;
+; db/lpm_divide_65m.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/brahim/Desktop/Risc_V/db/lpm_divide_65m.tdf               ;         ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------+---------+
+
+
++-----------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary               ;
++---------------------------------------------+-------------+
+; Resource                                    ; Usage       ;
++---------------------------------------------+-------------+
+; Estimate of Logic utilization (ALMs needed) ; 5580        ;
+;                                             ;             ;
+; Combinational ALUT usage for logic          ; 7581        ;
+;     -- 7 input functions                    ; 24          ;
+;     -- 6 input functions                    ; 3432        ;
+;     -- 5 input functions                    ; 2111        ;
+;     -- 4 input functions                    ; 1336        ;
+;     -- <=3 input functions                  ; 678         ;
+;                                             ;             ;
+; Dedicated logic registers                   ; 2297        ;
+;                                             ;             ;
+; I/O pins                                    ; 81          ;
+;                                             ;             ;
+; Total DSP Blocks                            ; 2           ;
+;                                             ;             ;
+; Maximum fan-out node                        ; clock~input ;
+; Maximum fan-out                             ; 2297        ;
+; Total fan-out                               ; 48649       ;
+; Average fan-out                             ; 4.84        ;
++---------------------------------------------+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                      ;
++-----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------------------------------------------------------------------------------------------------------------------+-----------------------------+--------------+
+; Compilation Hierarchy Node                    ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                ; Entity Name                 ; Library Name ;
++-----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------------------------------------------------------------------------------------------------------------------+-----------------------------+--------------+
+; |Risc_V                                       ; 7581 (9)            ; 2297 (9)                  ; 0                 ; 2          ; 81   ; 0            ; |Risc_V                                                                                                                            ; Risc_V                      ; work         ;
+;    |Control_unit:ctrl|                        ; 56 (4)              ; 16 (0)                    ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|Control_unit:ctrl                                                                                                          ; Control_unit                ; work         ;
+;       |ALU_decoder:alu_dec|                   ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|Control_unit:ctrl|ALU_decoder:alu_dec                                                                                      ; ALU_decoder                 ; work         ;
+;       |Inst_decoder:Imm_choice|               ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|Control_unit:ctrl|Inst_decoder:Imm_choice                                                                                  ; Inst_decoder                ; work         ;
+;       |Main_FSM:Fsm|                          ; 38 (38)             ; 16 (16)                   ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|Control_unit:ctrl|Main_FSM:Fsm                                                                                             ; Main_FSM                    ; work         ;
+;       |Size_decoder:size_data|                ; 5 (5)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|Control_unit:ctrl|Size_decoder:size_data                                                                                   ; Size_decoder                ; work         ;
+;    |datapath:data_path|                       ; 7516 (0)            ; 2272 (0)                  ; 0                 ; 2          ; 0    ; 0            ; |Risc_V|datapath:data_path                                                                                                         ; datapath                    ; work         ;
+;       |alu:ALU|                               ; 2732 (522)          ; 0 (0)                     ; 0                 ; 2          ; 0    ; 0            ; |Risc_V|datapath:data_path|alu:ALU                                                                                                 ; alu                         ; work         ;
+;          |lpm_divide:Div0|                    ; 1124 (0)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|datapath:data_path|alu:ALU|lpm_divide:Div0                                                                                 ; lpm_divide                  ; work         ;
+;             |lpm_divide_3dm:auto_generated|   ; 1124 (0)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated                                                   ; lpm_divide_3dm              ; work         ;
+;                |sign_div_unsign_9nh:divider|  ; 1124 (0)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider                       ; sign_div_unsign_9nh         ; work         ;
+;                   |alt_u_div_o2f:divider|     ; 1124 (1124)         ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|datapath:data_path|alu:ALU|lpm_divide:Div0|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider ; alt_u_div_o2f               ; work         ;
+;          |lpm_divide:Mod0|                    ; 1086 (0)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|datapath:data_path|alu:ALU|lpm_divide:Mod0                                                                                 ; lpm_divide                  ; work         ;
+;             |lpm_divide_65m:auto_generated|   ; 1086 (0)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|datapath:data_path|alu:ALU|lpm_divide:Mod0|lpm_divide_65m:auto_generated                                                   ; lpm_divide_65m              ; work         ;
+;                |sign_div_unsign_9nh:divider|  ; 1086 (0)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|datapath:data_path|alu:ALU|lpm_divide:Mod0|lpm_divide_65m:auto_generated|sign_div_unsign_9nh:divider                       ; sign_div_unsign_9nh         ; work         ;
+;                   |alt_u_div_o2f:divider|     ; 1086 (1086)         ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|datapath:data_path|alu:ALU|lpm_divide:Mod0|lpm_divide_65m:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider ; alt_u_div_o2f               ; work         ;
+;       |d_flip_flop:AFlipFlop|                 ; 0 (0)               ; 32 (32)                   ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|datapath:data_path|d_flip_flop:AFlipFlop                                                                                   ; d_flip_flop                 ; work         ;
+;       |d_flip_flop:ALUFlipFlop|               ; 0 (0)               ; 32 (32)                   ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|datapath:data_path|d_flip_flop:ALUFlipFlop                                                                                 ; d_flip_flop                 ; work         ;
+;       |d_flip_flop:dataFlipFlop|              ; 0 (0)               ; 32 (32)                   ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|datapath:data_path|d_flip_flop:dataFlipFlop                                                                                ; d_flip_flop                 ; work         ;
+;       |d_flip_flop:writeDataFlipFlop|         ; 0 (0)               ; 32 (32)                   ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|datapath:data_path|d_flip_flop:writeDataFlipFlop                                                                           ; d_flip_flop                 ; work         ;
+;       |d_flip_flop_with_enable:PCFlipFlop|    ; 0 (0)               ; 32 (32)                   ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|datapath:data_path|d_flip_flop_with_enable:PCFlipFlop                                                                      ; d_flip_flop_with_enable     ; work         ;
+;       |d_flip_flop_with_enable:instrFlipFlop| ; 0 (0)               ; 32 (32)                   ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|datapath:data_path|d_flip_flop_with_enable:instrFlipFlop                                                                   ; d_flip_flop_with_enable     ; work         ;
+;       |d_flip_flop_with_enable:oldPCFlipFlop| ; 0 (0)               ; 32 (32)                   ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|datapath:data_path|d_flip_flop_with_enable:oldPCFlipFlop                                                                   ; d_flip_flop_with_enable     ; work         ;
+;       |immediate_extend:extend|               ; 15 (15)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|datapath:data_path|immediate_extend:extend                                                                                 ; immediate_extend            ; work         ;
+;       |instruction_and_data_memory:memory|    ; 3889 (3889)         ; 1024 (1024)               ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory                                                                      ; instruction_and_data_memory ; work         ;
+;       |register_file:registers|               ; 736 (736)           ; 1024 (1024)               ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|datapath:data_path|register_file:registers                                                                                 ; register_file               ; work         ;
+;       |three_to_one_mux:resultMux|            ; 32 (32)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|datapath:data_path|three_to_one_mux:resultMux                                                                              ; three_to_one_mux            ; work         ;
+;       |three_to_one_mux:srcAMux|              ; 35 (35)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|datapath:data_path|three_to_one_mux:srcAMux                                                                                ; three_to_one_mux            ; work         ;
+;       |three_to_one_mux:srcBMux|              ; 69 (69)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|datapath:data_path|three_to_one_mux:srcBMux                                                                                ; three_to_one_mux            ; work         ;
+;       |two_to_one_mux:addressMux|             ; 8 (8)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Risc_V|datapath:data_path|two_to_one_mux:addressMux                                                                               ; two_to_one_mux              ; work         ;
++-----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------------------------------------------------------------------------------------------------------------------+-----------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++-----------------------------------------------+
+; Analysis & Synthesis DSP Block Usage Summary  ;
++---------------------------------+-------------+
+; Statistic                       ; Number Used ;
++---------------------------------+-------------+
+; Two Independent 18x18           ; 1           ;
+; Sum of two 18x18                ; 1           ;
+; Total number of DSP blocks      ; 2           ;
+;                                 ;             ;
+; Fixed Point Unsigned Multiplier ; 3           ;
++---------------------------------+-------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |Risc_V|Control_unit:ctrl|Main_FSM:Fsm|state                                                                                                                                                                                                          ;
++-----------------+-------------+-----------------+-----------------+-------------+-------------+----------------+-------------+-------------+---------------+----------------+----------------+-------------+---------------+--------------+--------------+------------+
+; Name            ; state.Fetch ; state.ExecuteIC ; state.ExecuteRC ; state.Auipc ; state.LUI_s ; state.ExecuteI ; state.JAL_s ; state.BEQ_s ; state.ALUWB_s ; state.ExecuteR ; state.MemWrite ; state.MemWB ; state.MemRead ; state.MemAdr ; state.Decode ; state.idle ;
++-----------------+-------------+-----------------+-----------------+-------------+-------------+----------------+-------------+-------------+---------------+----------------+----------------+-------------+---------------+--------------+--------------+------------+
+; state.idle      ; 0           ; 0               ; 0               ; 0           ; 0           ; 0              ; 0           ; 0           ; 0             ; 0              ; 0              ; 0           ; 0             ; 0            ; 0            ; 0          ;
+; state.Decode    ; 0           ; 0               ; 0               ; 0           ; 0           ; 0              ; 0           ; 0           ; 0             ; 0              ; 0              ; 0           ; 0             ; 0            ; 1            ; 1          ;
+; state.MemAdr    ; 0           ; 0               ; 0               ; 0           ; 0           ; 0              ; 0           ; 0           ; 0             ; 0              ; 0              ; 0           ; 0             ; 1            ; 0            ; 1          ;
+; state.MemRead   ; 0           ; 0               ; 0               ; 0           ; 0           ; 0              ; 0           ; 0           ; 0             ; 0              ; 0              ; 0           ; 1             ; 0            ; 0            ; 1          ;
+; state.MemWB     ; 0           ; 0               ; 0               ; 0           ; 0           ; 0              ; 0           ; 0           ; 0             ; 0              ; 0              ; 1           ; 0             ; 0            ; 0            ; 1          ;
+; state.MemWrite  ; 0           ; 0               ; 0               ; 0           ; 0           ; 0              ; 0           ; 0           ; 0             ; 0              ; 1              ; 0           ; 0             ; 0            ; 0            ; 1          ;
+; state.ExecuteR  ; 0           ; 0               ; 0               ; 0           ; 0           ; 0              ; 0           ; 0           ; 0             ; 1              ; 0              ; 0           ; 0             ; 0            ; 0            ; 1          ;
+; state.ALUWB_s   ; 0           ; 0               ; 0               ; 0           ; 0           ; 0              ; 0           ; 0           ; 1             ; 0              ; 0              ; 0           ; 0             ; 0            ; 0            ; 1          ;
+; state.BEQ_s     ; 0           ; 0               ; 0               ; 0           ; 0           ; 0              ; 0           ; 1           ; 0             ; 0              ; 0              ; 0           ; 0             ; 0            ; 0            ; 1          ;
+; state.JAL_s     ; 0           ; 0               ; 0               ; 0           ; 0           ; 0              ; 1           ; 0           ; 0             ; 0              ; 0              ; 0           ; 0             ; 0            ; 0            ; 1          ;
+; state.ExecuteI  ; 0           ; 0               ; 0               ; 0           ; 0           ; 1              ; 0           ; 0           ; 0             ; 0              ; 0              ; 0           ; 0             ; 0            ; 0            ; 1          ;
+; state.LUI_s     ; 0           ; 0               ; 0               ; 0           ; 1           ; 0              ; 0           ; 0           ; 0             ; 0              ; 0              ; 0           ; 0             ; 0            ; 0            ; 1          ;
+; state.Auipc     ; 0           ; 0               ; 0               ; 1           ; 0           ; 0              ; 0           ; 0           ; 0             ; 0              ; 0              ; 0           ; 0             ; 0            ; 0            ; 1          ;
+; state.ExecuteRC ; 0           ; 0               ; 1               ; 0           ; 0           ; 0              ; 0           ; 0           ; 0             ; 0              ; 0              ; 0           ; 0             ; 0            ; 0            ; 1          ;
+; state.ExecuteIC ; 0           ; 1               ; 0               ; 0           ; 0           ; 0              ; 0           ; 0           ; 0             ; 0              ; 0              ; 0           ; 0             ; 0            ; 0            ; 1          ;
+; state.Fetch     ; 1           ; 0               ; 0               ; 0           ; 0           ; 0              ; 0           ; 0           ; 0             ; 0              ; 0              ; 0           ; 0             ; 0            ; 0            ; 1          ;
++-----------------+-------------+-----------------+-----------------+-------------+-------------+----------------+-------------+-------------+---------------+----------------+----------------+-------------+---------------+--------------+--------------+------------+
+
+
++--------------------------------------------------------------+
+; Registers Removed During Synthesis                           ;
++-----------------------------------------+--------------------+
+; Register name                           ; Reason for Removal ;
++-----------------------------------------+--------------------+
+; Control_unit:ctrl|Main_FSM:Fsm|state~16 ; Lost fanout        ;
+; Control_unit:ctrl|Main_FSM:Fsm|state~17 ; Lost fanout        ;
+; Control_unit:ctrl|Main_FSM:Fsm|state~18 ; Lost fanout        ;
+; Control_unit:ctrl|Main_FSM:Fsm|state~19 ; Lost fanout        ;
+; Total Number of Removed Registers = 4   ;                    ;
++-----------------------------------------+--------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 2297  ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 2297  ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 2137  ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++-------------------------------------------------------------------------------+
+; Inverted Register Statistics                                                  ;
++---------------------------------------------------------------------+---------+
+; Inverted Register                                                   ; Fan out ;
++---------------------------------------------------------------------+---------+
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[9][6]  ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[25][6] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[24][6] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[27][6] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[9][5]  ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[24][5] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[27][5] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[13][5] ; 7       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[15][5] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[24][2] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[9][4]  ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[5][4]  ; 7       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[3][4]  ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[7][4]  ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[11][4] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[15][4] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[25][4] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[24][4] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[19][4] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[26][4] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[23][4] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[8][1]  ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[24][1] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[3][1]  ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[19][1] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[11][1] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[10][1] ; 7       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[27][1] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[26][1] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[7][1]  ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[23][1] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[15][1] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[24][3] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[26][3] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[3][0]  ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[17][0] ; 7       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[19][0] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[7][0]  ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[6][0]  ; 7       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[21][0] ; 7       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[23][0] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[22][0] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[8][0]  ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[11][0] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[25][0] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[27][0] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[15][0] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[14][0] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[3][7]  ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[11][7] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[15][7] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[14][7] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[24][7] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[19][7] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[27][7] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[26][7] ; 3       ;
+; datapath:data_path|instruction_and_data_memory:memory|MEMORY[22][7] ; 3       ;
+; Total number of inverted registers = 57                             ;         ;
++---------------------------------------------------------------------+---------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                             ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                   ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------+
+; 32:1               ; 32 bits   ; 672 LEs       ; 672 LEs              ; 0 LEs                  ; Yes        ; |Risc_V|datapath:data_path|d_flip_flop:AFlipFlop|out[7]                      ;
+; 32:1               ; 32 bits   ; 672 LEs       ; 672 LEs              ; 0 LEs                  ; Yes        ; |Risc_V|datapath:data_path|d_flip_flop:writeDataFlipFlop|out[12]             ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[127][6] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[126][7] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[125][1] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[124][5] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[123][5] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[122][2] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[121][7] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[120][2] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[119][0] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[118][7] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[117][3] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[116][3] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[115][7] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[114][0] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[113][0] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[112][2] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[111][6] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[110][6] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[109][6] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[108][6] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[107][1] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[106][7] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[105][2] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[104][4] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[103][6] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[102][1] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[101][3] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[100][7] ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[99][1]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[98][6]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[97][1]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[96][6]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[95][0]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[94][7]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[93][7]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[92][6]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[91][6]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[90][4]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[89][5]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[88][7]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[87][1]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[86][6]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[85][7]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[84][7]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[83][1]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[82][2]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[81][2]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[80][5]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[79][5]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[78][5]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[77][3]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[76][3]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[75][5]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[74][7]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[73][7]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[72][4]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[71][4]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[70][3]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[69][5]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[68][3]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[67][4]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[66][0]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[65][2]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[64][4]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[63][0]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[62][7]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[61][7]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[60][7]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[59][3]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[58][7]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[57][1]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[56][5]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[55][0]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[54][4]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[53][7]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[52][7]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[51][2]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[50][1]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[49][2]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[48][4]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[47][7]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[46][6]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[45][4]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[44][4]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[43][4]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[42][6]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[41][6]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[40][6]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[39][6]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[38][3]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[37][5]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[36][3]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[35][5]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[34][6]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[33][2]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[32][3]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[31][0]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[30][6]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[29][4]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[28][1]  ;
+; 15:1               ; 3 bits    ; 30 LEs        ; 6 LEs                ; 24 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[27][3]  ;
+; 15:1               ; 4 bits    ; 40 LEs        ; 8 LEs                ; 32 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[26][2]  ;
+; 15:1               ; 5 bits    ; 50 LEs        ; 10 LEs               ; 40 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[25][3]  ;
+; 15:1               ; 5 bits    ; 50 LEs        ; 10 LEs               ; 40 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[23][7]  ;
+; 15:1               ; 6 bits    ; 60 LEs        ; 12 LEs               ; 48 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[22][5]  ;
+; 15:1               ; 7 bits    ; 70 LEs        ; 14 LEs               ; 56 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[21][2]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[20][7]  ;
+; 15:1               ; 4 bits    ; 40 LEs        ; 8 LEs                ; 32 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[19][3]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[18][1]  ;
+; 15:1               ; 7 bits    ; 70 LEs        ; 14 LEs               ; 56 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[17][6]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[16][7]  ;
+; 15:1               ; 3 bits    ; 30 LEs        ; 6 LEs                ; 24 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[15][3]  ;
+; 15:1               ; 6 bits    ; 60 LEs        ; 12 LEs               ; 48 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[14][6]  ;
+; 15:1               ; 7 bits    ; 70 LEs        ; 14 LEs               ; 56 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[13][6]  ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[12][4]  ;
+; 15:1               ; 4 bits    ; 40 LEs        ; 8 LEs                ; 32 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[11][5]  ;
+; 15:1               ; 7 bits    ; 70 LEs        ; 14 LEs               ; 56 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[10][7]  ;
+; 15:1               ; 5 bits    ; 50 LEs        ; 10 LEs               ; 40 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[9][0]   ;
+; 15:1               ; 6 bits    ; 60 LEs        ; 12 LEs               ; 48 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[8][4]   ;
+; 15:1               ; 5 bits    ; 50 LEs        ; 10 LEs               ; 40 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[7][3]   ;
+; 15:1               ; 7 bits    ; 70 LEs        ; 14 LEs               ; 56 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[6][4]   ;
+; 15:1               ; 7 bits    ; 70 LEs        ; 14 LEs               ; 56 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[5][0]   ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[4][0]   ;
+; 15:1               ; 4 bits    ; 40 LEs        ; 8 LEs                ; 32 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[3][3]   ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[2][4]   ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[1][3]   ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[0][4]   ;
+; 15:1               ; 5 bits    ; 50 LEs        ; 10 LEs               ; 40 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[27][6]  ;
+; 15:1               ; 4 bits    ; 40 LEs        ; 8 LEs                ; 32 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[26][4]  ;
+; 15:1               ; 3 bits    ; 30 LEs        ; 6 LEs                ; 24 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[25][0]  ;
+; 15:1               ; 7 bits    ; 70 LEs        ; 14 LEs               ; 56 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[24][1]  ;
+; 15:1               ; 3 bits    ; 30 LEs        ; 6 LEs                ; 24 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[23][4]  ;
+; 15:1               ; 2 bits    ; 20 LEs        ; 4 LEs                ; 16 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[22][0]  ;
+; 15:1               ; 4 bits    ; 40 LEs        ; 8 LEs                ; 32 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[19][0]  ;
+; 15:1               ; 5 bits    ; 50 LEs        ; 10 LEs               ; 40 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[15][5]  ;
+; 15:1               ; 2 bits    ; 20 LEs        ; 4 LEs                ; 16 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[14][0]  ;
+; 15:1               ; 4 bits    ; 40 LEs        ; 8 LEs                ; 32 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[11][0]  ;
+; 15:1               ; 3 bits    ; 30 LEs        ; 6 LEs                ; 24 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[9][6]   ;
+; 15:1               ; 2 bits    ; 20 LEs        ; 4 LEs                ; 16 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[8][0]   ;
+; 15:1               ; 3 bits    ; 30 LEs        ; 6 LEs                ; 24 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[7][1]   ;
+; 15:1               ; 4 bits    ; 40 LEs        ; 8 LEs                ; 32 LEs                 ; Yes        ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|MEMORY[3][1]   ;
+; 4:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; No         ; |Risc_V|datapath:data_path|three_to_one_mux:resultMux|Mux24                  ;
+; 3:1                ; 12 bits   ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |Risc_V|datapath:data_path|three_to_one_mux:srcBMux|Mux3                     ;
+; 4:1                ; 20 bits   ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |Risc_V|datapath:data_path|three_to_one_mux:srcBMux|Mux27                    ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |Risc_V|datapath:data_path|immediate_extend:extend|Mux23                     ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |Risc_V|datapath:data_path|alu:ALU|ShiftLeft0                                ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |Risc_V|datapath:data_path|alu:ALU|ShiftLeft0                                ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |Risc_V|datapath:data_path|alu:ALU|ShiftLeft0                                ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |Risc_V|datapath:data_path|alu:ALU|ShiftRight0                               ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |Risc_V|datapath:data_path|alu:ALU|ShiftRight1                               ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |Risc_V|datapath:data_path|alu:ALU|ShiftLeft0                                ;
+; 4:1                ; 49 bits   ; 98 LEs        ; 98 LEs               ; 0 LEs                  ; No         ; |Risc_V|datapath:data_path|alu:ALU|ShiftRight1                               ;
+; 4:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; No         ; |Risc_V|datapath:data_path|three_to_one_mux:srcAMux|Mux26                    ;
+; 4:1                ; 7 bits    ; 14 LEs        ; 14 LEs               ; 0 LEs                  ; No         ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|Mux1057        ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |Risc_V|Control_unit:ctrl|Size_decoder:size_data|size[1]                     ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |Risc_V|Control_unit:ctrl|Main_FSM:Fsm|state                                 ;
+; 5:1                ; 8 bits    ; 24 LEs        ; 16 LEs               ; 8 LEs                  ; No         ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|Mux1066        ;
+; 64:1               ; 8 bits    ; 336 LEs       ; 336 LEs              ; 0 LEs                  ; No         ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|Mux1026        ;
+; 128:1              ; 8 bits    ; 680 LEs       ; 680 LEs              ; 0 LEs                  ; No         ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|Mux1034        ;
+; 68:1               ; 8 bits    ; 360 LEs       ; 352 LEs              ; 8 LEs                  ; No         ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|Mux1076        ;
+; 132:1              ; 8 bits    ; 704 LEs       ; 696 LEs              ; 8 LEs                  ; No         ; |Risc_V|datapath:data_path|instruction_and_data_memory:memory|Mux1084        ;
+; 23:1               ; 5 bits    ; 75 LEs        ; 70 LEs               ; 5 LEs                  ; No         ; |Risc_V|datapath:data_path|alu:ALU|Mux26                                     ;
+; 24:1               ; 8 bits    ; 128 LEs       ; 120 LEs              ; 8 LEs                  ; No         ; |Risc_V|datapath:data_path|alu:ALU|Mux12                                     ;
+; 25:1               ; 2 bits    ; 32 LEs        ; 30 LEs               ; 2 LEs                  ; No         ; |Risc_V|datapath:data_path|alu:ALU|Mux22                                     ;
+; 23:1               ; 3 bits    ; 45 LEs        ; 42 LEs               ; 3 LEs                  ; No         ; |Risc_V|datapath:data_path|alu:ALU|Mux17                                     ;
+; 26:1               ; 3 bits    ; 51 LEs        ; 48 LEs               ; 3 LEs                  ; No         ; |Risc_V|datapath:data_path|alu:ALU|Mux28                                     ;
+; 26:1               ; 2 bits    ; 34 LEs        ; 32 LEs               ; 2 LEs                  ; No         ; |Risc_V|datapath:data_path|alu:ALU|Mux6                                      ;
+; 27:1               ; 3 bits    ; 54 LEs        ; 51 LEs               ; 3 LEs                  ; No         ; |Risc_V|datapath:data_path|alu:ALU|Mux2                                      ;
+; 16:1               ; 2 bits    ; 20 LEs        ; 18 LEs               ; 2 LEs                  ; No         ; |Risc_V|Control_unit:ctrl|Main_FSM:Fsm|Selector15                            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Control_unit:ctrl|Main_FSM:Fsm ;
++----------------+-------+----------------------------------------------------+
+; Parameter Name ; Value ; Type                                               ;
++----------------+-------+----------------------------------------------------+
+; Fetch          ; 0000  ; Unsigned Binary                                    ;
+; Decode         ; 0001  ; Unsigned Binary                                    ;
+; MemAdr         ; 0010  ; Unsigned Binary                                    ;
+; MemRead        ; 0011  ; Unsigned Binary                                    ;
+; MemWB          ; 0100  ; Unsigned Binary                                    ;
+; MemWrite       ; 0101  ; Unsigned Binary                                    ;
+; ExecuteR       ; 0110  ; Unsigned Binary                                    ;
+; ALUWB_s        ; 0111  ; Unsigned Binary                                    ;
+; BEQ_s          ; 1000  ; Unsigned Binary                                    ;
+; JAL_s          ; 1001  ; Unsigned Binary                                    ;
+; ExecuteI       ; 1010  ; Unsigned Binary                                    ;
+; LUI_s          ; 1011  ; Unsigned Binary                                    ;
+; Auipc          ; 1100  ; Unsigned Binary                                    ;
+; ExecuteRC      ; 1101  ; Unsigned Binary                                    ;
+; idle           ; 1111  ; Unsigned Binary                                    ;
+; ExecuteIC      ; 1110  ; Unsigned Binary                                    ;
++----------------+-------+----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: datapath:data_path ;
++----------------+-------+----------------------------------------+
+; Parameter Name ; Value ; Type                                   ;
++----------------+-------+----------------------------------------+
+; MEMORY_SIZE    ; 128   ; Signed Integer                         ;
++----------------+-------+----------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: datapath:data_path|instruction_and_data_memory:memory ;
++----------------+-------+---------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                      ;
++----------------+-------+---------------------------------------------------------------------------+
+; MEMORY_SIZE    ; 128   ; Signed Integer                                                            ;
++----------------+-------+---------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: datapath:data_path|alu:ALU|lpm_divide:Div0 ;
++------------------------+----------------+---------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                              ;
++------------------------+----------------+---------------------------------------------------+
+; LPM_WIDTHN             ; 32             ; Untyped                                           ;
+; LPM_WIDTHD             ; 32             ; Untyped                                           ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                           ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                           ;
+; LPM_PIPELINE           ; 0              ; Untyped                                           ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                           ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                           ;
+; CBXI_PARAMETER         ; lpm_divide_3dm ; Untyped                                           ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                           ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                           ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                        ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                      ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                      ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                    ;
++------------------------+----------------+---------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: datapath:data_path|alu:ALU|lpm_divide:Mod0 ;
++------------------------+----------------+---------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                              ;
++------------------------+----------------+---------------------------------------------------+
+; LPM_WIDTHN             ; 32             ; Untyped                                           ;
+; LPM_WIDTHD             ; 32             ; Untyped                                           ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                           ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                           ;
+; LPM_PIPELINE           ; 0              ; Untyped                                           ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                           ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                           ;
+; CBXI_PARAMETER         ; lpm_divide_65m ; Untyped                                           ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                           ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                           ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                        ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                      ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                      ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                    ;
++------------------------+----------------+---------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------+
+; Port Connectivity Checks: "datapath:data_path|three_to_one_mux:srcBMux" ;
++------------+-------+----------+-----------------------------------------+
+; Port       ; Type  ; Severity ; Details                                 ;
++------------+-------+----------+-----------------------------------------+
+; in3[31..3] ; Input ; Info     ; Stuck at GND                            ;
+; in3[1..0]  ; Input ; Info     ; Stuck at GND                            ;
+; in3[2]     ; Input ; Info     ; Stuck at VCC                            ;
++------------+-------+----------+-----------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "datapath:data_path|immediate_extend:extend"                                                                                                     ;
++--------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port   ; Type  ; Severity ; Details                                                                                                                                        ;
++--------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------+
+; ImmSrc ; Input ; Warning  ; Input port expression (2 bits) is smaller than the input port (3 bits) it drives.  Extra input bit(s) "ImmSrc[2..2]" will be connected to GND. ;
++--------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Control_unit:ctrl"                                                                                                          ;
++--------+--------+----------+---------------------------------------------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                                                                   ;
++--------+--------+----------+---------------------------------------------------------------------------------------------------------------------------+
+; ImmSrc ; Output ; Warning  ; Output or bidir port (3 bits) is wider than the port expression (2 bits) it drives; bit(s) "ImmSrc[2..2]" have no fanouts ;
++--------+--------+----------+---------------------------------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; arriav_ff             ; 2297                        ;
+;     CLR               ; 160                         ;
+;     ENA CLR           ; 2137                        ;
+; arriav_lcell_comb     ; 7586                        ;
+;     arith             ; 1354                        ;
+;         0 data inputs ; 123                         ;
+;         1 data inputs ; 7                           ;
+;         2 data inputs ; 15                          ;
+;         4 data inputs ; 216                         ;
+;         5 data inputs ; 993                         ;
+;     extend            ; 24                          ;
+;         7 data inputs ; 24                          ;
+;     normal            ; 6198                        ;
+;         1 data inputs ; 6                           ;
+;         2 data inputs ; 212                         ;
+;         3 data inputs ; 314                         ;
+;         4 data inputs ; 1116                        ;
+;         5 data inputs ; 1118                        ;
+;         6 data inputs ; 3432                        ;
+;     shared            ; 10                          ;
+;         0 data inputs ; 4                           ;
+;         3 data inputs ; 2                           ;
+;         4 data inputs ; 4                           ;
+; arriav_mac            ; 2                           ;
+; boundary_port         ; 81                          ;
+;                       ;                             ;
+; Max LUT depth         ; 124.50                      ;
+; Average LUT depth     ; 83.96                       ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:01:07     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 24.1std.0 Build 1077 03/04/2025 SC Lite Edition
+    Info: Processing started: Sun Jun  8 19:21:51 2025
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off CPU_RISCV_Multicycle -c CPU_RISCV_Multicycle
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 8 of the 8 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file two_to_one_mux.v
+    Info (12023): Found entity 1: two_to_one_mux File: C:/Users/brahim/Desktop/Risc_V/two_to_one_mux.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file three_to_one_mux.v
+    Info (12023): Found entity 1: three_to_one_mux File: C:/Users/brahim/Desktop/Risc_V/three_to_one_mux.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file size_decoder.v
+    Info (12023): Found entity 1: Size_decoder File: C:/Users/brahim/Desktop/Risc_V/Size_decoder.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file risc_v.v
+    Info (12023): Found entity 1: Risc_V File: C:/Users/brahim/Desktop/Risc_V/Risc_V.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file register_file.v
+    Info (12023): Found entity 1: register_file File: C:/Users/brahim/Desktop/Risc_V/register_file.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file main_fsm.v
+    Info (12023): Found entity 1: Main_FSM File: C:/Users/brahim/Desktop/Risc_V/Main_FSM.v Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file inst_decoder.v
+    Info (12023): Found entity 1: Inst_decoder File: C:/Users/brahim/Desktop/Risc_V/Inst_decoder.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file instruction_and_data_memory.v
+    Info (12023): Found entity 1: instruction_and_data_memory File: C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file immediate_extend.v
+    Info (12023): Found entity 1: immediate_extend File: C:/Users/brahim/Desktop/Risc_V/immediate_extend.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file d_flip_flop_with_enable.v
+    Info (12023): Found entity 1: d_flip_flop_with_enable File: C:/Users/brahim/Desktop/Risc_V/d_flip_flop_with_enable.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file d_flip_flop.v
+    Info (12023): Found entity 1: d_flip_flop File: C:/Users/brahim/Desktop/Risc_V/d_flip_flop.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file datapath.v
+    Info (12023): Found entity 1: datapath File: C:/Users/brahim/Desktop/Risc_V/datapath.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file cpu_riscv.v
+    Info (12023): Found entity 1: CPU_RISCV File: C:/Users/brahim/Desktop/Risc_V/CPU_RISCV.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file control_unit.v
+    Info (12023): Found entity 1: Control_unit File: C:/Users/brahim/Desktop/Risc_V/Control_unit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file alu_decoder.v
+    Info (12023): Found entity 1: ALU_decoder File: C:/Users/brahim/Desktop/Risc_V/ALU_decoder.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file alu.v
+    Info (12023): Found entity 1: alu File: C:/Users/brahim/Desktop/Risc_V/alu.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file tb_risc_v.v
+    Info (12023): Found entity 1: tb_Risc_V File: C:/Users/brahim/Desktop/Risc_V/tb_Risc_V.v Line: 3
+Info (12127): Elaborating entity "Risc_V" for the top level hierarchy
+Warning (10230): Verilog HDL assignment warning at risc_v.v(27): truncated value with size 32 to match size of target (9) File: C:/Users/brahim/Desktop/Risc_V/risc_v.v Line: 27
+Info (12128): Elaborating entity "Control_unit" for hierarchy "Control_unit:ctrl" File: C:/Users/brahim/Desktop/Risc_V/risc_v.v Line: 42
+Info (12128): Elaborating entity "Main_FSM" for hierarchy "Control_unit:ctrl|Main_FSM:Fsm" File: C:/Users/brahim/Desktop/Risc_V/control_unit.v Line: 24
+Info (10264): Verilog HDL Case Statement information at main_fsm.v(43): all case item expressions in this case statement are onehot File: C:/Users/brahim/Desktop/Risc_V/main_fsm.v Line: 43
+Critical Warning (10237): Verilog HDL warning at main_fsm.v(92): can't infer register for assignment in edge-triggered always construct because the clock isn't obvious. Generated combinational logic instead File: C:/Users/brahim/Desktop/Risc_V/main_fsm.v Line: 92
+Info (12128): Elaborating entity "ALU_decoder" for hierarchy "Control_unit:ctrl|ALU_decoder:alu_dec" File: C:/Users/brahim/Desktop/Risc_V/control_unit.v Line: 27
+Info (12128): Elaborating entity "Inst_decoder" for hierarchy "Control_unit:ctrl|Inst_decoder:Imm_choice" File: C:/Users/brahim/Desktop/Risc_V/control_unit.v Line: 30
+Info (12128): Elaborating entity "Size_decoder" for hierarchy "Control_unit:ctrl|Size_decoder:size_data" File: C:/Users/brahim/Desktop/Risc_V/control_unit.v Line: 49
+Info (12128): Elaborating entity "datapath" for hierarchy "datapath:data_path" File: C:/Users/brahim/Desktop/Risc_V/risc_v.v Line: 49
+Info (12128): Elaborating entity "d_flip_flop_with_enable" for hierarchy "datapath:data_path|d_flip_flop_with_enable:PCFlipFlop" File: C:/Users/brahim/Desktop/Risc_V/datapath.v Line: 37
+Info (12128): Elaborating entity "two_to_one_mux" for hierarchy "datapath:data_path|two_to_one_mux:addressMux" File: C:/Users/brahim/Desktop/Risc_V/datapath.v Line: 39
+Info (12128): Elaborating entity "instruction_and_data_memory" for hierarchy "datapath:data_path|instruction_and_data_memory:memory" File: C:/Users/brahim/Desktop/Risc_V/datapath.v Line: 50
+Warning (10240): Verilog HDL Always Construct warning at instruction_and_data_memory.v(22): inferring latch(es) for variable "i", which holds its previous value in one or more paths through the always construct File: C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v Line: 22
+Warning (10240): Verilog HDL Always Construct warning at instruction_and_data_memory.v(91): inferring latch(es) for variable "data_temp", which holds its previous value in one or more paths through the always construct File: C:/Users/brahim/Desktop/Risc_V/instruction_and_data_memory.v Line: 91
+Info (12128): Elaborating entity "d_flip_flop" for hierarchy "datapath:data_path|d_flip_flop:dataFlipFlop" File: C:/Users/brahim/Desktop/Risc_V/datapath.v Line: 54
+Info (12128): Elaborating entity "register_file" for hierarchy "datapath:data_path|register_file:registers" File: C:/Users/brahim/Desktop/Risc_V/datapath.v Line: 67
+Warning (10240): Verilog HDL Always Construct warning at register_file.v(15): inferring latch(es) for variable "i", which holds its previous value in one or more paths through the always construct File: C:/Users/brahim/Desktop/Risc_V/register_file.v Line: 15
+Info (12128): Elaborating entity "immediate_extend" for hierarchy "datapath:data_path|immediate_extend:extend" File: C:/Users/brahim/Desktop/Risc_V/datapath.v Line: 72
+Info (12128): Elaborating entity "three_to_one_mux" for hierarchy "datapath:data_path|three_to_one_mux:srcAMux" File: C:/Users/brahim/Desktop/Risc_V/datapath.v Line: 74
+Info (12128): Elaborating entity "alu" for hierarchy "datapath:data_path|alu:ALU" File: C:/Users/brahim/Desktop/Risc_V/datapath.v Line: 79
+Warning (13046): Tri-state node(s) do not directly drive top-level pin(s)
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "datapath:data_path|comb~synth" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "Control_unit:ctrl|Inst_decoder:Imm_choice|ImmSrc[0]" feeding internal logic into a wire File: C:/Users/brahim/Desktop/Risc_V/inst_decoder.v Line: 6
+    Warning (13049): Converted tri-state buffer "Control_unit:ctrl|Inst_decoder:Imm_choice|ImmSrc[1]" feeding internal logic into a wire File: C:/Users/brahim/Desktop/Risc_V/inst_decoder.v Line: 6
+    Warning (13049): Converted tri-state buffer "Control_unit:ctrl|ALU_decoder:alu_dec|ALU_Control[0]" feeding internal logic into a wire File: C:/Users/brahim/Desktop/Risc_V/alu_decoder.v Line: 8
+    Warning (13049): Converted tri-state buffer "Control_unit:ctrl|ALU_decoder:alu_dec|ALU_Control[1]" feeding internal logic into a wire File: C:/Users/brahim/Desktop/Risc_V/alu_decoder.v Line: 8
+    Warning (13049): Converted tri-state buffer "Control_unit:ctrl|ALU_decoder:alu_dec|ALU_Control[2]" feeding internal logic into a wire File: C:/Users/brahim/Desktop/Risc_V/alu_decoder.v Line: 8
+    Warning (13049): Converted tri-state buffer "Control_unit:ctrl|ALU_decoder:alu_dec|ALU_Control[3]" feeding internal logic into a wire File: C:/Users/brahim/Desktop/Risc_V/alu_decoder.v Line: 8
+Info (278001): Inferred 2 megafunctions from design logic
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "datapath:data_path|alu:ALU|Div0" File: C:/Users/brahim/Desktop/Risc_V/alu.v Line: 56
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "datapath:data_path|alu:ALU|Mod0" File: C:/Users/brahim/Desktop/Risc_V/alu.v Line: 59
+Info (12130): Elaborated megafunction instantiation "datapath:data_path|alu:ALU|lpm_divide:Div0" File: C:/Users/brahim/Desktop/Risc_V/alu.v Line: 56
+Info (12133): Instantiated megafunction "datapath:data_path|alu:ALU|lpm_divide:Div0" with the following parameter: File: C:/Users/brahim/Desktop/Risc_V/alu.v Line: 56
+    Info (12134): Parameter "LPM_WIDTHN" = "32"
+    Info (12134): Parameter "LPM_WIDTHD" = "32"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_3dm.tdf
+    Info (12023): Found entity 1: lpm_divide_3dm File: C:/Users/brahim/Desktop/Risc_V/db/lpm_divide_3dm.tdf Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_9nh.tdf
+    Info (12023): Found entity 1: sign_div_unsign_9nh File: C:/Users/brahim/Desktop/Risc_V/db/sign_div_unsign_9nh.tdf Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_o2f.tdf
+    Info (12023): Found entity 1: alt_u_div_o2f File: C:/Users/brahim/Desktop/Risc_V/db/alt_u_div_o2f.tdf Line: 23
+Info (12130): Elaborated megafunction instantiation "datapath:data_path|alu:ALU|lpm_divide:Mod0" File: C:/Users/brahim/Desktop/Risc_V/alu.v Line: 59
+Info (12133): Instantiated megafunction "datapath:data_path|alu:ALU|lpm_divide:Mod0" with the following parameter: File: C:/Users/brahim/Desktop/Risc_V/alu.v Line: 59
+    Info (12134): Parameter "LPM_WIDTHN" = "32"
+    Info (12134): Parameter "LPM_WIDTHD" = "32"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_65m.tdf
+    Info (12023): Found entity 1: lpm_divide_65m File: C:/Users/brahim/Desktop/Risc_V/db/lpm_divide_65m.tdf Line: 25
+Warning (12241): 2 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Info (286030): Timing-Driven Synthesis is running
+Info (17049): 4 registers lost all their fanouts during netlist optimizations.
+Info (144001): Generated suppressed messages file C:/Users/brahim/Desktop/Risc_V/output_files/CPU_RISCV_Multicycle.map.smsg
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 8850 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 3 input pins
+    Info (21059): Implemented 78 output pins
+    Info (21061): Implemented 8767 logic cells
+    Info (21062): Implemented 2 DSP elements
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 78 warnings
+    Info: Peak virtual memory: 4957 megabytes
+    Info: Processing ended: Sun Jun  8 19:23:19 2025
+    Info: Elapsed time: 00:01:28
+    Info: Total CPU time (on all processors): 00:01:54
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in C:/Users/brahim/Desktop/Risc_V/output_files/CPU_RISCV_Multicycle.map.smsg.
+
+

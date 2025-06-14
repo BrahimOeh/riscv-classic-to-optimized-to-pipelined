@@ -1,0 +1,4 @@
+main:
+addi,x12,x0, 31
+jal,x1,fib
+jalr,x0,x1,0

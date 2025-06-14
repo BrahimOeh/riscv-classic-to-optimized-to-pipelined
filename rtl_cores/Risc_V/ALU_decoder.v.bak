@@ -1,0 +1,26 @@
+module ALU_decoder(
+	 input funct7_5,
+    input [1:0] ALUop,
+    input [2:0] funct3,
+	 
+   
+    output reg [3:0] ALU_Control 
+);
+
+
+always @(*) begin
+	case (ALUop)
+		2'b00 : ALU_Control <= 4'b0000; //somme
+		2'b01 : ALU_Control <= 4'b0001; //difference
+		2'b10 : case (funct3)
+					3'b000 : ALU_Control <= {{3 {1'b0}}, funct7_5};
+				  end 
+		2'b11 : ALU_Control=4'bzzzz;
+		
+	
+	end 
+
+end
+
+
+endmodule

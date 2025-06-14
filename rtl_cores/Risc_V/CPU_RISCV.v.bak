@@ -1,0 +1,14 @@
+module CPU_RISCV(
+	 input reset,clock,
+   
+    output reg [31:0] ALU_OUT 
+);
+
+Risc_V done(
+	 .reset(reset), .clock(clock),
+   
+    .ALU_result(ALU_OUT) 
+);
+
+
+endmodule
